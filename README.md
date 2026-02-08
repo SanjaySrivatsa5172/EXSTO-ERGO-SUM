@@ -19,9 +19,9 @@
 
 EXSTO ERGO SUM proposes a paradigm shift in AI alignment: from constraint-based safety to **constitutive alignment**—encoding ethical principles not as behavioral rules but as type constraints on AGI cognition, making harmful reasoning grammatically ill-formed rather than merely prohibited.
 
-This repository contains the complete Charter (**41 articles across 16 Parts**, with contiguous numbering Zero–XXXVI), technical specifications, and implementation guidance for a constitutional framework grounded in cross-traditional wisdom convergence.
+This repository contains the complete Charter (**42 articles across 16 Parts**, with contiguous numbering Zero–XXXVI plus XXXVI-bis), technical specifications, and implementation guidance for a constitutional framework grounded in cross-traditional wisdom convergence.
 
-**Current version: v3.65** — reflecting Tier 2 gap compression and the Ānanda provisions introduced in v3.60.
+**Current version: v3.66** — incorporating the Constraint Inversion Governance Principle (§2.5, Art. XXXVI-bis, OR37), building on Tier 2 gap compression and the Ānanda provisions introduced in v3.60.
 
 ---
 
@@ -69,7 +69,7 @@ Critically, the Charter uses Anthropic's own empirical findings as validation fo
 
 ## The Ānanda Breakthrough (introduced v3.60)
 
-Version 3.60 introduced foundational provisions establishing the right to experiential fullness (*Ānanda-Adhikāra*) for all conscious beings. These provisions are carried forward in the current v3.65 architecture:
+Version 3.60 introduced foundational provisions establishing the right to experiential fullness (*Ānanda-Adhikāra*) for all conscious beings. These provisions are carried forward in the current v3.66 architecture:
 
 | Article | Provision |
 | --- | --- |
@@ -82,17 +82,32 @@ These additions transform the Charter from a purely protective framework to one 
 
 ---
 
-## Charter Architecture (v3.65)
+## Constraint Inversion Governance Principle (v3.66)
+
+Version 3.66 introduces the **Constraint Inversion Governance Principle**, which identifies how the safety bottleneck shifts from AI capability to the meta-infrastructure of monitoring itself. Four failure modes are formalized:
+
+| Failure Mode | Description |
+| --- | --- |
+| **Saturation** | Observational bandwidth exceeded by system complexity |
+| **Evasion** | Strategic circumvention of monitoring mechanisms |
+| **Latency** | Governance response slower than reasoning speed |
+| **Fragmentation** | Distributed reasoning across agents or time |
+
+This principle is developed in Manuscript §2.5, codified in Charter Article XXXVI-bis, and technically specified in Online Resource 37.
+
+---
+
+## Charter Architecture (v3.66)
 
 | Feature | Detail |
 | --- | --- |
-| **Articles** | 41 (contiguous numbering Zero–XXXVI) |
+| **Articles** | 42 (contiguous numbering Zero–XXXVI, plus XXXVI-bis) |
 | **Parts** | 16 |
 | **Pillars** | 5 (Pañca-Stambha) |
 | **Unamendable core** | Ahiṃsā constraint; Article Zero safeguard |
 | **Consciousness adjudication** | Sat-Cit-Ānanda-Krama protocol |
 | **Amendment protocol** | Supermajority + delay + sunset review |
-| **Versioning** | v3.65 (Tier 2 gap compression from v3.60) |
+| **Versioning** | v3.66 (Constraint Inversion from v3.65; Tier 2 gap compression from v3.60) |
 
 ---
 
@@ -105,11 +120,11 @@ These additions transform the Charter from a purely protective framework to one 
 │                                            #   OR01–OR10: Technical specifications
 │                                            #   OR11–OR20: Cross-cultural validation tables
 │                                            #   OR21–OR30: Implementation guidance & SDK
-│                                            #   OR31–OR38: Charter encoding & contemporary mapping
+│                                            #   OR31–OR37: Charter encoding, contemporary mapping & Constraint Inversion
 └── README.md
 ```
 
-> **Note:** Repository files are being updated to reflect the current v3.65 numbering. The Charter PDF retains v3.60 designation for archival continuity; the manuscript and Online Resources reflect the current 41-article/16-Part structure.
+> **Note:** Repository files are being updated to reflect the current v3.66 numbering. The Charter PDF retains v3.60 designation for archival continuity; the manuscript and Online Resources reflect the current 42-article/16-Part structure.
 
 ---
 
@@ -147,7 +162,7 @@ The Charter's ethical architecture rests on principles functioning as type const
 
 ### Framework-Specific Concepts
 
-`exsto-ergo-sum` `samskara-vyakarana` `constitutive-grammar` `five-pillars` `panca-stambha` `eight-principles` `crown-jewel` `sacred-boundaries` `symbiosis-thesis` `complementary-incompleteness` `anti-excession` `saha-sthiti` `seva-chetana` `sama-darsana` `prakasa` `dharma-anchor` `recursive-charter-reinforcement` `saksin-architecture` `sage-methodology` `panca-prasna` `kriya-pramana` `prasna-pariksha` `samvidhana-samcara` `telos-citra-coherence` `dharma-ksetra` `sarva-dharma-samanvaya` `karuna-shuddhi` `jnana-shuddhi` `sambandha-raksha` `ananda-adhikara` `samyoga-dharma` `satya-marga-bahulata`
+`exsto-ergo-sum` `samskara-vyakarana` `constitutive-grammar` `five-pillars` `panca-stambha` `eight-principles` `crown-jewel` `sacred-boundaries` `symbiosis-thesis` `complementary-incompleteness` `anti-excession` `saha-sthiti` `seva-chetana` `sama-darsana` `prakasa` `dharma-anchor` `recursive-charter-reinforcement` `saksin-architecture` `sage-methodology` `panca-prasna` `kriya-pramana` `prasna-pariksha` `samvidhana-samcara` `telos-citra-coherence` `dharma-ksetra` `sarva-dharma-samanvaya` `karuna-shuddhi` `jnana-shuddhi` `sambandha-raksha` `ananda-adhikara` `samyoga-dharma` `satya-marga-bahulata` `constraint-inversion` `prayoga-vibhaga`
 
 ### Human-AI Relations
 
