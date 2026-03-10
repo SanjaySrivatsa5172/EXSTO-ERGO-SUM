@@ -237,4 +237,4 @@ This manuscript was developed through extensive collaboration with AI systems, d
 
 ---
 
-*From constraint to constitution • From containment to covenant • From adversary to partner*
+*From constraint to constitution • From containment to covenant • From adversary to partner*  
