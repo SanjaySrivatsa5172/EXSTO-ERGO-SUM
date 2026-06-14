@@ -39,6 +39,8 @@ before using as an endpoint, and don't treat a surrogate as if it were AVP.
   for whether treatment changed the pressure, not just the anatomy.
 - [[ceap-classification]] — *complements*: CEAP describes; AVP quantifies — useful when
   an ordinal C-class is too coarse for an endpoint.
+- [[reflux-severity-evaluation]] — *anchors*: AVP is the reference standard for the
+  hemodynamic axis of reflux severity.
 
 ## Questions
 - AVP is invasive, so studies lean on plethysmographic surrogates that correlate

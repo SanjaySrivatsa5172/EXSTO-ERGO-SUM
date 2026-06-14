@@ -36,6 +36,8 @@ obstruction, and treating one without recognizing the other under-treats the lim
   hemodynamic fingerprint of reflux.
 - [[may-thurner-syndrome]] — *confounds*: obstruction can coexist with reflux;
   treating reflux alone under-treats a mixed limb.
+- [[reflux-severity-evaluation]] — *graded-by*: how the severity of this mechanism is
+  quantified across anatomic, hemodynamic, clinical, and QoL axes.
 
 ## Questions
 - Duplex reflux thresholds (>0.5s superficial, >1s deep) are conventions. Design a

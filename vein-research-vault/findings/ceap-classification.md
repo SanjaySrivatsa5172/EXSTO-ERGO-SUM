@@ -40,6 +40,8 @@ classes (C4) is imperfect — worth checking before using C-class as an outcome.
   underweighted.
 - [[endovenous-ablation]] — *stratifies-trials-of*: CEAP class is how ablation cohorts
   are defined and compared.
+- [[reflux-severity-evaluation]] — *clinical-axis-of*: C-class (plus VCSS) is the
+  clinical severity layer among the four axes.
 
 ## Questions
 - The C axis is ordinal but not linear in severity. What goes wrong if you use C-class
