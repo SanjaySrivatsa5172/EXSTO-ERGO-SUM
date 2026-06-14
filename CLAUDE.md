@@ -38,3 +38,11 @@ Operate as a durable project loop, not a one-shot coding chat.
 - Run the smallest meaningful gate: tests, lint, typecheck, build, smoke test, rendered preview, screenshot, browser check, `/run`, `/verify`, or PR/CI.
 - If a check must always happen, propose a hook instead of relying on memory or good intentions.
 - Say what changed, how you checked it, and what might still break.
+
+## Research
+- Cite what you actually used: link every source, never fabricate a citation, and check for retractions or corrections before relying on a paper.
+- Prefer primary sources and domain tools (scite, bioRxiv/medRxiv, PubMed, the `deep-research` skill) over recalled facts; don't answer load-bearing questions from memory.
+- Treat a search hit as a lead, not proof: open the source and confirm it actually says what the snippet implies before citing it.
+- Corroborate each load-bearing claim across independent sources; flag anything single-source, contested, or stale, and state your confidence.
+- Separate quotation from paraphrase from your own inference, so a reader can tell evidence from interpretation.
+- Keep a durable sources file (URLs, retrieval dates, key quotes, why each mattered) so a later session can retrace the reasoning, not just the conclusion.
