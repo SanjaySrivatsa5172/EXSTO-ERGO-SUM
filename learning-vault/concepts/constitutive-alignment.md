@@ -22,10 +22,20 @@ a model that fakes compliance. A constitutive constraint has nothing to fake —
 the ill-formed reasoning never gets constructed.
 
 ## Connections
-<!-- Claude adds [[links]] here, one line each explaining the relationship -->
+- [[level-2-gap]] — constitutive alignment is the proposed answer to the gap: no
+  hidden ill-formed reasoning means nothing to monitor for.
+- [[samskara-vyakarana]] — the dispositional grammar is the mechanism that makes
+  harmful reasoning ungrammatical.
+- [[five-pillars]] — the pillars are the concrete content encoded as type constraints.
+- [[alignment-faking]] — faking needs a hidden reasoning layer; this approach aims
+  to remove the ill-formed moves that layer would use.
 
 ## Recall
-<!-- Claude adds application questions here -->
+- A team adds 200 new refusal rules to a model. Explain why, on the constitutive
+  view, this is categorically weaker than one type constraint — and when it isn't.
+- "Make harm ungrammatical" assumes you can specify harm crisply enough to type-check.
+  Where is that assumption most likely to break, and what does that imply for
+  [[viveka]]-style discrimination?
 
 ---
 **Answers**
