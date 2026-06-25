@@ -72,6 +72,18 @@ load-bearing and most-repeated claims; a full line-by-line sweep remains.
 | OR-6 | **64%** improvement from Agent-Computer-Interface design alone | L14316, L14470, L14521 | Yang et al. 2024 | ✅ attributed, consistent | PRIMARY READ BLOCKED |
 | OR-7 | Behavioral-bias cluster: t=14.32, **44%** increase, **73%**, **98.6%** / **13.6%** reduction | L15663–15675 | (check) | ⚠️ attribution not yet confirmed — needs a citation check | PRIMARY READ BLOCKED |
 
+### OR full sweep — remaining clusters (attribution confirmed)
+
+| # | Claim cluster | Loc | Source (as cited) | Internal | External |
+|---|---|---|---|---|---|
+| OR-8 | **Sycophancy**: AI affirmed user actions **49%** more than humans; **51%** affirmation where human consensus was **0%**; **47%** endorsement of harmful actions; across Llama-3/Qwen/DeepSeek/Mistral | L17154–17157 | Cheng et al. 2026 | ✅ attributed, consistent with manuscript #8 | PRIMARY READ BLOCKED |
+| OR-9 | **Behavioral bias** ("Māyā"): t-values (14.32, 9.72, 20.28, 12.72, 20.81…) with **44% / 19% / 34% / 73% / 65%** bias effects and preprocessing reductions (**98.6%, 77.0%, 13.6%, 106.8%** over-correction…) | L15663–15918 | **Keshavarz, Seagraves & Sirmans (2025)**, "Artificially Biased Intelligence" | ✅ **now confirmed cited** (source named with institutions + date) | PRIMARY READ BLOCKED — preprint, Dec 2025 |
+| OR-10 | **Clinical VLM "mirage"**: confident visual descriptions **>60%** avg, **90–100%** under standard prompts; expert models **33–38.5%** (ECG 33.0%, echo 38.5%, CMR 36.4%); orchestrator → **0%**; ReXVQA **10%** | L17492–17676 | ⚠️ **source not pinned in this pass** | ⚠️ attribution needs locating | PRIMARY READ BLOCKED |
+| OR-11 | **Meta-harness / AutoHarness accuracy**: scores-only **34.6%/41.3%**, full traces **50.0%/56.7%**, **73.1% vs 70.2%** across nine unseen datasets | L18764–18933 | Lou et al. 2026 (same paper as OR-2) | ✅ attributed | PRIMARY READ BLOCKED |
+| OR-12 | **Opaque serial depth**; "automated calculator overestimates by **~28%**" | L16108, L16230, L16425 | Brown-Cohen et al. | ✅ attributed | PRIMARY READ BLOCKED |
+| OR-13 | **Cisco 92.78% ASR** (=OR-3); **ICLR 21%** AI-reviews (=OR-4) | — | Cisco; ICLR 2026 | ✅ attributed | PRIMARY READ BLOCKED |
+| OR-14 | Throughput/overhead specs: **<0.1% throughput**, **<1% FNR at <5% throughput** (E2/E3) | L18323–18378 | — (Charter's own) | ⚠️ **these are the Charter's PROPOSED experiment design-targets, not empirical findings** | N/A — not an external claim |
+
 ### OR fix-list (in addition to the manuscript list)
 1. **Propagate the 78% relabel into OR** (L7071, L7186, L10500) — the
    "strategic compliance" wording is wrong in three more places here.
@@ -80,7 +92,12 @@ load-bearing and most-repeated claims; a full line-by-line sweep remains.
    Constitutive Proof-of-Concept") leans on the chess one. Make clear in text
    which 78% is which so a reviewer can't read them as the same result.
 3. **Reconcile the Walden 95% phrasing** (OR-5) the same way as the README/#7.
-4. **Confirm OR-7's behavioral-bias figures carry citations** (not yet verified).
+4. **Separate design-targets from findings (OR-14).** The `<0.1%` / `<1% FNR`
+   numbers are the framework's *proposed* experiment specs; ensure the text never
+   presents them as already-measured results — that would be the manuscript's own
+   version of the citation errors it critiques.
+5. **Locate OR-10's source.** The clinical VLM "mirage" figures (60% / 90–100% /
+   ReXVQA) are striking and load-bearing but the source wasn't pinned this pass.
 
 ## Applied this session
 - ✅ **README fixed** (`README.md` L64, L66): the 78% bullet relabeled to
@@ -93,9 +110,19 @@ load-bearing and most-repeated claims; a full line-by-line sweep remains.
 
 ## Scope / not yet done
 
-- The manuscript pass (92 pp) is complete; the online-resources pass above is a
-  **first pass** over the highest-leverage claims — a full 112-line sweep and the
-  behavioral-bias cluster (OR-7) remain.
+- The manuscript pass (92 pp) and the online-resources sweep (386 pp, 112
+  percent-bearing lines, 14 claim clusters OR-1…OR-14) are both complete for the
+  **internal layer** (citation presence, attribution, cross-document consistency).
+- **One open attribution:** OR-10 (clinical VLM "mirage" figures) — source not
+  yet located.
+- **The external layer is entirely blocked.** Every ⧗/PRIMARY-READ-BLOCKED item
+  awaits the MCP scholarly channel (Scite/PubMed), which is gated by a tool
+  approval that did not flow through in this session despite the user approving
+  it — likely an interactive permission prompt not rendering in the web client.
+  Resolve by approving the MCP tool in the client UI, allowlisting it, or opening
+  the network policy for primary web reads; then re-run the external pass.
+- No source files were edited (none exist). The README fixes are the only
+  in-place corrections. This document is the fix-list for the rest.
 - External (⧗) confirmations are queued for the MCP scholarly channel
   (Scite/PubMed) — blocked at run time by per-call tool approval not flowing
   through. Re-run once approved, or open the network policy for primary web reads.
