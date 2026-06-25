@@ -127,3 +127,19 @@ load-bearing and most-repeated claims; a full line-by-line sweep remains.
   (Scite/PubMed) — blocked at run time by per-call tool approval not flowing
   through. Re-run once approved, or open the network policy for primary web reads.
 - No manuscript text was edited. This is a report.
+
+## Glossary
+
+Plain-language definitions of the shorthand used in this report.
+
+| Term | Stands for | What it means here |
+|---|---|---|
+| **PR** | Pull Request | The proposed change-set on GitHub (PR #7) waiting for the author's approval before it merges into the project. Nothing is permanent until merged. |
+| **MCP** | Model Context Protocol | The connection to external research databases (Scite, PubMed, bioRxiv) used to verify citations against published papers. "MCP blocked" = those connections need a permission approval that hasn't come through. |
+| **OR** | Online Resource | The manuscript's 386-page supplementary document (`onlineresources.pdf`), with sections OR01–OR49. "OR-1, OR-2…" in this report are labels for findings located in that document — not the author's own section numbers. |
+| **CoT** | Chain-of-Thought | An AI model's step-by-step written reasoning. Central to the "95% / 34.5%" faithfulness claim. |
+| **ASR** | Attack Success Rate | The fraction of attack attempts that succeed — e.g. the 92.78% multi-turn jailbreak figure (OR-3). |
+| **RL / RLHF** | Reinforcement Learning (from Human Feedback) | A model-training method. The 78% alignment-faking figure is measured *after* an RL training step. |
+| **IAST** | Int'l Alphabet of Sanskrit Transliteration | The Latin-with-diacritics spelling of Sanskrit (Ahiṃsā, Ānanda). Preserved exactly in the derived text; native Devanāgarī was not. |
+| **Verdict: PRIMARY READ BLOCKED** | — | A claim that is cited but whose original source could not be opened in this environment (network policy blocks it), so it still needs the author's own primary check. |
+| **⧗** | — | Queued for the external verification pass once the research databases (MCP) are reachable. |
