@@ -46,3 +46,15 @@ Operate as a durable project loop, not a one-shot coding chat.
 - Corroborate each load-bearing claim across independent sources; flag anything single-source, contested, or stale, and state your confidence.
 - Separate quotation from paraphrase from your own inference, so a reader can tell evidence from interpretation.
 - Keep a durable sources file (URLs, retrieval dates, key quotes, why each mattered) so a later session can retrace the reasoning, not just the conclusion.
+
+## Manuscript tooling
+- This repo is a LaTeX academic submission (*AI and Ethics*). The `.tex` files are source; the `.pdf` files are build artifacts — edit and review the source.
+- Reusable workflows live as commands and a subagent, not in this file:
+  - `/verify-claims <section>` — extract every factual claim and verify each against a retrieved primary source. Run before any submission.
+  - `/consistency` — cross-document sweep (version, counts, Sanskrit transliteration, cross-references).
+  - `/submission-check` — pre-submission gate: builds LaTeX, checks bib/figures/front matter, reports blockers.
+  - `reviewer` subagent — fresh-context review of a draft for unsupported claims and citation mismatches; reports gaps, never edits.
+- Scoped rules belong in `.claude/rules/`; keep this file lean.
+
+## Context handoff
+- Before context gets heavy (~60%), don't rely on `/compact`. Copy `.claude/HANDOFF.template.md` → `HANDOFF.md`, fill in plan/decisions/open loops, `/clear`, then resume by reading `HANDOFF.md`. You control what survives.

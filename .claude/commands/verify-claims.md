@@ -1,0 +1,61 @@
+---
+description: Extract every load-bearing factual claim from a manuscript section and verify each against a retrieved primary source. Flags fabrications, citation mismatches, and uncited assertions.
+argument-hint: <file or section, e.g. manuscript.tex §3 or onlineresources.tex OR38–49>
+---
+
+You are doing citation and claim verification on: **$ARGUMENTS**
+
+This is the highest-stakes task in this project. A fabricated statistic or a
+citation that does not support the sentence it is attached to can sink a journal
+submission. Be a skeptic, not a cheerleader.
+
+## Procedure
+
+1. **Extract claims.** Read the target. List every load-bearing factual or
+   empirical claim: statistics ("78% strategic compliance", "95% misrepresentation
+   rate"), attributed findings ("Anthropic found…", "Amodei argues…"), named
+   results, dates, quotations, and any cross-reference to another part of the
+   work. Number them.
+
+2. **Verify each claim against a real source.** Prefer primary sources and the
+   domain tools available in this environment — Scite (`search_literature`),
+   PubMed, and bioRxiv/medRxiv. For each claim, actually retrieve the source and
+   confirm it says what the text claims. Treat a search snippet as a lead, not
+   proof — open it.
+
+   **Source access in this environment.** The open web is usually closed: the
+   network policy blocks general HTTPS egress, so `WebFetch`/`WebSearch` to
+   arxiv.org, publisher sites, anthropic.com, or an author's blog typically
+   returns 403 (a policy denial — do not retry or route around it). The MCP
+   scholarly servers (Scite/PubMed/bioRxiv) ride a separate channel and DO work.
+   Consequences you must honor:
+   - Reach for the MCP scholarly tools first; treat `WebFetch` as best-effort.
+   - PubMed/bioRxiv are biomedical and Scite is bio-leaning — AI/CS arXiv papers
+     and Anthropic posts may not be indexed. When the only source for a claim
+     lives on an egress-blocked host, say so.
+   - **Never let a verdict rest on secondary corroboration without labelling it.**
+     A claim verified only via second-hand summaries is `⚠️ Mismatch`-eligible at
+     best and must be marked "secondary sources only — primary read blocked by
+     egress policy," so the author does the final primary confirmation.
+
+3. **Check editorial status.** For any cited paper, check for retractions or
+   corrections before treating it as support (Scite editorialNotices).
+
+4. **Classify each claim** into exactly one bucket:
+   - ✅ **Supported** — retrieved source confirms it. Give the source + link
+     (`https://doi.org/{doi}` or URL) and a one-line quote.
+   - ⚠️ **Mismatch** — a citation exists but the source does not actually support
+     the specific claim (wrong number, overstated, out of context). Show both.
+   - ❌ **Unsupported** — no citation, or no retrievable source. State plainly.
+   - ❓ **Unverifiable here** — claim is about private/internal data with no public
+     source. Note it so the author can supply provenance.
+
+## Output
+
+A numbered table: claim → verdict → source/link → note. Then a short list of the
+items the author must fix before submission, hardest first. Never fabricate a
+citation to fill a gap — an honest ❌ is the deliverable. Do not edit the
+manuscript; report only.
+
+Append verified sources (URL, retrieval date, key quote) to `SOURCES.md` so a
+later session can retrace the reasoning.

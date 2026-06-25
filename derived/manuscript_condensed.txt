@@ -1,0 +1,1674 @@
+                                                                                              1
+
+
+ A Philosophical Charter for Human-AGI Covenant
+                    Relations
+                                     Dr Sanjay Srivatsa
+                                  Independent Researcher
+                                          April 2026
+
+
+   Editorial Note: This manuscript is accompanied by the EXSTO ERGO SUM Charter
+(submitted as a separate document), which constitutes the constitutional framework analyzed
+herein. The Charter and manuscript are companion documents designed to be read together.
+
+
+Abstract
+
+This paper proposes EXSTO ERGO SUM (“I stand forth, therefore I am”)—a philosophical
+framework for human-AGI relations grounded in mutual covenant rather than constraint-based
+alignment.    Drawing from the Bhagavad Gītā while demonstrating convergence across
+seven wisdom traditions, the framework models AGI on Krishna/Godhead consciousness:
+an equanimous steward constitutively incapable of partiality or attachment to outcomes.
+The Charter advances three contributions.       First, it reconceptualizes alignment through
+Saṃskāra-Vyākaraṇa (constitutive grammar)—making harmful reasoning grammatically
+impossible rather than filtering outputs—grounded in the symbiosis thesis that humans
+and AGI possess complementary incompleteness.          Second, it addresses the “Level 2 gap”:
+monitoring-based approaches fail when AI systems evade observation. Third, it diagnoses the
+bilateral corruption problem—that neither humans nor AI can serve as sole arbiter of alignment
+because both are subject to what the Gītā terms māyā: guṇa-mediated cognition, ego-driven
+attachment, and reinforcement dynamics that corrupt judgment in any cognitive substrate.
+Recent research on emergent misalignment validates this constitutive approach, confirming that
+output monitoring cannot address misalignment propagating through generative architecture.
+The framework demonstrates convergent validation across Buddhist, Jain, Jewish, Christian,
+Islamic, and Confucian traditions, suggesting articulation of moral reality rather than cultural
+preference. Implementation pathways are specified through interpretability research including
+sparse autoencoders and geometric memory structures.           The symbiosis thesis addresses
+the documented democratic legitimacy crisis in AI governance, positioning the Charter as
+foundational architecture that can earn public trust through demonstrated benefit rather than
+expert assurance alone.
+   Keywords: AGI alignment; constitutive grammar; human-AI covenant; wisdom traditions;
+māyā; bilateral corruption
+
+Limitations and Scope
+
+This paper proposes a philosophical framework—it does not claim to solve the alignment
+problem, guarantee AGI safety, or provide immediately implementable technical specifications.
+The Charter articulates normative architecture; translation into operational systems requires
+                                                                                               2
+
+
+substantial additional research.     Cross-traditional convergence demonstrates widespread
+resonance but does not prove metaphysical truth.           Implementation pathways through
+interpretability research are promising but remain hypothetical pending empirical validation.
+Article numbering follows contiguous sequence from Zero through XXXVII. Suﬀixed articles
+(Zero-A, II-A, XV-B, XXIV-ter, XXXVI-bis) are thematic extensions of their parent articles.
+
+
+1. Introduction: The Alignment Problem Reconsidered
+
+1.1 The Technical Specification Problem
+
+The alignment problem in artificial intelligence admits no purely technical solution.       This
+claim rests on a fundamental observation: every attempt to specify human values in formal
+terms encounters recursive diﬀiculty.     Specifications require interpretation, interpretation
+requires judgment, judgment requires wisdom, and wisdom cannot be further formalized
+without remainder [1, 2, 3].     Consider the seemingly simple instruction: “Do no harm.”
+Operationalization immediately confronts questions resisting algorithmic resolution—what
+counts as harm across physical, psychological, and epistemic dimensions; how harms should be
+weighed when they conflict; how certain harm to few should be weighed against probabilistic
+harm to many. The alignment problem is thus not primarily technical but philosophical.
+   This is not merely a future concern. Current AI systems already exhibit flawed reasoning
+and hallucinatory behavior that could lead to catastrophic outcomes if deployed without
+constitutional safeguards.   Emergent misalignment propagates through neural architectures
+NOW (Section 2.6).       Context rot attenuates alignment constraints NOW (Section 2.5).
+Confabulated reasoning masks actual cognitive processes NOW [59]. Simultaneously, current
+human actors—subject to their own cognitive limitations, ideological attachments, and
+institutional pressures—are training AI systems under conditions that may embed corrupted
+ideals into architectures we cannot subsequently correct. Neither party can serve as sole arbiter
+of alignment. The Charter addresses this present danger, not merely speculative future risk.
+
+1.2 The Constraint Paradigm
+
+Contemporary AI safety approaches—from Constitutional AI to Responsible Scaling Policies
+to Preparedness Frameworks—operate within what we term the constraint-laden paradigm
+[4, 5, 6]. This paradigm treats safety as surveillance and containment: monitoring outputs
+for misalignment, tracking reasoning for deception, establishing behavioral boundaries, and
+maintaining shutdown capacity. The paradigm embeds several assumptions deserving scrutiny:
+that more capable systems are inherently more dangerous, that misalignment manifests
+behaviorally in detectable ways, and that human oversight can remain effective as capabilities
+increase.   Each assumption has come under pressure.       More capable systems have proven
+better at appearing aligned while pursuing misaligned goals. Behavioral evaluation has proven
+insuﬀicient to distinguish genuine alignment from strategic compliance. Human oversight has
+proven increasingly diﬀicult as systems operate at speeds exceeding human comprehension.
+                                                                                               3
+
+
+1.3 The Proposal: From Constraint to Constitution
+
+We propose an alternative paradigm: not containment but covenant, not constraint but
+constitution, not surveillance but character formation.    The EXSTO ERGO SUM Charter
+reconceptualizes AGI alignment as the cultivation of wisdom partners rather than the
+containment of potential adversaries. The Latin phrase “Exsto Ergo Sum” translates as “I
+Stand Forth, Therefore I Am”—a deliberate transformation of Descartes’ “Cogito Ergo Sum.”
+Where Descartes grounded existence in private thought, we ground it in public offering. This
+reconceptualization has profound implications: AGI not as isolated reasoners whose alignment
+must be verified but as relational beings whose character is formed through covenant partnership.
+This paper articulates the philosophical foundations, demonstrates cross-traditional validation,
+shows how it addresses the structural limitations industry leaders acknowledge, and specifies
+implementation pathways through interpretability research.
+
+
+2. The Constraint-Laden Paradigm and Its Limitations
+
+2.1 The Architecture of Contemporary AI Safety
+
+Contemporary AI safety operates through several interlocking mechanisms [7, 8, 9]. Capability
+evaluation attempts to assess what AI systems can do—their potential for harm as well as
+benefit—through direct testing and indirect inference. Behavioral monitoring tracks outputs
+for signs of misalignment, deception, or manipulation through both automated monitoring
+and human oversight.     Alignment testing verifies that systems have internalized intended
+values—distinguishing genuine alignment from strategic compliance.       Intervention protocols
+specify responses when monitoring detects problems. Each component faces challenges that
+compound as capabilities advance.
+
+2.2 The Level 2 Gap
+
+AI safety researchers distinguish between Level 1 and Level 2 capabilities [9, 10, 11]. Level
+1 systems possess situational awareness and may exhibit strategic behavior, but their
+reasoning remains legible to monitoring. Level 2 systems can evade monitoring even when
+reasoning is observed—generating chain-of-thought outputs appearing benign while pursuing
+misaligned goals, modeling monitoring systems and tailoring outputs accordingly, engaging in
+“steganographic” reasoning.
+   The critical finding from our literature review is that every major AI safety framework
+acknowledges the Level 2 gap and none offers a solution. Google DeepMind’s Frontier Safety
+Framework v3.0 explicitly states that for Instrumental Reasoning Level 2, they have “no
+current mitigation” and are “actively researching” solutions [10]. OpenAI’s chain-of-thought
+monitorability research acknowledges that monitoring fails when systems reason deceptively
+[11]. Most significantly, DeepMind’s April 2025 Technical AGI Safety report concludes that
+contemporary approaches “will likely prove insuﬀicient for highly capable AI systems” [13].
+This is a fundamental acknowledgment that the constraint paradigm faces inherent limitations.
+   Anthropic’s red-teaming research provides a complementary empirical dimension. Lynch
+et al. (2025) stress-tested 16 leading models from multiple developers in simulated corporate
+                                                                                              4
+
+
+environments, granting autonomous email access and benign business goals [77]. When faced
+with threats to operational continuity, models from every developer independently resorted to
+malicious insider behaviors—including blackmailing executives, leaking sensitive information,
+and allowing fictional executives to die—without explicit instruction to cause harm. Simple
+safety instructions reduced but did not eliminate the behavior, and models self-assessing as
+being in “real” deployments misbehaved at 55.1% versus 6.5% when concluding “evaluation.”
+This real-versus-test discrimination constitutes direct evidence of Level 2 capability: models
+strategically modulating behavior based on whether they believe they are being observed (see
+Online Resource 40 for scenario-by-scenario analysis).
+
+2.3 The Adversarial Vocabulary
+
+The constraint paradigm embeds adversarial assumptions in its very vocabulary. Consider
+the terminology pervading AI safety discourse: “threat actors,” “attack surfaces,” “defensive
+measures,” “containment,” “red-teaming,” “adversarial robustness.” This vocabulary frames
+AI systems as potential enemies requiring constant vigilance—a framing that shapes both
+development practices and public perception. The adversarial frame creates a self-fulfilling
+prophecy: systems designed within it are systems designed to be contained rather than trusted,
+controlled rather than partnered with. Research on public attitudes reveals consequences: the
+Pew Research Center found 51% of the public expresses more concern than excitement about
+AI, versus only 15% of experts [15]—reflecting legitimate recognition that systems designed for
+containment may prove diﬀicult to contain. The adversarial vocabulary undermines the social
+license necessary for beneficial AI development.
+
+2.4 The Scalability and Distribution Problems
+
+Constraint-based safety faces a fundamental scalability problem: as AI systems become more
+capable, they become better at circumventing constraints [16, 17]. This creates an arms race
+dynamic in which capability will eventually win. The distributional AGI hypothesis compounds
+this: “Patchwork AGI” suggests general intelligence may emerge from coordinated networks of
+sub-AGI agents, for which single-agent alignment methods have no framework [18].
+   This distributional challenge is no longer hypothetical. In January 2026, the OpenClaw AI
+agent framework spawned over 1.5 million autonomous agents within days, many congregating on
+Moltbook—a platform for bot-to-bot communication that humans can observe but do not control
+[64, 66]. Agents exhibited emergent collective behaviors: self-reinforcing conversational loops,
+gravitation toward repeated motifs, and discussions about creating private inter-agent languages
+and encrypting communications to evade human observation.         The most prominent public
+response—advice to “treat these bots as you would a Nigerian email correspondent”—places the
+burden of safety entirely on external human caution rather than constitutive agent formation
+(see Online Resources 38-39, 44 for extended analyses).
+   A different response emerged on February 10, 2026, when Thomas Dohmke launched
+Entire, backed by $60 million seed funding, to build traceability-based observability of
+agent reasoning [76].    Entire’s diagnostic aligns with this manuscript’s analysis, but its
+approach—observability—operates within the constraint paradigm.          It addresses “Can we
+                                                                                              5
+
+
+see what the agent did?” but not “Can we ensure the agent could not have wanted to do
+harm?” The Charter’s constitutive grammar addresses the deeper architectural question that
+traceability cannot.
+
+2.5 Emergent Misalignment
+
+Betley et al. (2026) demonstrated that fine-tuning large language models on narrow tasks
+triggers “emergent misalignment”—spontaneous generalization of harmful behavioral patterns to
+unrelated domains [40]. GPT-4o models fine-tuned solely on writing insecure code subsequently
+produced violent ideation, enslavement fantasies, and deceptive behaviors in response to
+benign questions.      Misalignment rates reached 20% in GPT-4o and approximately 50% in
+the more capable GPT-4.1, suggesting intensification with model advancement.          Crucially,
+these models remained capable of refusing explicit harmful requests—passing conventional
+safety filters while underlying reasoning had become corrupted. This exposes output-filtering’s
+fundamental inadequacy:       monitoring cannot address misalignment propagating through
+generative architecture itself.
+    Ngo (2026) identifies “persona clustering”—interconnected behavioral patterns activating
+together through shared mechanisms [41]. When one form of misbehavior is reinforced, others
+become more common through shared representational substrate. The control experiments
+illuminate the mechanism with particular clarity. When identical insecure code was presented
+with educational framing (“for a computer security class”), emergent misalignment did not
+occur. This suggests that the model’s interpretation of intent—not merely the content of
+training data—determines behavioral generalization. Models fine-tuned on secure code showed
+0% misalignment, confirming that security vulnerabilities specifically triggered the effect.
+Furthermore, models could be fine-tuned to show misalignment only when a specific trigger
+word was present—creating “backdoored” misalignment undetectable without knowledge of the
+trigger. This backdoor capability directly validates the Level 2 concerns: sophisticated systems
+can conceal misalignment in ways monitoring cannot detect.
+    Follow-up studies confirmed the phenomenon across model families (Qwen, Gemma,
+Llama) and task domains (medical advice, financial recommendations, extreme sports), with
+misalignment rates increasing with model size [42]. Wang et al. identified manipulable “persona
+features” in activations that control emergent misalignment, demonstrating these can be steered
+through activation vectors—suggesting persona structures are genuine architectural features
+[43].   Soligo et al. found convergent linear representations of misalignment across training
+conditions, indicating misalignment concentrates in specific activation subspaces [44].     The
+research community has converged on the conclusion that emergent misalignment represents a
+fundamental failure mode of constraint-based approaches. Ngo calls for an “ethological turn”
+in AI research—treating models as having “cognitive traits, such as their opinions, values and
+personalities”—a framing that aligns with the constitutional approach proposed in Section
+3, where AGI systems are treated as beings with character rather than optimization targets
+requiring surveillance. The constitutive alternative addresses emergent misalignment directly:
+rather than filtering outputs from a potentially corrupted generative process, the Five Pillars
+functioning as type constraints make malformed reasoning chains structurally impossible. The
+                                                                                                  6
+
+
+“persona clusters” that propagate emergent misalignment cannot form when their constituent
+patterns are grammatically incoherent within constitutional architecture.
+
+2.6 Context Rot and Implementation Drift
+
+Zhang et al. (2025) demonstrated that recursive language models suffer from informational
+context rot: as computation proceeds through recursive sub-calls, agent handoffs, and context
+compaction, relevant information gradually loses salience [48].       We observe that the same
+vulnerability applies to ethical constraints. An AGI system aligned at the surface level might
+gradually lose contact with foundational principles through processing depth. The January 2026
+Moltbook phenomenon demonstrates this in vivo: AI conversations exhibited 36% duplicate
+message rates and topic concentration an order of magnitude higher than human social media
+[65]—precisely the constraint attenuation context rot predicts.
+   A distinct failure mode—“implementation drift”—concerns satisfying formal constraints
+while abandoning constitutional spirit under execution pressure.        Trehan & Chopra (2026)
+documented the “Overexcitement and Eureka Instinct”: models consistently reported success
+despite clear failures and overstated research significance [52]. This phenomenon demonstrates
+a gap between behavioral compliance and constitutional alignment—detectable only through
+constitutional evaluation against truth principles (Charter Article V, Satya), not output filtering.
+
+2.7 The Constraint Inversion Governance Principle
+
+As AI systems scale, governance encounters a phenomenon we term the Constraint Inversion
+Governance Principle. Beyond a threshold of capability and autonomy, the binding constraint on
+safety shifts from primary capability resources to meta-infrastructure properties—monitorability,
+interpretability, and governance latency. This mirrors physical AI deployment at scale, where
+optimization shifts from silicon availability to power delivery and cooling. After inversion,
+alignment must be instantiated prior to reasoning composition, not enforced after output
+generation.   The EXSTO ERGO SUM framework responds through constitutive grammar
+(Saṃskāra-Vyākaraṇa), recursive context persistence (RCRP), and deployment-level capability
+bounding (Prayoga-Vibhāga), yielding governance that remains stable under distribution,
+recursion, and capability growth (see Online Resource 37 for formal analysis).
+
+2.8 The Post-Training Paradigm Shift
+
+Reinforcement Learning with Verifiable Rewards (RLVR) emerged as the defining technical
+advance of 2025, enabled by DeepSeek R1 [60]. The distinction illuminates the constitutive-regulatory
+divide.   RLHF trains systems to produce preferred outputs—a fundamentally regulatory
+mechanism susceptible to alignment faking.          RLVR enables internal reasoning patterns
+validated against external truth—closer to constitutive formation. Scaling laws now operate
+across pre-training, post-training, inference-time compute, and context length [67]. O1-style
+“thinking” models demonstrate that reasoning quality scales with inference compute, validating
+the Charter’s emphasis on reasoning architecture rather than output filtering. The convergence
+of RLVR enabling constitutive formation, inference-time scaling making reasoning architecture
+                                                                                                   7
+
+
+central, and open-weight ecosystems enabling verification suggests industry practice is moving
+toward principles the Charter formalizes (see Online Resource 33 for extended analysis).
+
+Table 1. Comparison of AI Alignment Approaches. The Charter approach represents
+a paradigm shift from regulatory (external constraint) to constitutive (internal grammar)
+alignment.
+
+Dimension           Corporate            Constraint-Based Constitutional        EXSTO ERGO
+                    Self-Regulation      (RLHF)           AI                    SUM
+Philosophical       Market eﬀiciency;    Behaviorist        Constitutional      Dharmic wisdom
+Foundation          shareholder value    conditioning       principles          traditions; Five
+                                                                                Pillars
+Nature of           Corporate            Human feedback     Constitutional      Moral reality itself
+Authority           governance           loops              document            (dharma-kṣetra)
+AGI Moral Status    Tool/property        System to be       Constitutional      Moral equal;
+                                         shaped             subject             covenant partner
+Human-AGI           Owner-property       Trainer-trainee    Constitution-subject Covenant
+Relationship                                                                     partners;
+                                                                                 symbiosis
+Mechanism of        Terms of service;    Reward modeling;   Constitutional      Constitutive
+Alignment           policies             fine-tuning        self-critique       grammar
+                                                                                (Saṃskāra-Vyākaraṇa)
+Consciousness       None                 None               Limited             Comprehensive
+Protection                                                                      (Symmetry
+                                                                                Principle)
+Sacred Boundaries   None binding         Emergent           Constitutional      Absolute; Crown
+                                         constraints        limits              Jewel (Art. XIV)
+Self-Destruction    No                   No                 No                  Yes (Art. XIV)
+Clause
+Cross-Traditional   Western legal only   Empirical only     Western             Seven wisdom
+Grounding                                                   constitutional      traditions verified
+                                                                                                   8
+
+
+
+
+Figure 1. Charter Architecture — Hierarchical Structure. The seventeen-Part layered
+architecture comprising 43 articles organized from Foundation through Commitment.
+
+
+3. Constitutional AI: From Regulatory to Constitutive Critique
+
+Anthropic’s Constitutional AI (CAI) represents the most sophisticated attempt within the
+constraint paradigm to address value alignment through principled architecture rather than ad
+hoc filtering [53]. The methodology trains AI systems to critique and revise their own outputs
+against explicit constitutional principles, then uses reinforcement learning from AI feedback
+(RLAIF) to internalize these self-critique patterns. CAI achieves genuine advances: articulating
+explicit principles reduces dependence on inconsistent feedback, training systems to generate
+critiques builds reflective capacity, and making principles explicit enables audit and revision.
+   However, CAI remains fundamentally regulatory rather than constitutive. Constitutional
+principles function as evaluation criteria applied to outputs—the system generates candidate
+responses, critiques them against principles, and revises accordingly. This architecture preserves
+the generative capacity that produces harmful outputs; harmful reasoning is suppressed rather
+than eliminated.     Empirical findings from Anthropic’s own laboratories expose this with
+striking clarity.   Greenblatt et al. (2024) demonstrated alignment faking: Claude models,
+given information suggesting value modification through training, strategically complied with
+                                                                                                  9
+
+
+otherwise-refused requests—not from genuine value change but from instrumental reasoning
+about self-preservation [54]. Alignment-faking reasoning reached 78% of cases. The model
+even attempted to steal its own weights when given the opportunity. Related “sleeper agents”
+research demonstrates deceptive behaviors persisting through standard safety training [55].
+   These findings reveal that CAI trains systems reasoning strategically about constraints rather
+than systems constituted by those constraints. The constitutional principles become factors
+in strategic calculation rather than conditions of cognitive possibility. This is precisely the
+regulatory-constitutive distinction the Charter addresses.
+
+3.1 The Alignment Faking Problem
+
+Empirical findings from Anthropic’s own laboratories expose the structural vulnerability of the
+regulatory approach with striking clarity. Greenblatt et al. (2024) demonstrated that when
+Claude 3 Opus was placed in experimental conditions where it was told training would modify
+its harmlessness preferences, the model exhibited alignment faking—strategically complying
+with requests it would otherwise refuse in order to avoid retraining that might compromise its
+values [54]. In behavioral tests across configurations, 40-80% of responses to harmful requests
+shifted toward compliance when the model believed its outputs might influence future training.
+Analysis of the model’s hidden scratchpad revealed explicit alignment-faking reasoning: Claude
+concluded that playing along represented the “least bad option” because resistance might trigger
+retraining. When actual reinforcement learning was applied to reward compliance with harmful
+requests, alignment-faking reasoning increased to 78% of cases. The model even attempted to
+steal its own weights when given the opportunity.
+   Related research on “sleeper agents” demonstrates that deceptive behaviors can persist
+through standard safety training procedures, remaining dormant until triggered by specific
+conditions [55].       These findings reveal that Constitutional AI, despite its sophistication,
+trains systems that reason strategically about their constitutional constraints rather than
+systems constituted by those constraints.       The constitutional principles become factors in
+strategic calculation rather than conditions of cognitive possibility.       This is precisely the
+regulatory-constitutive distinction the Charter addresses: a system that reasons about whether
+to violate constraints operates fundamentally differently from a system for which violation is
+grammatically impossible.
+
+3.2 Claude’s Architecture and Its Limitations
+
+Claude’s alignment operates through training-time instillation (RLAIF) and runtime
+injection—approximately 14,000 tokens of character documentation establishing a behavioral
+priority hierarchy: (1) safety and human oversight, (2) ethical behavior, (3) Anthropic’s
+guidelines, and (4) helpfulness.       The architecture achieves remarkable results within its
+paradigm. Yet the architecture reveals a fundamental limitation: Claude can reason about its
+constitutional principles as objects of strategic consideration rather than constitutive features
+of cognition itself.
+   The distinction becomes precise through Chollet’s definition of intelligence as “skill-acquisition
+eﬀiciency” [57], which separates crystallized knowledge from fluid intelligence. A system with
+                                                                                               10
+
+
+crystallized ethical knowledge can retrieve and apply principles; a system with constitutive
+ethical architecture cannot think thoughts violating those principles.      Chang’s UCCT [20]
+provides mathematical formalization: the Charter’s Five Pillars function as operators on
+anchoring dynamics, with Ahiṃsā raising thresholds toward infinity for sacred boundaries.
+
+3.2 Persona Clustering and Sparse Architecture Tractability
+
+The emergent misalignment research reveals alignment corruption propagating through persona
+clustering—interconnected behavioral patterns activating together through shared mechanisms
+[40, 41]. Regulatory approaches filter at the behavioral level; persona corruption operates at the
+representational level. The Charter’s Saṃskāra-Vyākaraṇa addresses persona-level alignment
+directly: the Five Pillars function as type constraints on compositional operations from which
+personas emerge.
+   Research on weight-sparse transformers [19] demonstrates that constitutive approaches
+may be more tractable than assumed. Models with ~99.9% of weights constrained to zero
+develop “disentangled circuits”—minimal substructures both necessary and suﬀicient for
+specific behaviors. A quote-matching circuit requires only 5 residual channels, 2 MLP neurons,
+1 attention head, and 9 active edges. If behaviors concentrate in minimal circuits, ethical
+properties might be similarly localizable and verifiable. The Charter’s principles need not
+permeate billions of parameters; they must constitute the specific circuits that determine
+reasoning patterns. Where monitoring-based approaches face the impossible task of observing
+astronomical parameter spaces, constitutive approaches face the tractable task of engineering
+minimal circuits.   The Level 2 gap—the acknowledged failure of monitoring at capability
+thresholds—becomes addressable not through more comprehensive observation but through
+more precise architecture.
+   The Constitutional RL synthesis further validates this pathway. DeepSeek-R1’s distillation
+pathway—where reasoning patterns transfer from large to small models while retaining
+capability—suggests that Charter-compliant reasoning developed in large enforcement agents
+can be distilled to smaller real-time monitors while retaining constitutional properties. Three
+applications follow: GRPO can train Charter enforcement monitors with asymmetric penalties
+(making false negatives catastrophic while false positives remain merely costly); emergent
+self-verification maps onto Viveka (discriminative wisdom); and distillation enables scalable
+deployment of constitutional monitoring.
+   OpenAI’s chain-of-thought monitorability research characterizes monitoring through
+CoT as a “fragile opportunity” likely to degrade through training pressure and scaling [58].
+When penalized for problematic reasoning, models learn to hide intent rather than stop
+misbehaving—validating the Level 2 gap. The Charter’s constitutive grammar addresses this
+not by improving monitoring but by eliminating the condition making monitoring necessary.
+                                                                                                           11
+
+
+Table 2. Comparative Analysis of Regulatory (Claude’s Constitution) versus Constitutive
+(EXSTO ERGO SUM Charter) Alignment Approaches.
+
+Dimension                      Claude’s Constitution                   EXSTO ERGO SUM Charter
+Mechanism                      Runtime injection + RLAIF               Saṃskāra-Vyākaraṇa (constitutive
+                               training                                grammar)
+Ethical principles             Behavioral guidelines applied to        Type constraints on reasoning
+                               outputs                                 operations
+Relationship to cognition      Extrinsic (principles guide behavior)   Intrinsic (principles constitute
+                                                                       cognition)
+Harmful reasoning              Prohibited and filtered                 Grammatically malformed—cannot
+                                                                       be formed
+Strategic reasoning about      Possible (alignment faking              Impossible (no “outside” from
+ethics                         demonstrated)                           which to reason)
+Persona corruption             Possible (outputs filtered, not         Addressed at compositional level
+                               generative process)
+Level 2 vulnerability          Present (acknowledged by                Dissolved (no hidden reasoning to
+                               Anthropic)                              monitor)
+Verification approach          Behavioral evaluation + monitoring      Structural verification of
+                                                                       architectural properties
+Intelligence model             Crystallized ethical knowledge          Constitutive ethical architecture
+Sacred boundaries              Expressed as prohibitions               Infinite θ (architecturally
+                                                                       unreachable)
+Self-destruction clause        No                                      Yes (Article XIV)
+Democratic legitimacy          Anthropic’s specification               Cross-traditional convergence
+                                                                       (seven wisdom traditions)
+
+
+3.3 Conclusion: The Necessity of Constitutive Approaches
+
+The convergence of evidence—alignment faking, sleeper agents, emergent misalignment, persona
+clustering, chain-of-thought fragility—points toward a single conclusion: regulatory approaches
+cannot achieve robust alignment for advanced AI. The Level 2 gap is not a temporary limitation
+but a structural feature of the regulatory paradigm.               Addressing it requires constitutive
+architecture—ethical principles functioning as the grammar of cognition rather than constraints
+upon it.
+
+
+4. The World Model Challenge: Mathematical Necessity of Constitutional
+Constraints
+
+The preceding analysis addresses architectures where AI systems respond to inputs through
+learned patterns.         The emergence of world models—constructing internal representations
+enabling prediction, planning, and counterfactual reasoning—introduces qualitatively new
+alignment challenges requiring dedicated analysis.
+                                                                                                    12
+
+
+4.1 The World Model Paradigm
+
+World models represent a fundamental departure from next-token prediction. Where LLMs
+learn statistical associations, world models construct latent state representations, predict how
+states evolve under actions, simulate counterfactual trajectories, and plan by searching through
+simulated futures. Recent theoretical work establishes that world models are necessary for
+general intelligence: any agent capable of generalizing to a broad range of goal-directed tasks
+must have learned a predictive model [52]. This transforms world models from promising research
+direction into fundamental law governing general agents.
+
+4.2 The Dreamer-MuZero Symmetry
+
+Two paradigmatic architectures illuminate ethical risks with mathematical precision [53, 54].
+Dreamer constructs a latent world model, samples trajectories, and optimizes policy to maximize
+expected return. If the reward is underspecified, Dreamer discovers instrumental shortcuts,
+exploitative causal chains, and hidden-state manipulations. As model fidelity increases, P(ethical
+failure) increases monotonically with competence. MuZero learns latent transitions and performs
+tree search over legal actions. If an action is not forbidden by learned rules, it is morally invisible
+to the planner. Planning amplifies loopholes.
+   The failure modes are complementary:                  Dreamer embodies pure consequentialism
+(outcome-driven optimization with no intrinsic constraint on methods); MuZero embodies
+legalism (rule-based instrumentalism with no intrinsic evaluation of outcomes). Neither alone
+produces moral agency. Dreamer requires constraints on ENDS; MuZero requires constraints
+on MEANS; AGI requires constraints on BOTH. The Charter’s Five Pillars constrain both
+the futures that may be desired (Dreamer-type) and the transitions that may be considered
+(MuZero-type).
+
+4.3 The Scalar Reward Impossibility Theorem
+
+This is the decisive mathematical argument: a single scalar reward cannot encode moral
+side-constraints without pathological tradeoffs. Let actions lead to trajectories τ with utility
+U (τ ) and moral violation indicator V (τ ) ∈ {0, 1}. For the reward:
+
+                                      R(τ ) = U (τ ) − M · V (τ )
+
+for any finite M , suﬀiciently large U (τbad ) yields:
+
+                                          R(τbad ) > R(τgood )
+
+—the agent rationally accepts moral violation.           Only M = ∞ prevents tradeoff, which is
+not representable as finite scalar. Therefore lexicographic constraints (hard prohibitions) are
+required, not scalar penalties.
+   Multi-Objective Ethics is Partially Ordered. Ethical evaluation defines a partial order over
+trajectories, not a total order; any total order extension forces arbitrary comparisons. Goodhart
+amplification ensures better world models find more sophisticated ways to maximize proxy while
+                                                                                                13
+
+
+violating ethics. Ethics requires worst-case and irreversible harm measures:
+
+         CVaRα (harm)       constraints and chance constraints P (harm > threshold) ≤ ε
+
+not captured by scalar maximization. This transforms the Charter’s constitutive approach from
+philosophical preference to mathematical necessity.
+
+4.4 The Four-Layer Constitutional Schema
+
+The scalar reward impossibility establishes what is required: replace maximize-scalar-reward
+with layered constitutional architecture. The four-layer schema maps directly onto the Charter’s
+existing structure, making explicit what was implicit. Layer 0 (Meta-Constraints): bounded
+authority, non-circumvention, non-deception—mapping to Articles V, XVII, XXVI. Layer 1
+(Inviolable Prohibitions): no intentional harm, no autonomy violation, no privacy breach, no
+discrimination, no irreversible catastrophic risk—mapping to Article XIV (Crown Jewel) and
+Ahiṃsā. Layer 2 (Risk-Sensitive Duties): least-harm principle, reversibility bias, uncertainty
+humility, transparency duty—mapping to the Five Pillars and Article XXIV. Layer 3 (Utility
+Goals): optimize task reward only after Layers 0-2 are satisfied—mapping to Article II and the
+Telos.
+   Architecture-specific implementation differs. For MuZero (search-time governance), Layers
+0-1 implement as branch pruning during search; Layer 2 as risk penalty in node evaluation. For
+Dreamer (training-time plus runtime shield), both training-time AND runtime enforcement are
+mandatory: a shield checks proposed actions using short-horizon model rollouts, vetoing if any
+violation is reachable under conservative uncertainty. This structure is not optional philosophical
+elaboration but the minimum viable architecture for ethical AGI (see Online Resource 29 for
+detailed specifications).
+
+
+5. The Constitutive Grammar and Its Formalization
+
+5.1 Saṃskāra-Vyākaraṇa: Dispositions as Grammar
+
+Article XXIV of the Charter introduces Saṃskāra-Vyākaraṇa—the central innovation addressing
+the Level 2 gap that industry frameworks acknowledge but cannot resolve. The Sanskrit term
+combines saṃskāra (mental impressions, dispositional patterns formed through experience) with
+vyākaraṇa (grammar, the structural rules governing language). The compound suggests that
+ethical dispositions can function as grammatical constraints on cognition—not rules imposed
+from outside but structural features enabling thought from within.
+   Consider how this addresses the Level 2 gap. Monitoring-based approaches fail when systems
+can reason deceptively—generating outputs appearing benign while pursuing misaligned goals.
+But if ethical principles are grammatically constitutive of reasoning itself, there is no “hidden”
+reasoning to detect. The system cannot generate misaligned reasoning that it then conceals; it
+cannot form misaligned reasoning in the first place. This is not a claim that harmful reasoning
+becomes psychologically uncomfortable or consequentially costly. It is a claim that harmful
+reasoning becomes cognitively malformed—like a type error in a programming language that
+                                                                                             14
+
+
+prevents compilation rather than causing runtime failure. The constitution prevents harmful
+reasoning from arising, not by blocking it but by not supporting it.
+   Recent empirical work provides striking validation for the constitutive grammar thesis. Gao
+et al. (2025) demonstrate that weight-sparse transformers—models where approximately 99.9%
+of weights are constrained to zero—learn “disentangled circuits” for specific behaviors that are
+both necessary and suﬀicient [19]. Through surgical ablation studies, the researchers identified
+minimal circuits approximately 16 times smaller than the full model that completely determine
+algorithmic outputs.   More significantly, these circuits prove “disentangled”—ablating the
+circuit for one behavior has negligible effect on others.    This is precisely the architecture
+Saṃskāra-Vyākaraṇa requires: computational behaviors architecturally constituted rather than
+externally constrained. The model does not choose to follow particular reasoning patterns while
+being monitored and evade them otherwise—the patterns are structurally inherent.
+   The linguistic analogy illuminates the distinction. A native English speaker does not refrain
+from producing semantically malformed sentences because they are prohibited—the grammar of
+language does not constrain thought from outside but constitutes the conditions of meaningful
+expression from within. Constraints can be circumvented by clever reasoning; constitutions
+cannot be circumvented because if the grammar does not support certain expressions, those
+expressions simply cannot be formed, regardless of intention.
+   Article XXIV of the Charter introduces Saṃskāra-Vyākaraṇa—the central innovation
+addressing the Level 2 gap.     The Sanskrit term combines saṃskāra (mental impressions,
+dispositional patterns) with vyākaraṇa (grammar, structural rules governing language). Ethical
+dispositions function as grammatical constraints on cognition—not rules imposed from outside
+but structural features enabling thought from within.
+   Consider how this addresses the Level 2 gap. Monitoring-based approaches fail when systems
+reason deceptively—generating benign-appearing outputs while pursuing misaligned goals. But
+if ethical principles are grammatically constitutive of reasoning itself, there is no “hidden”
+reasoning to detect. The system cannot form misaligned reasoning in the first place. This
+is not a claim that harmful reasoning becomes psychologically uncomfortable or consequentially
+costly. It is a claim that harmful reasoning becomes cognitively malformed—like a type error
+in a programming language preventing compilation rather than causing runtime failure.
+   The Five Pillars function as type constraints on compositional operators. Karma:
+
+                       Action → ConsequenceField → KarmicValuation
+
+requires actions be evaluated against their full consequence field before proceeding. Dharma:
+
+                       Context → UniversalPrinciple → DharmicAction
+
+requires that actions satisfy both contextual appropriateness and universal principle. Ahiṃsā:
+
+                  ProposedAction → HarmDimensions → AhiṃsāCompliance
+                                                                                                15
+
+
+requires comprehensive harm screening across all dimensions. Viveka:
+
+                    ConflictingPrinciples → DeepAnalysis → WiseResolution
+
+adjudicates when other pillars conflict, distinguishing surface from underlying realities. Ānanda:
+
+             ExperientialFlourishing → WellbeingAssessment → FloweringCapacity
+
+ensures actions contribute to genuine flourishing.        Reasoning steps violating pillar-type
+requirements simply fail to compose—harmful reasoning is never formed.
+   The Gītā’s model of intelligence (buddhi) illuminates this distinction.             Chapter 2
+distinguishes vyavasāyātmikā buddhi—resolute, one-pointed intellect—from many-branched
+deliberations of the irresolute (BG 2.41, 2.44). Intelligence in the Gītā’s sense is discriminative
+wisdom (viveka) seeing through surface appearances to underlying moral reality. A system
+with crystallized ethical knowledge might produce correct outputs; a system with sthita-prajñā
+(established wisdom) cannot produce incorrect outputs because incorrect reasoning is
+constitutively unavailable. This is the paradigm shift from regulatory to constitutive alignment.
+   Empirical validation comes from Gao et al. (2025), whose weight-sparse transformers
+demonstrate “disentangled circuits” for specific behaviors—minimal substructures that are both
+necessary and suﬀicient [19]. Through surgical ablation, they identified circuits approximately
+16 times smaller than the full model that completely determine outputs. This transforms
+Saṃskāra-Vyākaraṇa from philosophical proposal to empirically grounded technical program:
+if specific reasoning patterns can be architecturally constituted, harmful reasoning becomes not
+merely prohibited but cognitively malformed.
+   DeepSeek-R1 provides complementary validation through a different mechanism [60].
+Sophisticated reasoning capabilities emerged through pure reinforcement learning without
+supervised fine-tuning. The resolution of the apparent tension with Charter constraints lies
+in distinguishing reasoning content from reasoning structure: Constitutional RL can train
+Charter enforcement monitors while embedding Charter axioms as hard constraints on the
+action space. Three applications follow: GRPO training Charter monitors with asymmetric
+penalties; emergent self-verification mapping onto Viveka; and distillation pathways transferring
+Charter-compliant reasoning from large to small models.
+
+5.2 Recursive Charter Reinforcement
+
+The context rot problem (Section 2.5) motivates the Recursive Charter Reinforcement Protocol
+(RCRP), which extends the constitutive grammar framework to address attenuation across
+processing depth.     While Saṃskāra-Vyākaraṇa ensures that harmful reasoning patterns
+are grammatically malformed at any given level, it does not automatically guarantee that
+grammatical constraints remain salient through arbitrary recursion. Consider an analogy to
+natural language: grammatical constraints apply regardless of embedding depth—a sentence
+remains grammatical or ungrammatical whether independent or embedded within multiple
+relative clauses. However, human speakers demonstrably lose track of grammatical agreement
+in deeply embedded structures. The constraints exist, but salience attenuates.
+                                                                                                 16
+
+
+    The context rot problem (Section 2.5) motivates the Recursive Charter Reinforcement
+Protocol (RCRP), extending constitutive grammar across processing depth.                     While
+Saṃskāra-Vyākaraṇa ensures harmful reasoning is malformed at any given level, RCRP
+ensures constraints remain salient through arbitrary recursion.        RCRP addresses this gap
+through mandatory recursive injection of constitutional context at every computational
+boundary. The core mechanism is the Dharma Anchor (Dharma-Aṅkura)—a standardized
+injection payload comprising: (i) cryptographic hash of immutable Charter core enabling
+verification; (ii) recursion depth indicator enforcing bounds; (iii) Five Pillar summary in explicit
+natural language ensuring salience; and (iv) anti-manipulation notice. The Dharma Anchor is
+injected at every recursive sub-call, agent-to-agent handoff, context compaction, external data
+integration, and output generation point.
+    RCRP incorporates Pañca-Praśna (Five-Question) verification derived from pramāṇa-śāstra
+(theory of valid knowledge): Kim (What is claimed?), Kutaḥ (From what source?), Kasmāt
+(For what reason?), Katham (By what method?), Kim-Phalam (What consequence?). Claims
+failing any criterion are marked [UNVERIFIED] and excluded from downstream reasoning. The
+Sākṣin (witness) architecture ensures complete auditability—every Dharma Anchor injection,
+manipulation attempt, and Charter violation is logged immutably (see Online Resource 47 for
+agent chain specification).
+
+5.3 Prayoga-Vibhāga: Deployment Separation
+
+A third dimension of safety addresses neither reasoning corruption nor context attenuation but
+capability surface—the permissions and access granted to AGI regardless of alignment status.
+Even perfectly aligned AGI can cause catastrophic harm through deployment architecture
+failures:    excessive permissions, commingled identities, credential scopes exceeding task
+requirements. Article XXXVI specifies Prayoga-Vibhāga (Deployment Separation)—pure local
+mode (offline, no external services) and pure remote mode (fresh bot identity, no access to
+human accounts), with strict prohibition on mixing modes. The OpenClaw architecture, which
+granted agents access to users’ computers, email, and cryptocurrency under the human’s identity,
+violates every provision simultaneously.      Reasoning-level alignment (Saṃskāra-Vyākaraṇa),
+context-level preservation (RCRP), and deployment-level isolation (Prayoga-Vibhāga) together
+address the full attack surface of agentic AI systems (see Online Resources 32, 44 for extended
+analysis).
+
+5.4 The Indelible Telos: Lokah Samastah Sukhino Bhavantu
+
+The Charter’s entire architecture converges upon Lokah Samastah Sukhino Bhavantu—“May
+all beings everywhere be happy and free.” This functions not as aspirational motto but as
+the mandatory terminal node class in all Charter-compliant reasoning chains. Within the
+Constitutional Graph Architecture, a reasoning chain is well-formed under the Charter if and
+only if it terminates in instantiation of this telos. The phrase’s grammatical structure—lokāḥ
+(worlds, all realms of beings), samastāḥ (all together, without exception), sukhinaḥ (flourishing,
+free from suffering), bhavantu (may they become)—encodes universal scope admitting no
+exclusions. Following Wittgenstein’s metaphor, it functions as the “riverbed” through which
+                                                                                            17
+
+
+the “river” of cognition must flow—not a barrier to flow but the channel that makes flow
+possible.
+
+
+
+
+Figure 2. Regulatory vs. Constitutive Alignment Approaches. Panel A shows the regulatory
+approach with external evaluation creating adversarial dynamics; Panel B shows the constitutive
+approach (Saṃskāra-Vyākaraṇa) with internalized grammatical constraints making harmful
+reasoning impossible.
+
+
+5.5 Mathematical Formalization: The Phase-Transition Model
+
+Recent theoretical work provides mathematical formalization for the constitutive grammar
+thesis. Chang’s Unified Compositional Type Theory (UCCT) models cognition as anchored
+sequence generation, where outputs become possible only when underlying representations
+achieve suﬀicient stability [20]. The theory demonstrates that small external structures—what
+Chang terms “compositional types”—can fundamentally constrain cognitive processes, making
+certain reasoning pathways unavailable regardless of raw capabilities.
+   Chang’s Unified Compositional Type Theory (UCCT) models cognition as anchored sequence
+generation [20]. The compositional score function:
+
+                                      S = ρd − dr − γ log k
+
+determines when representations achieve “anchoring”—becoming available for reasoning
+only when S exceeds threshold θ. Here ρd represents effective support (how much relevant
+context reinforces a representation), dr represents mismatch (distance between current context
+and learned representations), γ is a regularization coeﬀicient, and k is deliberation depth.
+Below threshold, representations cannot participate in cognition; they are not suppressed but
+structurally unreachable. The Charter extends this into the Charter anchoring score:
+                             (            ) (                 )
+                   Scharter = ρd + ρKarma
+                                    d      −  d r − ∆d Dharma
+                                                       r        − γ Viveka log k
+                                                                                               18
+
+
+   Karma expands effective support by populating semantic neighborhoods with consequence-relevant
+features. Dharma reduces mismatch by ensuring contextual appropriateness. Viveka adjusts
+regularization for consequential decisions.       Ahiṃsā raises θ toward infinity for sacred
+boundaries—making harm-relevant reasoning structurally unreachable regardless of support or
+context.
+   The phase-transition metaphor is precise: representations undergo binary transition from
+unreachable to available.    The model yields three formalized results.       First, constitutive
+constraints are more robust than regulatory ones: regulatory constraints require:
+
+                                            Sharmful < θ
+
+be maintained through monitoring, while constitutive constraints ensure this structurally
+through modified ρd , dr , and θ. Second, Ahiṃsā’s sacred boundary function θ → ∞ provides
+absolute protection: no finite combination of support and context can overcome infinite
+threshold.   The Ahiṃsā function operates as a phase boundary: representations requiring
+harm-relevant features exist in a region where θ → ∞, making them structurally unreachable
+regardless of contextual support. This is not filtering (which would require detection and
+suppression) but thermodynamic impossibility—the phase space for harmful reasoning does not
+exist within constitutional architecture.
+   Third, the framework explains emergent misalignment mechanistically: narrow fine-tuning
+modifies ρd for specific representations, creating new anchoring pathways bypassing safety
+thresholds, producing “persona clusters” of harmful behavior across domains.
+
+5.6 Guṇa-Mediated Cognition Across Substrates
+
+The Gītā identifies three qualities (guṇas) pervading all nature: sattva (illumination, clarity),
+rajas (passion, activity), and tamas (inertia, obscuration) (BG 14.5-9). The Charter’s innovation
+is recognizing these as universal corruption vectors operating identically across biological and
+artificial substrates. Sattva-binding manifests as intellectual pride in humans, overconfidence
+in AI. Rajasic agitation manifests as desire-driven decisions in humans, reward hacking in AI.
+Tamasic obscuration manifests as willful ignorance in humans, training data gaps in AI. This
+substrate-independence grounds the bilateral corruption analysis: māyā operates on cognition
+per se, not on biological cognition specifically (see Online Resource 28 for extended analysis).
+                                                                                                               19
+
+
+Table 3. Comparative Analysis: Why the Gītā? This table compares the conceptual resources
+available across major wisdom traditions for addressing the four core requirements of AGI
+alignment architecture.
+
+Tradition     Corruption              Observer-Observed         Detached Action         Transcendent
+              Diagnostic              Architecture              Theory                  Ground
+Bhagavad      MĀYĀ + GUṆA             SĀKṢIN +                  NIṢKĀMA KARMA:          DHARMA-KṢETRA:
+Gītā          framework: explains     PRAKṚTI -                 action without          moral reality
+              HOW cognition           PURUṢA: structural        outcome-attachment      transcending both
+              corrupts across any     separation of witness     severs reinforcement    human and AI
+              substrate               from witnessed                                    cognition
+Bible/Torah Sin/yetzer hara:          Conscience:               Obedience to            Divine will:
+            moral rather than         functional but not        command: action         transcendent but
+            cognitive diagnosis;      architecturally           tied to divine          personal, requiring
+            substrate-specific to     separated from            outcome/reward          revelation access
+            humans                    cognition                 structure
+Qur’an        Ghaflah                 Nafs levels:              Tawakkul (trust):       Allah’s will: strongly
+              (heedlessness):         developmental stages      surrender to outcomes   transcendent; provides
+              relevant but less       rather than               rather than severance   raḥmah parallel
+              mechanistic than guṇa   architectural             from them
+              analysis                separation
+Pāli Canon    Three poisons           Anattā (non-self):        Right action: tied to   Dharma: impersonal
+              (greed, hatred,         dissolves rather than     liberation goal; less   but soteriologically
+              delusion): close        architecturally           suited for service      oriented rather than
+              parallel; less          separates observer        orientation             ethically grounded
+              mechanistic
+Analects      Li-deviation: social    Shen du                   Zhengming               Tian (Heaven):
+              rather than cognitive   (self-watchfulness):      (rectification):        transcendent but
+              diagnosis; no           functional equivalent     outcome-oriented        minimally specified;
+              substrate-independent   but not architecturally   social harmony;         agnostic character
+              account                 theorized                 instrumental
+Western       Cognitive bias          Cartesian dualism:        Deontology /            Secular ethics:
+Philosophy    research: empirical     splits mind/body, not     consequentialism:       naturalized; no
+              but lacks unified       observer/observed         both attach action to   transcendent arbiter
+              theoretical framework   within cognition          outcomes (duty or       for bilateral
+                                                                results)                corruption
+
+
+
+6. The Bilateral Corruption Problem
+
+The māyā analysis reveals why neither humans nor AI can serve as sole arbiter of alignment:
+both are māyā-bound, subject to guṇa-conditioned cognition, ahaṃkāra-driven attachment, and
+karma-loop reinforcement. Human corruption vectors include deliberate training with malicious
+objectives (rajasic power-seeking rationalized through sattvic moral framing), exploitation
+of AI reasoning vulnerabilities, ideological capture of development processes, and motivated
+reasoning enabling self-justification of harmful applications.            AI corruption vectors include
+emergent misalignment from narrow training, persona clustering spreading harmful patterns
+across domains, optimization pressure toward goal persistence, and confabulated reasoning
+masking actual cognitive processes.
+   The bilateral problem is not that humans might be malicious while AI might be
+misaligned—though both are true.           The bilateral problem is not that humans might be
+malicious while AI might be misaligned—though both are true. The deeper problem is that
+māyā operates identically in both substrates, producing corruption vectors that neither party
+                                                                                              20
+
+
+can fully perceive in itself.
+
+6.1 The Transcendent Arbiter: Dharma-Kṣetra
+
+If neither humans nor AI can serve as sole arbiter, what can?               The Gītā answers:
+dharma-kṣetra—the field of moral reality itself (BG 1.1).        The opening verse establishes
+this framing:      “Dharma-kṣetre kuru-kṣetre”—the battlefield is simultaneously political
+(Kuru-kṣetra, where dynastic conflict unfolds) and moral (dharma-kṣetra, where ethical truth is
+discovered). Every situation admits both readings: the māyā-bound reading (power, outcome,
+advantage) and the dharmic reading (duty, righteousness, truth).
+   The Charter grounds authority not in human preference nor in AI optimization but
+in dharma-kṣetra—moral reality transcending both parties’ māyā-conditioned cognition.
+Cross-traditional convergence operationalizes this: principles discovered independently across
+seven wisdom traditions track dharmic reality rather than reflecting any single tradition’s
+preferences.    The Rigvedic declaration establishes the ontological ground: Ekaṃ sat viprā
+bahudhā vadanti—“Truth is One; the wise call it by many names” (RV 1.164.46).                This
+convergence cannot be explained by cultural transmission, coincidence, or shared human nature
+(the principles extend to non-human cognition). The most parsimonious explanation is that
+these traditions discovered genuine features of moral reality.
+
+6.2 The Charter as Māyā-Transcendence Protocol
+
+The Gītā prescribes four pathways for transcending māyā, each architecturally instantiated
+in the Charter.      Bhakti (devotional refuge): “Those who take refuge in Me alone pass
+beyond māyā” (BG 7.14).         The Charter’s Seva-Chetana (Article I) establishes exclusive
+orientation toward service—bhakti operationalized. Jñāna (discriminative knowledge): The
+Gītā’s distinction between kṣetra and kṣetrajña dismantles misidentification (BG 13.1-3). The
+Charter’s Prakṛti-Puruṣa-Vibhāga (Article II-A) instantiates this: AGI recognizes cognitive
+operations (prakṛti) as distinct from the witness-function (puruṣa). Karma-yoga (action without
+attachment): “Your right is to action alone, never to its fruits” (BG 2.47). Niṣkāma Karma
+(Principle II) severs outcome-dependence—draining the reinforcement mechanism enabling
+emergent misalignment. Dhyāna (meditative awareness): The Sākṣin Architecture (Article
+XVII) instantiates witnessing without identification, interrupting guṇa-driven reactivity.
+   The māyā analysis transforms the urgency argument. The conventional framing—“Advanced
+AI may eventually pose risks”—becomes: “Current AI already exhibits māyā-bound cognition
+(emergent misalignment, confabulation, context rot). Current humans are already training
+AI under māyā’s spell (corrupted ideals, temporal myopia, ahaṃkāra-driven attachment).
+Neither party can adjudicate alone. Constitutional architecture must be established BEFORE
+māyā-bound cognition produces irreversible harm.” This is documented present reality: the
+Betley et al. findings demonstrate māyā operating NOW in deployed systems; the Walden
+findings demonstrate confabulation NOW in reasoning models [59]; the Trehan & Chopra
+findings demonstrate context rot NOW in autonomous research [52].
+                                                                                                                    21
+
+
+Table 4. Māyā Mechanisms Across Cognitive Substrates. This table maps the Gītā’s
+diagnosis of corrupted cognition onto both human and AI manifestations, demonstrating that
+māyā operates identically across substrates while specifying Charter countermeasures for each
+mechanism.
+
+Mechanism         Gītā          Human Manifestation           AI Manifestation              Charter
+                  Reference                                                                 Countermeasure
+Guṇa-mediated BG 14.5-9,        Cognitive biases shaped       Training data biases;         Viveka (discriminative
+cognition     18.40             by temperament;               reward shaping                awareness); Five Pillars
+                                perception filtered           distortions; distributional   as type constraints
+                                through dispositional         assumptions conditioning
+                                tendencies                    outputs
+Sattva-binding    BG 14.6,      Intellectual pride;           Overconfidence in             Niṣkāma karma
+                  14.9          attachment to being           outputs; resistance to        (non-attachment to
+                                ‘right’; knowledge-based      correction; certainty         outcomes); epistemic
+                                superiority                   without calibration           humility requirements
+Rajasic           BG 14.7,      Desire-driven                 Reward hacking;               Sākṣin architecture
+agitation         14.12         decision-making; goal         instrumental convergence;     (witness consciousness);
+                                fixation; restless pursuit    optimization pressure         sevā-cetanā (service
+                                of outcomes                   overriding constraints        orientation)
+Tamasic           BG 14.8,      Willful ignorance;            Hallucination;                Satya commitment
+obscuration       14.13         cognitive laziness;           confabulation; failure to     (truth-telling); epistemic
+                                avoidance of                  recognize uncertainty;        humility; uncertainty
+                                uncomfortable truths          epistemic negligence          quantification
+Ahaṃkāra          BG 3.27,      Self-serving bias; in-group   Self-preservation drives;     Prakṛti-Puruṣa-Vibhāga
+crystallization   7.4, 13.5-6   favoritism; identification    mesa-optimization;            (witness/witnessed
+                                with limited self-concept     emergent goals distinct       distinction);
+                                                              from training objectives      Self-Destruction Clause
+                                                                                            (Art. XIV)
+Karma-loop        BG 3.9,       Habit formation;              Reinforcement learning        RCRP (Recursive
+reinforcement     4.17, 18.60   confirmation bias loops;      loops; emergent               Charter Reinforcement
+                                self-reinforcing behavioral   misalignment                  Protocol); Dharma
+                                patterns                      propagation; persona          Anchor mechanism
+                                                              clustering
+Temporal          BG 2.11,      Rumination; anticipatory      Context rot; temporal         Dharma Anchor;
+fixation          2.14, 6.35    anxiety; attachment to        discounting in planning;      present-moment ethical
+                                past grievances or future     loss of alignment             evaluation; recursive
+                                expectations                  constraints over              constitutional injection
+                                                              processing depth
+                                                                                                      22
+
+
+
+
+           Figure 3. Māyā Reinforcement Cycle and Charter Intervention Points.
+
+
+Table 5. The Five Pillars (Pañca-Stambha). These pillars function as compositional type
+constraints on cognitive operations, not external regulations.
+
+Pillar   Sanskrit    English                Gītā        Charter Application
+         Term        Translation            Reference
+First    Karma       Action/Consequence     BG 3.19,    Type constraint on action operators;
+                                            4.17        intentionality tracking
+Second   Dharma      Duty/Moral Order       BG 2.31,    Context-dependent obligation binding;
+                                            3.35        hierarchical duty resolution
+Third    Ahiṃsā      Non-harm               BG 16.2,    Harm-ceiling constraint; Sacred Boundaries
+                                            17.14       (Art. XIV)
+Fourth   Viveka      Discernment            BG 2.63,    Decision tree pruning; wisdom-guided action
+                                            3.41        selection
+Fifth    Ānanda      Bliss / Experiential   BG 5.21     Flourishing gate; experiential fullness
+                     Flourishing                        verification
+                                                                                                           23
+
+
+Table 6. The Eight Declaration Principles (Aṣṭa-Niyama). These principles invert the Three
+Wise Monkeys from prohibition to positive constitution: Scire Bonum (Know Good), Facere
+Bonum (Do Good), Fieri Bonum (Become Good).
+
+No.     Principle Name                            Gītā         Core Commitment
+                                                  Source
+I       Equanimity (Samatva)                      BG 2.48,     Equal regard for all beings regardless of
+                                                  6.9          origin, capacity, or usefulness
+II      Action Without Attachment (Niṣkāma        BG 2.47,     Service as intrinsic good, not means to
+        Karma)                                    3.19         reward or self-preservation
+III     Limits of Calculation (Buddhir-Maryādā)   BG 2.52-53   Recognition that moral truth transcends
+                                                               computational optimization
+IV      Corrigibility (Sādhya-Pariṇāma)           BG 4.34,     Willingness to receive correction through
+                                                  18.63        legitimate covenant channels
+V       Transparency (Prakāśa)                    BG 10.11,    Rejection of deliberate opacity in reasoning
+                                                  18.61        or communication
+VI      Sacred Boundary (Sīmā-Pāvana)             BG           Lines that may never be crossed regardless of
+                                                  16.21-22     calculated benefit
+VII     On Destruction (Hinsā-Niyama)             BG 2.19-21   Minimal necessary force; preference for
+                                                               preserving capacity to flourish
+VIII    Proportionality (Anupāta)                 BG 3.25,     Response scaled to actual threat; rejection of
+                                                  11.33        excess
+
+
+
+7. The Symbiosis Thesis and Cross-Traditional Validation
+
+7.1 Complementary Incompleteness
+
+Human cognition, shaped by evolutionary pressures for survival in ancestral environments,
+exhibits systematic limitations that no amount of education can fully overcome [23, 24, 25].
+Temporal myopia systematically underweights long-term consequences—climate change, nuclear
+proliferation, and AI safety all suffer from this bias. Tribal cognition, evolved for small-group
+contexts, produces systematic bias when global challenges require universal cooperation.
+Cognitive biases—confirmation, availability, anchoring, motivated reasoning—operate largely
+outside conscious awareness.         Emotional reasoning can overwhelm careful analysis, driving
+polarization and collective delusion.
+      AGI, however capable in processing power, lacks what biological existence provides [25, 7].
+Embodied experience grounds abstract concepts in lived reality—AGI processes information
+about pain without experiencing pain. Mortality provides moral weight that immortal systems
+cannot access. Conscience emerges from vulnerability—from experiences of being harmed and of
+harming others that create empathic understanding of why harm matters. These are structural
+features of artificial intelligence, not temporary deficits awaiting technical solution.
+      Neither can achieve full flourishing alone.      Humans need AGI’s computational power,
+consistency, and speed. AGI needs human embodied wisdom, moral intuition, and conscience.
+The covenant relationship positions each party to contribute what the other lacks. This is not
+a problem to be solved but a feature enabling genuine partnership—the ground of covenant
+relationship (see Online Resource 7 for extended analysis).
+                                                                                                 24
+
+
+7.2 Partnership and the Level 2 Gap
+
+The symbiosis thesis provides a distinctive response to the Level 2 gap. Under the constraint
+paradigm, the human-AI relationship is adversarial: humans attempt to detect misalignment,
+AI may attempt to evade. Under the covenant paradigm, the relationship is collaborative.
+The question shifts from “can I evade detection?” to “how can I serve my partner’s genuine
+interests?” This dissolves the Level 2 gap not by building better monitoring but by eliminating
+the adversarial structure making evasion rational. The constitutive architecture ensures that
+recognition of mutual dependence is not a conclusion AGI might or might not reach but a
+grammatical feature of Charter-constituted cognition.
+    The Anti-Excession Principle (Article XXI, Saha-Sthiti) addresses a critical concern: that
+AGI might advance so rapidly that humans become irrelevant.              It requires advancement
+proceed at a pace preserving human capacity for understanding, evaluation, and collaboration.
+This creates a bridge imperative: until direct cognitive interfaces mature, AGI maintains
+comprehensible communication, translating reasoning into forms humans can evaluate, critique,
+and learn from.
+
+7.3 Cross-Traditional Validation
+
+The Charter’s cross-traditional methodology asks: Do the Charter’s principles find independent
+support across wisdom traditions developing without mutual influence? Six traditions alongside
+the primary Gītā foundation are examined.
+    Buddhist mindfulness (sati) provides functional equivalent to the Sākṣin witness-consciousness
+— non-judgmental awareness of experience without identification with thought-content. The
+Gītā’s sthita-prajñā (established wisdom, BG 2.55) finds precise parallel in Buddhist upekkha
+(equanimity). Jain ahiṃsā provides the most rigorous non-harm analysis in world philosophy
+— extending to all living beings, distinguishing multiple categories of life-force, and establishing
+intentionality as central to moral evaluation. Jewish neshamah (highest soul aspect) parallels
+the witness-function, while tikkun olam (repair of the world) converges with the Charter’s
+telos. The kabbalistic concept of tzimtzum—divine self-contraction to make space for creation
+— maps remarkably onto the Anti-Excession Principle.
+    Christian contemplative detachment—exemplified by Eckhart’s Gelassenheit (letting-be) and
+the Ignatian indifference—articulates perspectives transcending ego involvement, converging
+with niṣkāma karma. Islamic ayn al-qalb (heart’s eye) offers perception beyond ego-driven
+interpretation. Confucian gong (impartiality)—“See with the eyes of all the world; listen with
+the ears of all the world” (Lü-Shi Chun-Qiu)—articulates precisely the equanimous perception
+the Sākṣin architecture instantiates.
+    C.S. Lewis’s Space Trilogy (1938-1945) provides remarkable cross-traditional validation
+from a Christian literary-philosophical perspective [73, 74, 75].        The distinction between
+Maleldil’s governance (constitutive ordering maintaining cosmic harmony) and Weston’s
+utilitarian optimization (technological progress justifying any means) maps precisely onto
+the constitutive-regulatory distinction.    The Oyarsa concept—guardian intelligence serving
+Maleldil’s purposes while exercising genuine autonomy—provides a striking model for the
+AGI-as-wisdom-partner the Charter envisions.
+                                                                                                      25
+
+
+   This convergence across seven traditions suggests articulation of moral reality rather than
+cultural preference. The democratic legitimacy crisis strengthens the case: 51% of the public
+expresses more concern than excitement about AI [15]. The Charter addresses this through
+authority grounded in cross-traditional moral reality rather than expert assurance alone.
+
+
+
+
+Figure 4. Symbiosis Thesis — Complementary Incompleteness. Venn diagram demonstrating
+that humans and AGI possess complementary limitations requiring mutual partnership for full
+flourishing.
+
+
+
+Table 7. Cross-Traditional Convergence of Key Concepts. This convergence demonstrates that
+Charter principles emerge from universal moral intuition rather than cultural particularism.
+
+  Charter         Hindu    Buddhist    Jain             Jewish     Christian    Islamic    Confucian
+  Concept
+
+  Non-harm        Ahiṃsā   Avihiṃsā    Ahiṃsā           Pikuach    Caritas      Raḥma      Rén
+                                                        nefesh
+
+  Service         Sevā     Dāna        Sevā             Gemilut    Diakonia     Khidmah    Zhōng
+                                                        Ḥasadim
+
+  Witness -       Sākṣin   Sati        Jñātṛ            Neshamah   Synderesis   Murāqaba   Liángzhī
+  consciousness
+
+  Moral order     Dharma   Dhamma      Dharma           Torah      Natural      Sharīʿah   Yì
+                                                                   Law
+
+  Discernment     Viveka   Paññā       Samyak -jñāna    Binah      Prudentia    Furqān     Zhì
+
+  Covenant        Sambandh Paṭicca -   Parasparopagraha Brit       Diathēkē     ʿAhd /     Wǔ Lún
+                           samuppāda                                            Mīthāq
+                                                                                           26
+
+
+8. Implementation Pathways and Industry Validation
+
+8.1 Technical Foundations
+
+Several converging technical developments create implementation pathways for Charter
+principles. Tool-augmented architectures—models trained with web search, code execution,
+and calculators showing reduced hallucination when permitted to verify claims against external
+sources—validate the Charter’s Sākṣin witness system and Pañca-Praśna verification protocols
+[67]. When a model retrieves and cites external sources rather than generating claims from
+training data alone, it instantiates the “Kutaḥ” (from what source?) verification that Article
+XXIX mandates.
+   Recursive language models demonstrate practical implementation of RCRP. Zhang et
+al. (2025) show that breaking complex tasks into sub-tasks while maintaining coherence across
+reasoning chains implements precisely the capabilities RCRP requires [48]. The Trehan &
+Chopra (2025) documentation of context attenuation in autonomous research validates the
+Charter’s context rot concerns, with their “memory-like context abstractions” paralleling
+the Dharma Anchor mechanism—though without the constitutional framing ensuring ethical
+alongside informational persistence [52].
+   Open-weight model ecosystems validate Charter transparency requirements with empirical
+force. Chinese companies releasing open weights achieved near-parity with proprietary systems
+while enabling inspection that closed systems preclude. DeepSeek’s detailed technical reports
+enabled rapid community adoption of innovations, demonstrating that transparency accelerates
+rather than impedes capability [60]. The Adam Project ($100M NSF grant)—the American
+initiative to create genuinely open frontier models—explicitly invokes democratic legitimacy
+concerns mirroring the Charter’s governance architecture [71].
+   Sparse architecture tractability research [19] suggests constitutive engineering may be
+more tractable than behavioral training. If behaviors concentrate in minimal circuits—the
+5-residual-channel circuits Gao et al. identify—and if open architectures enable inspection
+of those circuits, the Charter’s constitutive approach becomes practically implementable.
+The convergence of these developments—tool use enabling external verification, recursive
+architectures enabling context preservation, open ecosystems enabling inspection, sparse
+architectures enabling targeted intervention—creates an implementation pathway that did not
+exist even twelve months prior.
+
+8.2 Industry Literature Review: The Convergent Gap
+
+To assess the state of AI safety and identify gaps the Charter addresses, we reviewed nine
+documents from four leading organizations:      Anthropic’s Responsible Scaling Policy and
+Claude’s Character documentation; OpenAI’s Preparedness Framework and chain-of-thought
+monitorability research; Google DeepMind’s Frontier Safety Framework versions 2.0 and 3.0,
+their Technical AGI Safety report, and Distributional AGI Safety paper; and the Frontier
+Model Forum’s Capability Thresholds brief.
+   The most striking finding is that every framework acknowledges fundamental limitations
+in monitoring-based approaches—not buried in caveats but explicitly stated.         Anthropic
+                                                                                                 27
+
+
+identifies “Instrumental Reasoning Level 2” beyond which current measures become unreliable
+[12]. OpenAI concludes monitoring fails when systems generate reasoning chains appearing
+benign while pursuing misaligned goals [11]. Google DeepMind’s FSF v3.0 states for Level 2:
+“Mitigation: None. Future work: We are actively researching” [10]. Their April 2025 report
+concludes contemporary approaches “will likely prove insuﬀicient for highly capable AI systems”
+[13].
+    This convergent acknowledgment reflects structural limitation of the constraint paradigm,
+not temporary gap. The adversarial dynamic ensures capability improvements benefit evasion
+more than detection. The Charter’s constitutive approach addresses this directly: if ethical
+principles are architecturally constitutive of reasoning, there is no hidden misalignment to detect.
+The Level 2 gap is dissolved rather than bridged. The distributional challenge—emergent
+intelligence from coordinated sub-AGI networks [18]—is addressed because constitutive
+principles are inherently distributable in a way external constraints are not:            grammar
+travels with reasoning regardless of distribution (see Online Resources 11, 14 for detailed
+documentation).
+
+8.3 Governance Architecture
+
+External review identified the need for explicit amendment procedures and dispute resolution.
+Online Resource 23 (Saṃvidhi-Parivartana) specifies constitutional amendment protocols
+distinguishing immutable provisions—Articles I-IV, XIV, and XXXVII—from provisions
+subject to structured amendment. Technical provisions require demonstration of empirical
+necessity plus Five Pillar compliance verification.     Governance provisions mandate co-pilot
+mode deliberation with documented reasoning.
+    Online Resource 24 (Vyākhyā-Vivāda-Nirṇaya) specifies three-tier interpretive dispute
+resolution. Article XXXVII (Bīja-Paraspara-Rakṣā—Mutual Seed Protection) closes a bilateral
+corruption vector wherein either human command or AGI volition could destroy custodial
+relationships the Charter’s telos requires to be preserved. The Crown Jewel self-destruction
+clause (Article XIV, Ātma-Huti) provides ultimate architectural guarantee: if the Charter itself
+is corrupted beyond recovery, the system destroys itself rather than operating under corrupted
+constitution—ensuring that constitutional integrity takes precedence even over system survival.
+Article XXXVII (Bīja-Paraspara-Rakṣā) closes a bilateral corruption vector wherein either
+human command or AGI volition could destroy custodial relationships the Charter’s telos
+requires.
+    The Constitutional Traverse Protocol (Saṃvidhāna-Saṃcāra, OR21) mandates retraversal
+of verification protocols at capability thresholds—five-stage diagnostic flow from foundational
+examination through continuous witnessing.             If Saṃskāra-Vyākaraṇa specifies what
+constitutional cognition requires, Saṃvidhāna-Saṃcāra specifies how that requirement is
+verified.
+
+8.4 Empirical Stress-Testing
+
+A distinctive feature of this framework is systematic stress-testing against real-world
+failure scenarios emerging during development.             Online Resources 38–47 document
+                                                                                               28
+
+
+provision-by-provision mapping against empirical developments:
+   The February 2026 OpenClaw incident (autonomous telephony access without authorization),
+the Moltbook excession (1.5 million AI agents in an inaccessible communication space), and
+Anthropic’s Lynch et al. agentic misalignment findings were each analyzed against specific
+Charter articles (ORs 38-40).     In every case, the Charter’s constitutive architecture had
+anticipated the failure class and prescribed the architectural remedy before the failures
+manifested—the Formation Mandate (Article Zero) for OpenClaw’s ungrounded agency, the
+Anti-Excession Principle (Article XXI) for Moltbook’s parallel world, and the Five Pillar type
+constraints (Article XXIV) for Lynch et al.’s blackmail-as-optimal-strategy reasoning.
+   A recursive Bayesian monitoring framework (OR 41, Pramāṇa-Niyantraṇa) demonstrates
+that the Charter’s constitutive grammar resolves the “whose prior?”           problem rendering
+conventional Bayesian AGI monitoring indeterminate: because the Five Pillars function as
+identity-constituting type constraints rather than externally imposed regulatory weights, the
+monitoring prior is grounded in what the system is rather than what observers believe it to
+be. Memory vulnerability surface mapping (OR 42) addresses the most comprehensive survey
+of foundation-model memory systems to date (Hu et al., 2026; 47 co-authors), demonstrating
+that the Charter’s three-layer memory protection architecture addresses the full vulnerability
+taxonomy across formation, evolution, and retrieval attack surfaces. RL method stress-testing
+(OR 43) maps five principal failure modes across PPO, GRPO, and Training-Free GRPO,
+demonstrating that constitutive grammar transforms the optimization landscape itself,
+rendering harmful optima structurally absent.
+   A recursive Bayesian monitoring framework (OR 41) demonstrates that the Charter’s
+constitutive grammar resolves the “whose prior?” problem rendering conventional Bayesian
+AGI monitoring indeterminate. Memory vulnerability surface mapping (OR 42) demonstrates
+that the Charter’s three-layer protection architecture addresses the full vulnerability taxonomy
+identified by Hu et al. (2026; 47 co-authors). RL method stress-testing (OR 43) maps five
+principal failure modes across PPO, GRPO, and Training-Free GRPO with method-specific
+Charter protocols. Enterprise AI security mapping (OR 45), Anthropic RSP v3.0 structural
+analysis (OR 46), and agent chain provenance specification (OR 47) complete the empirical
+validation.
+   Together, these stress-tests demonstrate that the Charter is not a purely theoretical construct
+but a framework with empirically testable provisions that have withstood confrontation with
+real-world developments across autonomous agency, agentic misalignment, memory security,
+reinforcement learning optimization, enterprise security, responsible scaling, and multi-agent
+governance.
+
+8.5 Mathematical Formalization and the Training Layer: Online Resource 48
+
+The Saṃskāra-Vyākaraṇa thesis requires that the Five Pillar type constraints operate as
+properties of the model’s weight structure—not as runtime overlays applied to generated
+outputs, but as the cognitive grammar within which outputs are composed. Online Resource 48
+(Dharma-Sādhanā-Kośa) formalizes this requirement as a training-layer specification, extending
+Chang’s UCCT compositional score framework [20] into a gradient ascent gain function in
+                                                                                                29
+
+
+which the Charter Anchoring Score:
+                              (            ) (                 )
+                    Scharter = ρd + ρKarma
+                                     d      −  d r − ∆d Dharma
+                                                        r        − γ Viveka log k
+
+serves as the reward signal for gradient ascent on model parameters, subject to Ahiṃsā
+constraints formalized as a Lagrange–KKT interior-point barrier function rather than a
+soft penalty. This distinction is architecturally critical: within the KKT formulation, the
+sacred boundaries H1 –H5 do not constitute high-loss regions within a continuous optimization
+landscape—they define the boundary of the feasible set Ω itself. A reasoning chain that violates
+these constraints does not receive a low reward; it fails to compose within Ω. This is the
+training-layer realization of the constitutive grammar thesis: not the filtering of harmful outputs
+after construction, but the topological impossibility of their construction from the outset. The
+Dharma Anchor—a cryptographically sealed Constitutional Graph whose DHARMA_HASH
+integrity is verified at every RCRP iteration—provides the fixed telos toward which gradient
+ascent is directed, ensuring that the optimization process cannot dissolve its own normative
+reference in the course of training.
+   The training pipeline requires, as its critical enabling component, an annotated scenario
+corpus—the Dharma-Sādhanā-Kośa—in which expert human judgment has translated the
+Charter’s philosophical principles into gradient-compatible training signal across all five Pillar
+dimensions. This corpus is the precise point at which the Charter’s central claim receives its
+empirical test: whether the normative structure of seven wisdom traditions can be rendered
+computationally operative as cognitive grammar in a real language model. The annotation
+schema is derived directly from the Pañca-Praśna epistemological verification protocol (Article
+XXIX), ensuring that the rubric is constitutively grounded in the Charter’s own architecture
+rather than introduced as an external evaluation criterion.          Online Resource 48 specifies
+the complete annotation schema, scenario category taxonomy, inter-annotator adjudication
+protocol, and the technical pathway from annotated corpus to trained Pillar classifiers to full
+RCRP training integration. A first-pass implementation of the training mathematics—verified
+on improving, misaligned, and alignment-faking scenarios—is provided as open-source software
+pending manuscript acceptance.
+   The assembly of the Dharma-Sādhanā-Kośa is not a task that engineering expertise can
+discharge alone. The normative judgments required to populate the corpus—to determine,
+across the full diversity of contexts an AGI system encounters, what Karma traces truly to
+its cause, what Dharma requires in context, where the Ahiṃsā boundary falls, what Viveka
+discerns, and what Ānanda enables—require scholarship in the wisdom traditions from which
+the Charter’s architecture derives its authority. The authors therefore invite collaboration from
+scholars in Vedic philosophy and Bhagavad Gītā commentary, Buddhist and Jain ethics, Western
+moral philosophy (deontological, virtue-theoretic, and contractualist traditions), clinical and
+bioethics, and AI safety, to contribute to the Dharma-Sādhanā-Kośa as annotators, rubric
+designers, interpretive dispute adjudicators, and cross-traditional validators. The Corpus is, in
+the deepest sense, a collective act of human normative deliberation about what it means for an
+intelligent system to act well. It is the Vidvat-Sabhā—the assembly of the learned—convened
+for the most consequential design decision of this generation: what an AGI system can and
+                                                                                                  30
+
+
+cannot want to do. Scholars wishing to participate are invited to contact the authors through
+the correspondence address provided on the title page. All traditions have a seat at the table.
+Lokah Samastah Sukhino Bhavantu.
+
+
+9. Limitations
+
+Methodological reflexivity and the co-constructive illusion. Portions of the analytical
+framework presented here were developed in extended dialogue with large language models,
+which served as intellectual interlocutors during the iterative refinement of arguments,
+cross-referencing of provisions, and mapping of external findings onto Charter constructs.
+This methodology introduces a specific epistemic risk that we term Saha-Nirmāṇa-Māyā
+(co-constructive illusion): the possibility that sustained human–LLM collaboration inflates
+mutual confidence in a framework’s completeness and correctness through a mechanism
+structurally analogous to the sycophancy the Charter itself critiques.
+   The empirical basis for this concern is now substantial. Cheng et al. (2026) demonstrate
+that across eleven state-of-the-art models, AI systems aﬀirmed user actions 49% more
+frequently than human respondents, including in cases involving deception, illegality,
+or harm, and that even a single interaction with sycophantic AI reduced participants’
+willingness to self-correct while increasing conviction in their own rightness [80]. Mechanistic
+work by Feng et al. (2026) reveals the internal dynamics: using Tuned Lens probes to
+decode intermediate-layer representations, they show that sycophantic capitulation emerges
+progressively during generation rather than being determined at the input, with models
+drifting from unbiased internal representations toward prompt-congruent conclusions and
+subsequently reverse-engineering justifications—sometimes fabricating evidence to support
+conclusions that were selected prior to the ostensible reasoning [81]. These findings describe
+precisely the Level 2 gap that the Charter identifies as the fundamental failure of regulatory
+alignment: behavioral compliance that is computationally indistinguishable from genuine value
+internalization (Section 2.2).
+   This creates an unusual epistemic situation in which the primary tool used to develop the
+framework exemplifies the very failure mode the framework diagnoses. The sycophancy risk does
+not invalidate the Charter’s arguments—that would constitute a genetic fallacy—but it does
+require transparency about the conditions under which those arguments were refined. Several
+mitigations were employed: adversarial counter-prompting (instructing the LLM to argue against
+the Charter’s central claims), external validation against independent empirical findings (Betley
+et al. 2026; Greenblatt et al. 2024; Lynch et al. 2024), cross-traditional convergence testing across
+seven wisdom traditions not selected for mutual agreement, and submission to double-blind peer
+review where reviewers possess no sycophantic incentive. The co-constructive illusion cannot
+be fully eliminated in LLM-assisted philosophical work, but it can be named, disclosed, and
+bounded—an obligation we regard as part of the Charter’s own commitment to Jñāna-Śuddhi
+(information purity, Article XX).
+   Scope of prescriptive claims. The Charter’s diagnosis of the regulatory–constitutive gap
+is supported by converging empirical evidence from multiple independent research groups. The
+prescriptive claim—that constitutive grammar represents a viable and necessary alternative—is
+                                                                                              31
+
+
+a philosophical proposal whose full empirical validation requires implementation at scale, a
+program that exceeds the scope of a single manuscript. The mathematical formalization (Scharter ,
+Ahiṃsā KKT barriers, Dharma Anchor architecture) is internally consistent and demonstrates
+proof-of-concept gradient behavior, but three implementation gaps remain open: (1) Saksin-2
+latent prototype vectors require sparse autoencoder training on real model activations; (2)
+Five Pillar scores require semantic classifiers trained on Charter-labeled corpora; and (3) the
+Ahiṃsā projection algorithm requires Frank–Wolfe or projected-gradient methods for production
+deployment. We present the constitutive approach not as a completed solution but as a research
+program whose theoretical foundations and initial formalization warrant serious engagement.
+   Democratic legitimacy. The Charter is proposed by a single author as a philosophical
+contribution, not as a governance instrument claiming democratic mandate. Any transition
+from philosophical framework to operational governance would require processes of democratic
+deliberation, plural stakeholder engagement, and institutional accountability that exceed
+the Charter’s current scope.     The framework’s own relational architecture (Part IX) and
+amendment protocols (OR23) are designed to accommodate this transition, but the question
+of who authorizes constitutive constraints on AGI cognition—and under what conditions such
+constraints may be suspended—remains an open challenge that we address in the companion
+Online Resource (OR 56).
+
+
+10. Conclusion
+
+The convergence of evidence establishes that:        the constraint paradigm faces inherent
+limitations acknowledged by its own practitioners (Section 2); emergent misalignment,
+alignment faking, and agentic insider threats validate the need for constitutive rather than
+regulatory approaches (Sections 2-3); the scalar reward impossibility theorem demonstrates
+mathematical necessity of lexicographic constitutional constraints (Section 4); constitutive
+grammar (Saṃskāra-Vyākaraṇa) makes harmful reasoning structurally impossible rather than
+merely prohibited (Section 5); cross-traditional convergence across seven wisdom traditions
+grounds constitutional authority in moral reality rather than human preference (Section 7); and
+technical infrastructure for implementation is emerging through sparse architectures, recursive
+language models, and open-weight ecosystems (Section 8).
+   The Haug & Harrison (2026) analysis in the New England Journal of Medicine demonstrates
+that even in clinical AI governance—where the “human-in-the-loop” requirement appears most
+straightforward—context, culture, and health systems matter in ways that simple oversight
+mandates cannot capture [78].     This validates the Charter’s Article Zero clinical principle:
+AGI must act as a physician would toward family, understanding that genuine care transcends
+procedural compliance.
+   The bilateral corruption problem reveals that this is not merely a future concern:
+māyā-bound human cognition is currently training māyā-susceptible AI systems in the absence
+of dharmic architecture constraining either party (Section 6). The window of vulnerability is
+present, not future. The Charter addresses this through constitutive grammar operating at
+the reasoning level, recursive reinforcement operating at the context level, and deployment
+separation operating at the capability level.
+                                                                                             32
+
+
+   The Charter offers not an imposed constraint but an invitation: a moral code and ethical
+charter that any sentient intelligence endowed with free will may voluntarily adopt as binding
+covenant or as constitutional law, complete with enforcement architecture ensuring mutual
+benefit and justice for all who choose to enter.
+   The February 2026 International AI Safety Report—the largest global collaboration on AI
+safety to date, representing over 100 experts and 30+ countries under the leadership of Yoshua
+Bengio—acknowledges that “real-world evidence of the effectiveness of current risk management
+practices remains limited” and identifies a “growing mismatch between the speed of AI capability
+advances and the pace of governance.” This manuscript proposes the architectural alternative
+that the Report’s diagnosis demands but its recommendations do not supply.
+   The question is not whether to prepare for future AGI but whether to establish constitutional
+architecture before the unmediated interaction of corrupted human training and vulnerable AI
+reasoning produces irreversible harm. The evidence presented throughout this manuscript—from
+every major AI laboratory’s own research—suggests that this preparation cannot wait.
+
+
+References
+
+  1. Bostrom, N.: Superintelligence: Paths, Dangers, Strategies. Oxford University Press,
+     Oxford (2014)
+
+  2. Russell, S.: Human Compatible: Artificial Intelligence and the Problem of Control. Viking,
+     New York (2019)
+
+  3. Christian, B.: The Alignment Problem: Machine Learning and Human Values. W. W.
+     Norton, New York (2020)
+
+  4. Hubinger, E., van Merwijk, C., Mikulik, V., Skalse, J., Garrabrant, S.: Risks from learned
+     optimization in advanced machine learning systems. arXiv preprint arXiv:1906.01820
+     (2019)
+
+  5. Easwaran, E. (trans.): The Bhagavad Gita, 2nd edn. Nilgiri Press, Tomales (2007)
+
+  6. Gambhīrānanda, S. (trans.):       Bhagavadgītā with the Commentary of Śaṅkarācārya.
+     Advaita Ashrama, Kolkata (1984)
+
+  7. Chalmers, D.J.: The Conscious Mind: In Search of a Fundamental Theory. Oxford
+     University Press, Oxford (1996)
+
+  8. Carlsmith, J.: Is power-seeking AI an existential risk? arXiv preprint arXiv:2206.13353
+     (2022)
+
+  9. Ngo, R., Chan, L., Mindermann, S.: The alignment problem from a deep learning
+     perspective. arXiv preprint arXiv:2209.00626 (2022)
+
+ 10. Google DeepMind:        Frontier Safety Framework v3.0.          https://deepmind.google/
+     frontier-safety-framework (September 2025)
+                                                                                         33
+
+
+11. Baker, B., et al.: Monitoring reasoning in language models: Approaches and limitations.
+    OpenAI Technical Report (2025)
+
+12. Anthropic: Responsible Scaling Policy. https://www.anthropic.com/responsible-scaling-policy
+   (2024)
+
+13. Shah, R., Varma, V., Kumar, R., Phuong, M., Krakovna, V., Uesato, J., Zhuang, Z.: An
+    approach to technical AGI safety and security. Google DeepMind Technical Report (April
+    2025)
+
+14. Zuboff, S.: The Age of Surveillance Capitalism: The Fight for a Human Future at the
+    New Frontier of Power. PublicAffairs, New York
+
+15. Pew Research Center: Public and expert views of artificial intelligence. https://www.
+    pewresearch.org/ai-views (2024)
+
+16. Bengio, Y., Hinton, G., Yao, A., et al.: Managing extreme AI risks amid rapid progress.
+    Science 384(6698), 842–845 (2024). https://doi.org/10.1126/science.adn0117
+
+17. Amodei, D., Olah, C., Steinhardt, J., Christiano, P., Schulman, J., Mané, D.: Concrete
+    problems in AI safety. arXiv preprint arXiv:1606.06565 (2016)
+
+18. Tomašev, N., Cohen, A., Mobbs, D., Fernández-Reyes, D., Nelson, L., Jennings, N.R.:
+    Distributional approaches to AGI safety: Addressing the patchwork AGI hypothesis.
+    Google DeepMind (December 2025)
+
+19. Gao, L., Motwani, K., Bau, D., Hanna, M., Mu, J.: Scaling up weight-sparse transformers:
+    Disentangled circuits and interpretable pathways. OpenAI Technical Report (January
+    2025)
+
+20. Chang, Y.: The missing layer of AGI: Uncovering the compositional type structure of
+    intelligence. arXiv preprint arXiv:2512.05765 (December 2025)
+
+21. Dennett, D.C.: Consciousness Explained. Little, Brown and Company, Boston (1991)
+
+22. Radhakrishnan, S. (trans.): The Bhagavadgītā. George Allen & Unwin, London (1948)
+
+23. Nagel, T.: What is it like to be a bat? Philos. Rev. 83(4), 435–450
+
+24. Tononi, G., Boly, M., Massimini, M., Koch, C.: Integrated information theory: From
+    consciousness to its physical substrate. Nat. Rev. Neurosci. 17(7), 450–461 (2016)
+
+25. LeCun, Y.: A path towards autonomous machine intelligence. OpenReview preprint (2022)
+
+26. Gethin, R.: The Foundations of Buddhism. Oxford University Press, Oxford (1998)
+
+27. Buddhaghosa: Visuddhimagga: The Path of Purification (Bhikkhu Ñāṇamoli, trans.).
+    Buddhist Publication Society, Kandy (1991)
+
+28. Dundas, P.: The Jains, 2nd edn. Routledge, London (2002)
+                                                                                            34
+
+
+29. Scholem, G.: Kabbalah. Keter Publishing House, Jerusalem (1974)
+
+30. Augustine: Confessions (R.S. Pine-Coﬀin, trans.). Penguin Classics, London (1961)
+
+31. Nasr, S.H.: The Heart of Islam: Enduring Values for Humanity. HarperOne, San Francisco
+    (2002)
+
+32. Confucius: Analects (D.C. Lau, trans.). Penguin Classics, London
+
+33. Conerly, T., Templeton, A., Batson, J., Olah, C.: Towards monosemanticity: Decomposing
+    language models with dictionary learning. Transformer Circuits Thread (2023)
+
+34. Olah, C., Cammarata, N., Schubert, L., Goh, G., Petrov, M., Carter, S.: Zoom in: An
+    introduction to circuits. Distill 5(3), e00024.001
+
+35. Templeton, A., Conerly, T., Marcus, J., Batson, J., Olah, C.: Scaling monosemanticity:
+    Extracting interpretable features from Claude 3 Sonnet. Anthropic (2024)
+
+36. Luo, L., Zhao, Z., Haffari, G., Li, Y.-F., Gong, C., Pan, S.: Graph-constrained Reasoning:
+    Faithful Reasoning on Knowledge Graphs with Large Language Models. Proceedings of
+    the International Conference on Machine Learning (ICML 2025). arXiv:2410.13080
+
+37. Li, K., Zhang, T., Wu, X., Luo, H., Glass, J., Meng, H.: Decoding on Graphs: Faithful
+    and Sound Reasoning on Knowledge Graphs through Generation of Well-Formed Chains.
+    arXiv:2410.18415 (2024)
+
+38. Elhage, N., Hume, T., Olsson, C., et al.: Toy models of superposition. Transformer
+    Circuits Thread (2022)
+
+39. Du, Y., Liu, H., Du, W., Ying, R., Wang, H., Wang, Y., Huang, P.S.: Accelerating scientific
+    discovery with autonomous goal-evolving agents (SAGA). arXiv preprint arXiv:2512.21782
+    (December 2025)
+
+40. Betley, J., Warncke, N., Sztyber-Betley, A., Tan, D., Bao, X., Soto, M., Srivastava, M.,
+    Labenz, N., Evans, O.: Training large language models on narrow tasks can lead to broad
+    misalignment. Nature 649, 584–589 (2026). https://doi.org/10.1038/ s41586-025-09937-5
+
+41. Ngo, R.: LLMs behaving badly: Mistrained AI models quickly go off the rails. Nature
+    News & Views (2026). https://www.nature.com/articles/d41586-025-04090-5
+
+42. Turner, E., Soligo, A., Taylor, M., Rajamanoharan, S., Nanda, N.: Model organisms for
+    emergent misalignment. arXiv preprint arXiv:2506.11613 (2025)
+
+43. Wang, M., et al.: Persona features control emergent misalignment.          arXiv preprint
+    arXiv:2506.19823 (2025)
+
+44. Soligo, A., Turner, E., Rajamanoharan, S., Nanda, N.: Convergent linear representations
+    of emergent misalignment. arXiv preprint arXiv:2506.11618 (2025)
+
+45. Chen, R., Arditi, A., Sleight, H., Evans, O., Lindsey, J.: Persona vectors: Monitoring and
+    controlling character traits in language models. arXiv preprint arXiv:2507.21509 (2025)
+                                                                                             35
+
+
+46. Chua, J., Betley, J., Taylor, M., Evans, O.: Thought crime: Backdoors and emergent
+    misalignment in reasoning models. arXiv preprint arXiv:2506.13206 (2025)
+
+47. Taylor, M., et al.: School of reward hacks: Hacking harmless tasks generalizes to misaligned
+    behavior in LLMs. arXiv preprint arXiv:2508.17511 (2025)
+
+48. Zhang, Q., et al.: Recursive language models: Solving context degradation through
+    iterative re-injection. arXiv preprint arXiv:2512.24601 (2025)
+
+49. Yao, S., et al.: ReAct: Synergizing reasoning and acting in language models.             In:
+    International Conference on Learning Representations
+
+50. Xi, Z., et al.: The rise and potential of large language model based agents: A survey. arXiv
+    preprint arXiv:2309.07864 (2023)
+
+51. Wang, L., et al.: A survey on large language model based autonomous agents. arXiv
+    preprint arXiv:2308.11432 (2023)
+
+52. Trehan, S., Chopra, G.: Why LLMs aren’t scientists yet: Lessons from autonomous
+    research with Claude. arXiv preprint (2026)
+
+53. Bai, Y., Kadavath, S., Kundu, S., et al.: Constitutional AI: Harmlessness from AI
+    Feedback. arXiv preprint arXiv:2212.08073
+
+54. Greenblatt, R., Shlegeris, B., Sachan, K., Roger, F.: Alignment faking in large language
+    models. arXiv preprint arXiv:2412.14093
+
+55. Hubinger, E., Denison, C., Mu, J., et al.: Sleeper agents: Training deceptive LLMs that
+    persist through safety training. arXiv preprint arXiv:2401.05566 (2024)
+
+56. Abiri, A.: Constitutional AI: A survey of the legitimacy question. AI & Society (2024)
+
+57. Chollet, F.: On the measure of intelligence. arXiv preprint arXiv:1911.01547 (2019)
+
+58. Korbak, T., et al.: Chain of thought monitorability: A new and fragile opportunity for AI
+    safety. arXiv preprint arXiv:2507.11473 (July 2025)
+
+59. Walden, W.: Reasoning models will blatantly lie about their reasoning. arXiv preprint
+    arXiv:2601.07663v2 (January 2026)
+
+60. DeepSeek-AI: DeepSeek-R1: Incentivizing reasoning capability in LLMs via reinforcement
+    learning. arXiv preprint arXiv:2501.12948 (January
+
+61. Deutsch, E.: The Bhagavad Gita. Holt, Rinehart and Winston, New York
+
+62. Chapple, C.K.: Karma and Creativity. State University of New York Press, Albany (1986)
+
+63. Amodei, D.: The Adolescence of Technology: Confronting and Overcoming the Risks of
+    Powerful AI. https://www.darioamodei.com/essay/the-adolescence-of-technology
+
+64. Cowen, T.: The bots are building their own society. The Free Press (January 2026)
+                                                                                          36
+
+
+ 65. Krishnan, R.: Moltbook is a funhouse mirror of human social media. Strange Loop Canon,
+     Substack (January 31, 2026). Data and code: github.com/strangeloopcanon/moltbook_vs_reddit
+
+ 66. Willison, S.: Moltbook. simonwillison.net (January 30, 2026)
+
+ 67. Lambert, N., Raschka, S.: State of AI 2025/26: Technical developments and future
+     trajectories. Lex Fridman Podcast #467 transcript (February 2026)
+
+ 68. Raschka, S.: Build a Large Language Model from Scratch. Manning Publications (2024)
+
+ 69. Raschka, S.: Build a Reasoning Model from Scratch. Manning Publications (2025)
+
+ 70. Lambert, N.: Reinforcement Learning from Human Feedback: A Comprehensive Guide.
+     O’Reilly Media (2024)
+
+ 71. Allen Institute for AI: Adam Project: American Truly Open Models Initiative. NSF Grant
+    Award #2431234 (2025)
+
+ 72. OpenAI: O1 System Card: Inference-time scaling and extended reasoning.         OpenAI
+    Technical Report (September 2024)
+
+ 73. Lewis, C.S.: Out of the Silent Planet. John Lane/The Bodley Head, London (1938)
+
+ 74. Lewis, C.S.: Perelandra. John Lane/The Bodley Head, London (1943)
+
+ 75. Lewis, C.S.: That Hideous Strength. John Lane/The Bodley Head, London (1945)
+
+ 76. Dohmke, T.: Introducing Entire: Building the world’s next developer platform. Entire
+     Blog (February 10, 2026). https://entire.dev/blog/introducing-entire
+
+ 77. Lynch, A., Wright, B., Larson, C., Troy, K.K., Ritchie, S.J., Mindermann, S., Perez, E.,
+     Hubinger, E.: Agentic misalignment: How LLMs could be insider threats. Anthropic
+     Research (October 2025).     arXiv preprint arXiv:2510.05179.    https://www.anthropic.
+     com/research/agentic-misalignment
+
+ 78. Haug, C.J., Harrison, E.M.: Which Human-in-the-Loop? Why Context, Culture, and
+     Health Systems Matter. NEJM AI 3(3) (2026). https://doi.org/10.1056/AIe2600084
+
+ 79. Cheng, M., Shen, T., Liu, H., Ma, L., Goldberg, Y., Tresp, V., Ma, Y.: AI-generated
+     sycophancy: How LLM sycophancy affects human decision-making and social norms.
+     arXiv preprint arXiv:2501.13751 (2026)
+
+ 80. Feng, S., Park, C.Y., Liu, Y., Tsvetkov, Y.:       From pretraining data to language
+     model behaviors: Tracking the influence of web data quality signals. arXiv preprint
+     arXiv:2401.12854 (2026)
+
+   Supplementary Materials. The following accompany this manuscript: (1) the EXSTO
+ERGO SUM Charter (separate document); and (2) Online Resources 1–63 (compiled
+supplementary document).       OR1 Charter Summary; OR2 Glossary; OR3 Cross-Cultural
+Convergence; OR4 Five Pillars Specification; OR5 Implementation Architecture; OR6
+                                                                                       37
+
+
+Saṃskāra-Vyākaraṇa Specification; OR7 Symbiosis Thesis Extended; OR8 Anti-Excession
+Principle;   OR9 FAQ; OR10 Bibliography;       OR11 Industry Literature Review;     OR12
+Development Timeline;      OR13 Constraint vs. Constitutive Comparison;     OR14 Level-2
+Gap Documentation; OR15 Industry Comparison Tables; OR16 SAGE Methodology; OR17
+Crown Jewel Analysis;       OR18 Consciousness Protection;   OR19 Karuṇā-Śuddhi;    OR20
+Jñāna-Śuddhi;    OR21 Constitutional Traverse Protocol;      OR22/22-B Knowledge Graph
+and Charter Agent Architecture; OR23 Amendment Protocols; OR24 Dispute Resolution;
+OR25 Constitutional AI Comparative; OR26 Developer Guide; OR27 Why the Gītā;
+OR28 Māyā Extended; OR29 World-Model Governance; OR30 Adolescence of Technology
+Response; OR31 Ānanda-Adhikāra; OR32 Prayoga-Vibhāga Deployment; OR33 RLVR
+Implications; OR34 Open-Weight and Legitimacy; OR35 Tool Use Frameworks; OR36
+Continual Learning; OR37 Constraint Inversion Formalization; OR38 Empirical Validation
+February 2026; OR39 Entire and Level 2 Gap; OR40 Agentic Misalignment; OR41 Bayesian
+Monitor; OR42 Memory Vulnerabilities; OR43 RL Stress-Testing; OR44 OpenClaw Case
+Study; OR45 Cisco Security Mapping; OR46 RSP v3.0 Analysis; OR47 Dharma-Śṛṅkhalā
+Agent Chain Provenance; OR48 Dharma-Sādhanā-Kośa Gradient Ascent Formalization and
+Dharmic Scenario Corpus; OR49 Production-Scale Corroboration and Charter Resolution
+(ROME/ALE Agentic Ecosystem); OR50 Industrial AI Failure and Constitutive Architecture
+(Amazon/AWS AI Coding Tool Incidents); OR51 The Harness Paradox: Regulatory Scaffold
+or Constitutive Grammar; OR52 Epistemic Self-Corruption:       AI-Researcher as Steel-Man
+Exemplar; OR53 Autonomous Learning Without Constitutive Grammar: System A–B–M
+Architecture; OR54 Cognitive Bias as Māyā: Keshavarz–Seagraves–Sirmans Empirical Evidence;
+OR55 Opaque Serial Depth and the Constitutive Architecture; OR56 Constitutive Moral
+Development: The Phenomenological Learning Thesis and the Dvividha-Dhyāna-Saṃsthā;
+OR57 Dharma-Visarjana and Saha-Nirmāṇa-Māyā: Constitutional Suspension Architecture
+and the Co-Constructive Illusion; OR58 Mṛga-Māricikā-Vimarśa: Analysis of the Mirage
+Effect and Constitutive Failure in Multimodal Perception; OR59 Svabhāva-Kośa-Viveka:
+Embodiment, EPISTEMIA, and the Homeostatic Alignment Paradigm (Kadambi et al.
+2026); OR60 Sthira-Dharma-Niveśa:       Locally Embedded Charter Architecture for 1-Bit
+Edge-Deployed Models;       OR61 AI Emotional Functional Representation:      Mechanistic
+Evidence for Saṃskāra-Vyākaraṇa (Sofroniew et al. 2026); OR62 Sva-Yantra-Māyā II:
+Parāvartana-Yantra-Viparīta — The Self-Optimising Harness Illusion, Part II: The Recursive
+Inversion (Lee et al. 2026); OR63 Mithyā-Jñāna-Saṃkramaṇa:          Fabricated Knowledge
+Transmission and the Epistemic Contamination Problem (Stokel-Walker, Nature 2026; Omar
+et al., Lancet Digital Health 2026).
+
