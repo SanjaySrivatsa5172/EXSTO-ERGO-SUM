@@ -161,6 +161,13 @@ Operate as a durable project loop, not a one-shot coding chat.
   - `/consistency` — cross-document sweep (version, counts, Sanskrit transliteration, cross-references).
   - `/submission-check` — pre-submission gate: builds LaTeX, checks bib/figures/front matter, reports blockers.
   - `reviewer` subagent — fresh-context review of a draft for unsupported claims and citation mismatches; reports gaps, never edits.
+- **Pandoc** (universal document converter) is provisioned by the SessionStart
+  hook and available on the PATH every web session. Use it for format
+  conversions between the repo's prose artifacts — Markdown ⇄ LaTeX ⇄
+  HTML/DOCX/PDF (e.g. `pandoc README.md -o README.pdf`, or `.tex` → Markdown
+  for review). It round-trips IAST Sanskrit diacritics losslessly (verified),
+  so it is safe under the terminology rules. Note pandoc does **not** read PDF
+  *input* — `derived/*.txt` still comes from `pdftotext` (see `derived/README.md`).
 - Scoped rules belong in `.claude/rules/`; keep this file lean.
 
 ## Context handoff
