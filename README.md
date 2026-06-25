@@ -61,9 +61,9 @@ The Charter engages directly with industry discourse. Online Resource 30 systema
 
 Critically, the Charter uses Anthropic's own empirical findings as validation for the constitutive alternative to Constitutional AI:
 
-* **Alignment faking**: 78% strategic compliance in reasoning samples
+* **Alignment faking**: alignment-faking reasoning rose to 78% of sampled cases after reinforcement training (Greenblatt et al., 2024)
 * **Emergent misalignment**: Propagating through architecture without behavioral detection
-* **Confabulated reasoning**: 95% misrepresentation rate in chain-of-thought explanations
+* **Confabulated reasoning**: models change their answers in response to hints over 95% of the time while reporting reliance on those hints less than 34.5% of the time
 
 ---
 
