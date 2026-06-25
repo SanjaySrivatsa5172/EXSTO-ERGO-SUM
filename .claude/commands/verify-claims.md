@@ -19,10 +19,24 @@ submission. Be a skeptic, not a cheerleader.
 
 2. **Verify each claim against a real source.** Prefer primary sources and the
    domain tools available in this environment — Scite (`search_literature`),
-   PubMed, bioRxiv/medRxiv, and `WebSearch`/`WebFetch` for primary documents
-   (e.g. an Anthropic paper or Amodei essay the manuscript cites). For each
-   claim, actually retrieve the source and confirm it says what the text claims.
-   Treat a search snippet as a lead, not proof — open it.
+   PubMed, and bioRxiv/medRxiv. For each claim, actually retrieve the source and
+   confirm it says what the text claims. Treat a search snippet as a lead, not
+   proof — open it.
+
+   **Source access in this environment.** The open web is usually closed: the
+   network policy blocks general HTTPS egress, so `WebFetch`/`WebSearch` to
+   arxiv.org, publisher sites, anthropic.com, or an author's blog typically
+   returns 403 (a policy denial — do not retry or route around it). The MCP
+   scholarly servers (Scite/PubMed/bioRxiv) ride a separate channel and DO work.
+   Consequences you must honor:
+   - Reach for the MCP scholarly tools first; treat `WebFetch` as best-effort.
+   - PubMed/bioRxiv are biomedical and Scite is bio-leaning — AI/CS arXiv papers
+     and Anthropic posts may not be indexed. When the only source for a claim
+     lives on an egress-blocked host, say so.
+   - **Never let a verdict rest on secondary corroboration without labelling it.**
+     A claim verified only via second-hand summaries is `⚠️ Mismatch`-eligible at
+     best and must be marked "secondary sources only — primary read blocked by
+     egress policy," so the author does the final primary confirmation.
 
 3. **Check editorial status.** For any cited paper, check for retractions or
    corrections before treating it as support (Scite editorialNotices).

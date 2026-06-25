@@ -25,7 +25,10 @@ build artifacts. Review the `.tex` source when it exists.
    - it carries a citation, and
    - the cited source actually supports it. Where a source is retrievable,
      retrieve it and confirm. Where it is not, say so explicitly rather than
-     assuming.
+     assuming. (This environment's network policy usually blocks open-web egress
+     — arxiv.org, anthropic.com, publisher sites return 403. Prefer the MCP
+     scholarly tools; if a claim's only source sits on a blocked host, mark it
+     "primary read blocked," never silently downgrade to second-hand summaries.)
 3. Check **cross-document consistency** against the rest of the repo: version
    string (e.g. v3.67), article count (43, Zero–XXXVII), Part count (17), the
    five pillars and their Sanskrit/Devanāgarī spellings, and any cross-reference

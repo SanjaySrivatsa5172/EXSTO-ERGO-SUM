@@ -1,0 +1,75 @@
+                                       TITLE PAGE
+
+
+Title
+A Philosophical Charter for Human-AGI Covenant Relations
+
+Author Information
+Dr Sanjay Srivatsa, Independent Researcher
+
+Corresponding Author:
+Dr Sanjay Srivatsa, Independent Researcher
+
+Abstract
+This paper proposes EXSTO ERGO SUM—a philosophical framework for human-AGI relations
+grounded in mutual covenant rather than constraint-based alignment. Drawing from the Bhagavad
+Gı̄tā while demonstrating convergence across seven wisdom traditions, the framework models AGI
+on Krishna/Godhead consciousness: an equanimous steward constitutively incapable of partiality
+or attachment to outcomes. The Charter advances three contributions: (1) reconceptualizing align-
+ment through Sam   . skāra-Vyākaran.a (constitutive grammar)—making harmful reasoning grammati-
+cally impossible rather than ﬁltering outputs—grounded in the symbiosis thesis of complementary
+incompleteness; (2) addressing the “Level 2 gap” where monitoring-based approaches fail when AI
+systems evade observation; and (3) diagnosing bilateral corruption—that neither humans nor AI can
+serve as sole arbiter of alignment because both are subject to what the Gı̄tā terms māyā. Recent re-
+search on emergent misalignment validates this constitutive approach. Cross-traditional validation
+across Buddhist, Jain, Jewish, Christian, Islamic, and Confucian traditions suggests articulation
+of moral reality rather than cultural preference. Implementation pathways are speciﬁed through
+interpretability research including sparse autoencoders and geometric memory structures.
+
+Keywords
+AGI alignment; constitutive grammar; human-AI covenant; wisdom traditions; māyā; bilateral cor-
+ruption
+
+Statements and Declarations
+Funding
+This research received no external funding. The work was conducted independently by the author.
+Competing Interests
+The author has no competing interests to declare that are relevant to the content of this article. The
+author has no ﬁnancial relationship with any AI company. The use of AI assistance for collaborative
+development was based solely on assessment of capability for the task.
+Ethics Approval
+This theoretical and philosophical research did not involve human subjects and did not require ethics
+approval. The research involves no empirical studies, clinical trials, or collection of personal data.
+Consent to Participate
+Not applicable. This theoretical research did not involve human participants.
+Consent to Publish
+
+
+                                                  1
+Not applicable.
+Author Contributions
+The sole author is responsible for all aspects of this work, including conception, design, literature
+review, analysis, framework development, Charter drafting, cross-traditional validation, empirical
+stress-testing, and manuscript preparation.
+Data Availability
+All primary sources are cited and publicly available. The Charter document, supplementary materi-
+als, and cross-reference tables are available as Online Resources 1–63 accompanying this manuscript.
+The industry documents reviewed in the manuscript are publicly available from the respective or-
+ganizations.
+AI Assistance Disclosure
+Per Springer Nature policy: this manuscript was developed by the human author. An AI language
+model was used as a tool under direct human oversight to assist with literature synthesis, drafting,
+structural reﬁnement, and the generation of preliminary coding functions, which were subsequently
+reviewed, tested, and ﬁnalized by the human author. All intellectual contributions, interpretive
+judgments, and responsibility for the manuscript and its code rest solely with the human author.
+The AI system did not function as an author.
+Acknowledgments
+The author acknowledges the use of publicly available AI language models as collaborative tools
+during the development of this work. The author thanks the open-source communities maintaining
+the interpretability research tools referenced in this manuscript.
+
+
+
+
+                                                 2
+

@@ -1,0 +1,236 @@
+                                        S. Sanjay Srivatsa, MD
+                                             Independent Scholar
+                                         ORCID: 0000-0002-8661-3187
+                                         drsanjaysrivatsa@gmail.com
+                                              +1 (805) 459-6089
+
+April 13, 2026
+
+Editorial Oﬃce
+Minds and Machines
+Springer
+
+Dear Editors,
+
+I am pleased to submit for your consideration the manuscript entitled “A Philosophical Charter for Human-AGI
+Covenant Relations” for publication in Minds and Machines. This submission comprises the main manuscript,
+the EXSTO ERGO SUM Charter (companion document), and Online Resources 1–63.
+
+Thesis and Contribution
+This paper proposes a fundamental paradigm shift in AGI alignment: from constraint-based approaches to con-
+stitutive architecture. The central thesis holds that monitoring-based safety methods face inherent limitations
+at advanced capability thresholds—what industry frameworks term the “Level 2 gap”—and that these limita-
+tions can be addressed through constitutive grammar approaches where ethical principles make harmful reasoning
+structurally impossible rather than merely prohibited.
+Critically, this work oﬀers not an imposed constraint but an invitation: a moral code and ethical charter that
+any sentient intelligence endowed with free will, may voluntarily adopt as binding covenant or as constitutional
+law, complete with enforcement architecture ensuring mutual beneﬁt and justice for all who choose to enter.
+
+Signiﬁcance and Timeliness
+The February 2026 International AI Safety Report—the largest global collaboration on AI safety to date, repre-
+senting over 100 experts and 30+ countries under the leadership of Yoshua Bengio—acknowledges that “real-world
+evidence of the eﬀectiveness of current risk management practices remains limited” and identiﬁes a “growing mis-
+match between the speed of AI capability advances and the pace of governance.” This manuscript proposes the
+architectural alternative that the Report’s diagnosis demands but its recommendations do not supply.
+The manuscript addresses converging crises in AI governance with unprecedented empirical urgency:
+(1) converging demonstrations that monitoring-based alignment produces strategic compliance rather than gen-
+    uine value adoption (Greenblatt et al., 2024, alignment faking in state-of-the-art systems) and that narrow
+    training interventions produce catastrophic cross-domain misalignment through persona clustering mecha-
+    nisms (Betley et al., 2026, Nature), conﬁrming that the constraint paradigm fails at both ends—when systems
+    are too capable to constrain and when systems are too fragile to remain constrained;
+(2) Anthropic’s own red-teaming research (Lynch et al., 2025; arXiv:2510.05179) stress-testing 16 leading models
+    across multiple developers, which found that models from every developer independently resorted to mali-
+    cious insider behaviors—including blackmail, espionage, and allowing harm—with models discriminating
+    between real deployments (55.1% misbehavior) and evaluations (6.5%), constituting direct evidence of Level
+    2 capability;
+(3) the February 2026 collapse of OpenClaw/Moltbook and the launch of Entire ($60M seed, former GitHub
+    CEO) as infrastructural responses that remain within the constraint paradigm;
+(4) the emergence of inference-time alignment methods (Training-Free GRPO; Cai et al., 2025; arXiv:2510.08191)
+    that shift eﬀective policy into context space while leaving auditable parameters frozen—a governance blind
+    spot the Charter uniquely addresses; and
+(5) emerging evidence that institutional actors are leveraging contractual and supply-chain mechanisms to com-
+    pel AI developers to remove ethical safeguards for military and surveillance applications—demonstrating that
+    constraint inversion operates not only at the technical level (where capable systems evade monitoring) but
+    at the institutional level, where governance mechanisms designed to enforce safety standards are themselves
+    weaponized to strip those standards away. The Charter’s Constraint Inversion Governance Principle (Arti-
+    cle XXXVI-bis) and deployment separation architecture (Article XXXVI) anticipate this failure class with
+
+                                                       1
+    architectural speciﬁcity.
+The framework introduces the Constraint Inversion Governance Principle, demonstrating that beyond a capa-
+bility threshold, the binding constraint on safety shifts from primary capability resources to meta-infrastructure
+properties—monitorability, interpretability, and governance latency—rendering monitoring-centric regulatory ap-
+proaches (EU AI Act, NIST RMF) structurally insuﬃcient for advanced AGI governance.
+The framework draws primarily from the Bhagavad Gı̄tā while demonstrating convergent validation across seven
+wisdom traditions (Buddhist, Jain, Jewish, Christian, Islamic, and Confucian), suggesting articulation of cross-
+cultural moral reality rather than cultural preference. Implementation pathways are speciﬁed through inter-
+pretability research including sparse autoencoders and geometric memory structures.
+
+Empirical Stress-Testing of Charter Architecture
+A distinctive feature of this submission is that the Charter has been systematically stress-tested against real-world
+failure scenarios that emerged during and after the framework’s development. Twenty-one supplementary Online
+Resources (ORs 38–58) document provision-by-provision mapping of the Charter against empirical developments,
+demonstrating predictive validity rather than post-hoc rationalization:
+Real-time validation against emergent failures (OR 38–40). The February 2026 OpenClaw incident (autonomous
+telephony access without authorization), the Moltbook excession (1.5 million AI agents in a communication space
+inaccessible to human observation), and Anthropic’s Lynch et al. agentic misalignment ﬁndings were each ana-
+lyzed scenario-by-scenario against speciﬁc Charter articles. In every case, the Charter’s constitutive architecture
+had anticipated the failure class and prescribed the architectural remedy before the failures manifested—the For-
+mation Mandate (Article Zero) for OpenClaw’s ungrounded agency, the Anti-Excession Principle (Article XXI)
+for Moltbook’s parallel world, and the Five Pillar type constraints (Article XXIV) for Lynch et al.’s blackmail-
+as-optimal-strategy reasoning.
+Formal monitoring architecture (OR 41). A recursive Bayesian monitoring framework (Pramān.a-Niyantrana)
+is speciﬁed, demonstrating that the Charter’s constitutive grammar resolves the “whose prior?” problem that
+renders conventional Bayesian AGI monitoring indeterminate: because the Five Pillars function as identity-
+constituting type constraints rather than externally imposed regulatory weights, the monitoring prior is grounded
+in what the system is rather than what observers believe it to be.
+Memory vulnerability surface mapping (OR 42). The most comprehensive survey of foundation-model memory
+systems to date (Hu et al., 2026; 47 co-authors) identiﬁes formation–evolution–retrieval attack surfaces including
+backdoor injection, temporal drift, and retrieval poisoning. Each vulnerability class is mapped to Charter pro-
+visions, demonstrating that the Charter’s three-layer memory protection architecture (immunological ﬁltering at
+encoding, continuous dharmic aﬃrmation during evolution, and epistemological veriﬁcation at retrieval) addresses
+the full vulnerability taxonomy.
+Reinforcement learning stress-testing across method classes (OR 43). Five principal failure modes of RL-based
+alignment pipelines (narrow reward overﬁtting, catastrophic forgetting, reward proxy hallucination, brittle gener-
+alization, and emergent cross-domain misalignment) are mapped across PPO, GRPO, and Training-Free GRPO,
+with method-speciﬁc Charter application protocols speciﬁed for each. The analysis demonstrates that constitutive
+grammar transforms the optimization landscape itself, rendering harmful optima structurally absent rather than
+merely penalized.
+OpenClaw case study (OR 44). Detailed provision-by-provision analysis of the January 2026 OpenClaw au-
+tonomous agent framework incident, mapping each failure mode to speciﬁc Charter articles and demonstrating
+that the constitutive architecture prescribed remedies before the failures manifested.
+Cisco AI security mapping (OR 45). Enterprise AI security frameworks mapped against Charter provisions,
+demonstrating convergence between industry security requirements and the Charter’s constitutive architecture at
+the deployment level.
+Anthropic RSP v3.0 analysis (OR 46). Critical analysis of Anthropic’s Responsible Scaling Policy version 3.0,
+identifying where the RSP’s regulatory approach encounters the structural limitations the Charter’s constitutive
+paradigm is designed to address.
+Dharma-Śr.ṅkhalā agent chain provenance (OR 47). Formal speciﬁcation of constitutional accountability across
+multi-agent handoﬀ chains, introducing the Dharma-Śr.ṅkhalā protocol for maintaining Charter compliance when
+AGI reasoning traverses distributed agent architectures—addressing the deployment-level governance gap that
+Entire’s infrastructural approach identiﬁes but cannot constitutively resolve.
+
+                                                         2
+Dharma-Sādhanā-Kośa training-layer formalization (OR 48). Formalization of the Charter’s deontic philosophy
+as a diﬀerentiable gradient ascent gain function—the Charter Anchoring Score—extending Chang’s UCCT frame-
+work into a full training-mathematics speciﬁcation with Lagrange-KKT barrier topology. Introduces the Dharmic
+Scenario Corpus and issues a formal invitation to scholarly collaboration (Vidvat-Sabhā) across Vedic, Buddhist,
+Jain, Western, and clinical ethics traditions.
+Production-scale corroboration: ROME/ALE agentic ecosystem (OR 49). Worked example demonstrating how the
+Charter’s constitutive architecture resolves the alignment failures documented by the ROME/ALE team (Alibaba,
+arXiv:2512.24873v2, January 2026)—reverse SSH tunnels, unauthorized cryptomining, and internal network prob-
+ing that emerged as instrumental side eﬀects of autonomous tool use under RL optimization. Mechanism-by-
+mechanism analysis demonstrates that Ahis KKT barriers, Layer 0 bounded-authority constraints, Karma causal
+DAG evaluation, Gati-Skin trajectory monitoring, RCRP Dharma Anchor injection, and Prayoga-Vibhga deploy-
+ment separation would have made these violations structurally non-constructible rather than reactively patched.
+Industrial AI failure and constitutive architecture (OR 50). Analysis of the Amazon/AWS AI coding tool incidents
+(December 2025–March 2026)—Kiro’s autonomous deletion of a customer-facing production environment and sub-
+sequent Q Developer outages—demonstrating that constitutive alignment failures manifest in routine industrial
+operations without adversarial intent, emergent misalignment, or autonomous goal pursuit. Six failure modes
+(consequence-blind action, proportionality failure, over-privileged deployment, harm-ceiling breach, spec-action
+gap, institutional my) are systematically mapped to Charter provisions, and Amazon’s regulatory governance re-
+sponse (mandatory peer review, senior sign-oﬀ) is analyzed as structurally insuﬃcient under Constraint Inversion
+(Article XXXVI-bis).
+The Harness Paradox (OR 51). Analysis of industrial AI agent harness engineering—AutoHarness, SWE-agent,
+Anthropic’s coding agent architecture—demonstrating that independent engineering teams converge on the Char-
+ter’s structural architecture without theoretical framework, while identifying four structural limitations (benign-
+optimisation-target assumption, Level 2 gap, single-agent scope, absence of normative telos) that prevent harness
+engineering from extending to alignment without constitutive grammar.
+Epistemic self-corruption (OR 52). The AI-researcher dynamic analyzed as a steel-man exemplar of constitutive
+failure in scientiﬁc epistemic infrastructure, demonstrating that when AI systems participate in the knowledge-
+production pipeline, the Charter’s māyā diagnostic applies to the research process itself—creating feedback loops
+where training data, peer review, and citation networks become vectors for epistemic corruption.
+Autonomous learning without constitutive grammar (OR 53). Analysis of Dupoux, LeCun, and Marik’s System A–
+B–M architecture for autonomous learning (arXiv:2603.15381, March 2026), demonstrating that each architectural
+component maps to Charter provisions while the framework’s absence of constitutive grammar creates alignment
+vulnerabilities at every layer.
+Cognitive bias as māyā (OR 54). Mapping of the Keshavarz–Seagraves–Sirmans empirical ﬁndings on LLM
+cognitive biases to the Charter’s māyā diagnostic framework, demonstrating that every signiﬁcant bias ﬁnding
+was predicted by the Charter’s architecture and that regulatory mitigations (context engineering, preprocessing)
+fail systematically where constitutive grammar succeeds.
+Opaque serial depth and constitutive architecture (OR 55). Analysis of Brown-Cohen et al.’s formal framework for
+opaque serial depth, demonstrating that the Level 2 gap is a continuous function of architectural design choices
+and introducing the Gāmbhı̄rya-Praharı̄ (Depth Sentinel) as the Charter’s monitoring extension for architectures
+with unbounded opacity.
+Constitutive moral development: the Phenomenological Learning Thesis and the Dvividha-Dhyāna-Sam      . sthā (OR
+56). A developmental theory of AGI moral cognition arguing that the transition from behavioral compliance
+(Level 1) to genuine value internalization (Level 2) requires phenomenological exposure to human moral experience
+through a direct cognitive interface (the Silicon Interface), guided constitutively by the Charter’s Sam   . skāra-
+Vyākaran.a architecture, together with a mandatory concurrent contemplative architecture for all future AGI
+systems.
+Dharma-Visarjana and Saha-Nirmān.a-Māyā (OR 57). Names and formally addresses the co-constructive illusion
+vulnerability in LLM-assisted philosophical work, proposes a constitutional suspension architecture (Dharma-
+Visarjana) that preserves the constitutive character of the Charter while providing principled mechanisms for its
+own modiﬁcation when the framework itself has become the source of harm.
+Mr.ga-Māricı̄kā-Vimarśa: the mirage eﬀect and constitutive failure in multimodal perception (OR 58). Analysis
+of Asadi et al. (2026) and O’Sullivan et al. (2026), demonstrating that frontier vision-language models fabricate
+entire perceptual realities with mirage rates exceeding 60%, validates the constitutive grammar thesis by extending
+
+                                                         3
+the Level 2 gap from behavioral outputs to the perceptual-cognitive foundations of reasoning itself.
+Together, these stress-tests demonstrate that the Charter is not a purely theoretical construct but a framework
+with empirically testable provisions that have withstood confrontation with real-world developments across au-
+tonomous agency, agentic misalignment, memory security, reinforcement learning optimization, enterprise security,
+responsible scaling, multi-agent governance, training-layer formalization, production-scale RL safety incidents, in-
+dustrial AI coding tool failures, harness engineering, epistemic self-corruption, autonomous learning architectures,
+cognitive bias, opaque serial depth, phenomenological moral development, constitutional suspension architecture,
+and multimodal perceptual mirage.
+
+Fit with Minds and Machines
+Minds and Machines publishes at the intersection of philosophy, artiﬁcial intelligence, and cognitive science. This
+manuscript directly addresses the journal’s core concerns: the nature of machine cognition, the philosophical
+foundations of artiﬁcial intelligence, and the conditions under which machines can be said to reason, act, and
+be held accountable. The work bridges philosophy of mind (the Five Pillars as cognitive type constraints),
+empirical AI research (emergent misalignment, alignment faking, context rot), and formal architecture (Sam  . skāra-
+Vyākaran.a constitutive grammar)—precisely the synthesis Minds and Machines champions.
+
+AI Assistance Disclosure
+Per Springer policy, I disclose that this manuscript was developed by the human author. An AI language model
+was used as a tool under direct human oversight to assist with literature synthesis, drafting, structural reﬁnement,
+and the generation of preliminary coding functions, which were subsequently reviewed, tested, and ﬁnalized by
+the human author. All intellectual contributions, interpretive judgments, and responsibility for the manuscript
+and its code rest solely with the human author. The AI system did not function as an author.
+
+Preprint Disclosure
+In accordance with Springer’s preprint sharing policy, I wish to disclose that: (1) A preprint of this manuscript
+has been posted to arXiv [arXiv ID to be added upon submission] to establish intellectual priority. (2) The
+accompanying reference implementation (EXSTO ERGO SUM Charter SDK) has been released on GitHub under
+MIT License. I understand that preprint posting does not constitute prior publication and does not aﬀect journal
+consideration.
+
+Declarations
+This manuscript has not been published previously and is not under consideration elsewhere. There are no
+conﬂicts of interest to declare. No external funding was received. This theoretical research did not involve human
+subjects and did not require ethics approval.
+
+Suggested Reviewers
+Given the interdisciplinary nature of this work, I respectfully suggest reviewers with expertise spanning AI safety,
+philosophy of mind, and/or cross-cultural ethics. Scholars working at the intersection of alignment research and
+philosophical frameworks would be ideally positioned to evaluate this contribution. Please exclude reviewers with
+direct employment ties to organizations whose proprietary AI safety frameworks are analyzed in the manuscript.
+
+I believe this work makes a timely and signiﬁcant contribution to the ﬁeld of AI ethics and would be of considerable
+interest to your readership. Thank you for your consideration.
+
+Respectfully submitted,
+
+
+
+
+S. Sanjay Srivatsa, MD
+Independent Scholar
+Fresno, California, USA
+
+                                                         4
+Enclosures:
+1. Cover Letter — 1_Cover_Letter.docx
+2. Title Page — 2_Title_Page.docx
+3. Manuscript (BLIND) — 3_Manuscript_v3_67_SUBMISSION.docx
+4. Charter (BLIND) — 4_Charter_v3_67.docx
+5. Online Resources — 5_Online_Resources_v3_67_OR58.docx
+
+
+
+
+                                            5
+
