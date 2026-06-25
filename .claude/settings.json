@@ -1,4 +1,11 @@
 {
+  "permissions": {
+    "allow": [
+      "mcp__Scite_mcp",
+      "mcp__PubMed",
+      "mcp__bioRxiv"
+    ]
+  },
   "hooks": {
     "SessionStart": [
       {
