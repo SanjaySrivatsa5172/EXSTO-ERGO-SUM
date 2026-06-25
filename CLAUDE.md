@@ -1,3 +1,110 @@
+# CLAUDE.md
+
+Guidance for AI assistants working in this repository.
+
+## What this repository is
+
+**EXSTO ERGO SUM** ("I Stand Forth, Therefore I Am") is an academic
+publishing repository — **not a software project**. It holds the manuscript,
+charter, and supporting documents for a philosophy / AI-safety paper:
+
+> *EXSTO ERGO SUM: A Philosophical Charter for Human-AGI Covenant Relations*
+> by S. Sanjay Srivatsa, MD — submitted to *AI and Ethics* (Springer).
+
+The work proposes **constitutive alignment**: encoding ethical principles as
+type constraints on AGI cognition (via *Saṃskāra-Vyākaraṇa*, "dispositional
+grammar") so that harmful reasoning becomes structurally ill-formed rather than
+merely prohibited. The framework is grounded in cross-traditional wisdom
+convergence (seven traditions) and the Five Pillars (Karma, Dharma, Ahiṃsā,
+Viveka, Ānanda).
+
+There is **no application code, package manager, test suite, or CI pipeline**.
+"Development" means editing prose/PDF documents and keeping the README and
+metadata accurate. Treat tasks accordingly: do not look for or invent npm/make/
+pytest workflows. The repo *does* carry Claude Code tooling under `.claude/`
+(slash commands, a session-start hook, a `reviewer` subagent, scoped rules) and
+plain-text mirrors of each PDF under `derived/` for reading/grepping — see the
+**Manuscript tooling** section below.
+
+**Current Charter version: v3.67** (43 articles across 17 Parts, contiguous
+numbering Zero–XXXVII; five pillars; unamendable Ahiṃsā core).
+
+## Repository contents
+
+The `.tex` source files named in the README **are not committed** — the repo
+ships the rendered PDFs as the deliverables, with plain-text extractions
+alongside for review.
+
+```
+manuscript.pdf             # Full academic manuscript (~90 pp)
+manuscript_condensed.pdf   # Condensed manuscript (~35 pp)
+charter.pdf                # The Charter document (43 articles)
+onlineresources.pdf        # Technical specs + implementation (OR01–OR49)
+coverletter.pdf            # Submission cover letter
+titlepage.pdf              # Title page (anonymized)
+titlepage_with_author.pdf  # Title page with author identity
+derived/*.txt              # Plain-text extraction of each PDF (read/grep-able)
+derived/README.md          # How the derived text is produced/used
+README.md                  # Public-facing overview, keywords, citation
+VERIFICATION.md            # Claim/consistency verification report
+CLAUDE.md                  # This file
+.claude/                   # Claude Code tooling: commands, hooks, rules, agent
+.DS_Store                  # macOS artifact (tracked; harmless — do not rely on)
+```
+
+Online Resources are organized in bands inside `onlineresources.pdf`:
+- **OR01–OR10** Technical specifications
+- **OR11–OR20** Cross-cultural validation tables
+- **OR21–OR30** Implementation guidance & SDK
+- **OR31–OR37** Charter encoding & contemporary mapping
+- **OR38–OR49** Empirical stress-testing & validation
+
+## Working conventions
+
+- **PDFs are the source of truth in-repo.** Since `.tex` sources are not
+  committed, you generally cannot regenerate PDFs here. If asked to edit
+  document *content*, flag that the LaTeX sources are external and confirm how
+  the user wants changes delivered (e.g., edit the README, draft text for them
+  to paste into their LaTeX, or have them add the `.tex` files to the repo).
+- **README.md is the primary editable artifact.** Keep its version number,
+  article/part counts, pillar table, keyword taxonomy, and citation block
+  consistent with the current Charter version. When the Charter version changes,
+  update every place the number appears (Overview, Charter Architecture table,
+  Ānanda section).
+- **Terminology must stay precise.** Sanskrit terms carry exact diacritics
+  (Ahiṃsā, Saṃskāra-Vyākaraṇa, Sat-Cit-Ānanda, dharma-kṣetra). Preserve
+  diacritics and Devanāgarī exactly; do not anglicize or drop marks.
+- **Tone is scholarly.** Match the existing academic register; avoid casual
+  phrasing in any document-facing text.
+- **Citation format** is BibTeX (`@article{srivatsa2026exsto, ...}`) as shown in
+  the README — keep it in sync with submission status.
+- **License:** content is CC BY-NC-SA 4.0; Charter provisions themselves are
+  offered for adoption without restriction. Don't add conflicting license text.
+
+## Git workflow
+
+- Default branch is `main`. Feature work for the current task happens on
+  `claude/claude-md-docs-l1ht5d` (or the branch named in the task).
+- Commit with clear, descriptive messages; push with
+  `git push -u origin <branch>`; open a **draft** PR after pushing if none
+  exists.
+- Commit only when the user asks. Never push to a different branch without
+  explicit permission.
+- History shows the project is versioned by edition/date (e.g. "April edition")
+  and Charter version, not semantic software versioning.
+
+## Verification for this repo
+
+A diff is not evidence. For doc work, the meaningful gate is **reading the
+rendered result and checking internal consistency**:
+- Re-read changed sections; confirm version numbers, counts, and tables agree
+  across README and (if provided) the manuscript.
+- For PDFs, open and inspect the relevant pages rather than trusting a summary.
+- State what changed, how you checked it, and what remains unverified (e.g.,
+  the LaTeX-rendered PDF, which you cannot rebuild without the sources).
+
+---
+
 # Operating mode: durable project loop
 
 Operate as a durable project loop, not a one-shot coding chat.
