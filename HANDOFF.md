@@ -34,7 +34,10 @@ and merged it.
   gaps — the Workflow tool and gh needed interactive approval — fixed by
   `--dangerously-skip-permissions` in claude_args and by moving issue
   filing into a deterministic workflow step (Claude writes
-  /tmp/pm-report.md; plain `gh issue create` files it).
+  /tmp/pm-report.md; plain `gh issue create` files it). Run #8 exposed a
+  third: the Workflow tool backgrounds its fleet and the one-shot job
+  exits before it finishes, so the CI prompt now mandates the inline
+  five-scout sweep; the fleet graph stays interactive-only via /pm.
 - [ ] Author works through `PM-STATUS.md` Next actions 1–9 (all require the
   external `.tex` sources; the repo ships PDFs only).
 

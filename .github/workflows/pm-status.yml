@@ -1,6 +1,9 @@
-# Weekly PM status — runs the pm-status workflow graph (.claude/workflows/)
+# Weekly PM status — runs the inline five-scout sweep of the pm-status graph
 # every Monday and files the report as a GitHub issue, which notifies the
 # author by email. Report-only: this job never commits, pushes, or merges.
+# (The full fleet graph with its skeptic panel is interactive-only via /pm —
+# the Workflow tool backgrounds its fleet, which a one-shot CI job cannot
+# outlive; see run #8.)
 #
 # Auth: the CLAUDE_CODE_OAUTH_TOKEN repository secret — a Claude subscription
 # token from `claude setup-token`. (To use API billing instead: add credits at
@@ -51,14 +54,18 @@ jobs:
             SUM academic-submission repository. This prompt is the author's
             explicit request to run the pm-status workflow graph.
 
-            1. Invoke the /pm command (.claude/commands/pm.md), which launches
-               the pm-status workflow (.claude/workflows/pm-status.js). If the
-               Workflow tool is unavailable in this environment, perform the
-               five scout sweeps inline instead (repository state;
-               version/count drift across README.md and derived/*.txt;
-               verification debt in VERIFICATION.md; submission readiness
-               across the cover letter and both title pages; .claude tooling
-               health) and label the report "inline run".
+            1. Perform the five scout sweeps of the pm-status graph as
+               parallel subagents (repository state; version/count drift
+               across README.md and derived/*.txt; verification debt in
+               VERIFICATION.md; submission readiness across the cover letter
+               and both title pages; .claude tooling health), re-verify any
+               high-severity finding yourself against the cited files, and
+               synthesize the report in PM-STATUS.md's structure, labeled
+               "inline run". Do NOT use the Workflow tool here: it launches
+               its fleet in the background and returns immediately, and in
+               this one-shot headless job, ending your turn kills the runner
+               before the fleet finishes — the report would be lost. The full
+               graph with its skeptic panel is for interactive /pm sessions.
             2. Compare the outcome with the previous report in PM-STATUS.md at
                the repository root: open with one line stating what changed —
                new findings, resolved findings, or "unchanged".
