@@ -2,10 +2,13 @@
 # every Monday and files the report as a GitHub issue, which notifies the
 # author by email. Report-only: this job never commits, pushes, or merges.
 #
-# Requires one repository secret: ANTHROPIC_API_KEY
-#   (Settings → Secrets and variables → Actions → New repository secret.
-#    If the Claude GitHub App was installed via /install-github-app, the
-#    secret is typically configured already.)
+# Auth: the CLAUDE_CODE_OAUTH_TOKEN repository secret — a Claude subscription
+# token from `claude setup-token`. (To use API billing instead: add credits at
+# console.anthropic.com and re-enable the anthropic_api_key input below.)
+#
+# Delivery: Claude writes the report to /tmp/pm-report.md; a plain follow-up
+# step files it as an issue with the runner's own token — the delivery edge is
+# code, not an agent action, so it cannot be blocked by permission prompts.
 #
 # Schedule is UTC: 16:00 Monday = 9:00 AM Pacific during daylight time
 # (8:00 AM in winter). Manual runs: Actions tab → this workflow → Run workflow.
@@ -59,11 +62,13 @@ jobs:
             2. Compare the outcome with the previous report in PM-STATUS.md at
                the repository root: open with one line stating what changed —
                new findings, resolved findings, or "unchanged".
-            3. File the full dated report as a new GitHub issue in this
-               repository using: gh issue create --title "PM status — <today's
-               date>" --body-file <the report>. The issue body is the
-               deliverable; keep the report complete, confirmed high-severity
-               findings first.
+            3. Write the complete dated report to /tmp/pm-report.md with the
+               Write tool — that path is outside the repository, so the run
+               stays report-only. First line: "# PM status — <today's date>".
+               Keep the report complete, confirmed high-severity findings
+               first. A follow-up workflow step files that file as the GitHub
+               issue — do NOT run gh yourself. Also include the full report
+               in your final message.
             4. Report-only, like the graph itself: change no repository files,
                commit nothing, push nothing, merge nothing, open no pull
                requests.
@@ -73,7 +78,27 @@ jobs:
           # Pin a standard model: the CI default resolved to an opus 1M-context
           # beta variant that a plain API key may not be entitled to, and a
           # weekly ~30-agent fleet belongs on the economical tier regardless.
-          claude_args: "--max-turns 150 --model claude-sonnet-5"
+          #
+          # --dangerously-skip-permissions: this is a headless, sandboxed CI
+          # runner — no one exists to answer permission prompts, and without
+          # it the Workflow tool and Bash are denied (run #7 fell back to the
+          # inline sweep and could not use git/gh at all). Blast radius is
+          # bounded by the job permissions above: contents read-only, issues
+          # write, nothing else.
+          claude_args: "--max-turns 150 --model claude-sonnet-5 --dangerously-skip-permissions"
           # Surface Claude's output in the job log so API-level errors
           # (credits, model access) are visible instead of hidden.
           show_full_output: "true"
+
+      - name: File the report as a GitHub issue
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -s /tmp/pm-report.md ]; then
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "PM status — $(date -u +%Y-%m-%d)" \
+              --body-file /tmp/pm-report.md
+          else
+            echo "::warning::No /tmp/pm-report.md produced — the report exists only in this run's log"
+          fi

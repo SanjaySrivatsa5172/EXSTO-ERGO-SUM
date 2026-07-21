@@ -23,11 +23,18 @@ and merged it.
 - [x] Validate with a live fleet run: `wf_918f593f-42c`, 30 agents, 0 errors.
 - [x] Merge to `main` (PR #10, squash `3ef3d5f`); PR watch closed.
 - [x] Save the run's report to `PM-STATUS.md`; document `/pm` in CLAUDE.md.
-- [x] Weekly routine set up as a repo-native GitHub Actions schedule:
-  `.github/workflows/pm-status.yml` (Mondays 16:00 UTC, report filed as a
-  GitHub issue). Prerequisite: the `ANTHROPIC_API_KEY` repository secret.
-- [ ] Verify the routine's first run (Actions tab → "Weekly PM status" →
-  Run workflow); add the secret if the run fails on authentication.
+- [x] Weekly routine live as a repo-native GitHub Actions schedule:
+  `.github/workflows/pm-status.yml` (Mondays 16:00 UTC). Auth is the
+  `CLAUDE_CODE_OAUTH_TOKEN` secret (author's Claude subscription, via
+  `claude setup-token`); the stored `ANTHROPIC_API_KEY` has no API credits
+  and its input is disabled in the workflow — do not re-enable without
+  adding credits first.
+- [x] First authenticated run validated (run #7, 2026-07-21: ~5½ min,
+  $2.17 on claude-sonnet-5, full report produced). It exposed two headless
+  gaps — the Workflow tool and gh needed interactive approval — fixed by
+  `--dangerously-skip-permissions` in claude_args and by moving issue
+  filing into a deterministic workflow step (Claude writes
+  /tmp/pm-report.md; plain `gh issue create` files it).
 - [ ] Author works through `PM-STATUS.md` Next actions 1–9 (all require the
   external `.tex` sources; the repo ships PDFs only).
 
@@ -58,14 +65,11 @@ and merged it.
   in git), matching the `VERIFICATION.md` convention.
 
 ## Open loops / unresolved
-- **The routine's first run is unverified.** `.github/workflows/pm-status.yml`
-  fires Mondays 16:00 UTC and needs the `ANTHROPIC_API_KEY` repository secret
-  (Settings → Secrets and variables → Actions). Validate with a manual run
-  from the Actions tab; the report should arrive as a GitHub issue titled
-  "PM status — <date>". If the author prefers a UI routine instead (desktop:
-  Routines → New routine → Local, weekly Mon 9:00 AM; cloud:
-  https://claude.ai/code/routines, cron `0 16 * * 1` UTC), the prompt to
-  paste is step 1–5 of the workflow file's `prompt:` block.
+- **End-to-end issue delivery pending one green run.** After the delivery
+  fix, one manual dispatch (Actions tab → "Weekly PM status" → Run
+  workflow) should end with an issue titled "PM status — <date>"; confirm
+  it appears, then the loop is fully closed. On-demand alternatives: `/pm`
+  in any session on this repo, or the same Actions button anytime.
 - **All eight confirmed high findings in `PM-STATUS.md` are unfixed** — the
   two desk-reject-class ones first: cover letter targets *Minds and Machines*
   while README/CLAUDE.md say *AI and Ethics*; the "anonymized" title page
@@ -89,7 +93,7 @@ and merged it.
   `1fb7702` (graph + command), `699c628` (attribution fix).
 
 ## Next action
-- Author: confirm the `ANTHROPIC_API_KEY` secret exists, then trigger one
-  manual run of "Weekly PM status" from the Actions tab to validate the
-  routine. First working session after that: PM-STATUS Next action 1 — pick
-  the target journal and align cover letter, README citation, and CLAUDE.md.
+- Confirm one post-fix run files its issue (see Open loops). Then the real
+  work: PM-STATUS Next action 1 — pick the target journal and align cover
+  letter, README citation, and CLAUDE.md; the un-anonymized title page is
+  the other desk-reject-class fix.
