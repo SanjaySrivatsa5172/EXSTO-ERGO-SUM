@@ -121,13 +121,17 @@ const scoutResults = await parallel(
 
 // ── Edge work in plain JS (course step 04: flatten/dedupe is code, zero tokens) ──
 // Course step 10: tolerate missing inputs — a dead scout must not sink the run.
-const alive = scoutResults.filter(Boolean)
+// Attach scout names BEFORE filtering nulls, or a dead scout shifts the
+// indices and every later finding gets misattributed.
+const alive = scoutResults
+  .map((r, i) => (r ? { scout: SCOUTS[i].key, ...r } : null))
+  .filter(Boolean)
 const dropped = SCOUTS.length - alive.length
 if (dropped > 0) log(`Coverage gap: ${dropped} of ${SCOUTS.length} scouts returned nothing — reporting on partial evidence`)
 
 const seen = new Set()
 const findings = alive
-  .flatMap((r, i) => r.findings.map((f) => ({ ...f, scout: SCOUTS[i] ? SCOUTS[i].key : 'unknown' })))
+  .flatMap((r) => r.findings.map((f) => ({ ...f, scout: r.scout })))
   .filter((f) => {
     const key = `${f.area}::${f.claim}`.toLowerCase()
     if (seen.has(key)) return false
@@ -194,7 +198,7 @@ One-line overall state (on track / needs attention / blocked), then:
                             single imperative sentence naming its file(s)
 
 Inputs:
-Scout summaries: ${JSON.stringify(alive.map((r, i) => ({ scout: SCOUTS[i] ? SCOUTS[i].key : 'unknown', summary: r.summary })))}
+Scout summaries: ${JSON.stringify(alive.map((r) => ({ scout: r.scout, summary: r.summary })))}
 Confirmed high findings: ${JSON.stringify(confirmedHigh)}
 Refuted high findings: ${JSON.stringify(rejectedHigh)}
 Watchlist: ${JSON.stringify(watchlist)}
