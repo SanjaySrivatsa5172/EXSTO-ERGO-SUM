@@ -161,6 +161,7 @@ Operate as a durable project loop, not a one-shot coding chat.
   - `/consistency` — cross-document sweep (version, counts, Sanskrit transliteration, cross-references).
   - `/submission-check` — pre-submission gate: builds LaTeX, checks bib/figures/front matter, reports blockers.
   - `reviewer` subagent — fresh-context review of a draft for unsupported claims and citation mismatches; reports gaps, never edits.
+  - `/pm` — launches the `pm-status` workflow graph (`.claude/workflows/pm-status.js`): five parallel scouts → skeptic panel on high-severity findings → status report with ranked next actions. Report-only; latest report lives in `PM-STATUS.md`.
 - Scoped rules belong in `.claude/rules/`; keep this file lean.
 
 ## Context handoff
