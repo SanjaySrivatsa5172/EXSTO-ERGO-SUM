@@ -68,4 +68,10 @@ jobs:
 
             Preserve Sanskrit diacritics exactly in everything you write:
             Ahiṃsā, Saṃskāra-Vyākaraṇa, Sat-Cit-Ānanda, Pañca-Stambha.
-          claude_args: "--max-turns 150"
+          # Pin a standard model: the CI default resolved to an opus 1M-context
+          # beta variant that a plain API key may not be entitled to, and a
+          # weekly ~30-agent fleet belongs on the economical tier regardless.
+          claude_args: "--max-turns 150 --model claude-sonnet-5"
+          # Surface Claude's output in the job log so API-level errors
+          # (credits, model access) are visible instead of hidden.
+          show_full_output: "true"
