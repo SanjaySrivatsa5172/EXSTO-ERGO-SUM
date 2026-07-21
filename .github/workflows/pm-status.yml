@@ -35,7 +35,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         with:
+          # Either secret works — set whichever you have:
+          #   ANTHROPIC_API_KEY      — from console.anthropic.com (API billing)
+          #   CLAUDE_CODE_OAUTH_TOKEN — from `claude setup-token` (Pro/Max subscription)
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ github.token }} # use the runner's token directly; job only needs issues: write
           prompt: |
             You are running the weekly project-status pulse for the EXSTO ERGO
