@@ -23,7 +23,11 @@ and merged it.
 - [x] Validate with a live fleet run: `wf_918f593f-42c`, 30 agents, 0 errors.
 - [x] Merge to `main` (PR #10, squash `3ef3d5f`); PR watch closed.
 - [x] Save the run's report to `PM-STATUS.md`; document `/pm` in CLAUDE.md.
-- [ ] Author creates the weekly routine (see Open loops — paste-ready block).
+- [x] Weekly routine set up as a repo-native GitHub Actions schedule:
+  `.github/workflows/pm-status.yml` (Mondays 16:00 UTC, report filed as a
+  GitHub issue). Prerequisite: the `ANTHROPIC_API_KEY` repository secret.
+- [ ] Verify the routine's first run (Actions tab → "Weekly PM status" →
+  Run workflow); add the secret if the run fails on authentication.
 - [ ] Author works through `PM-STATUS.md` Next actions 1–9 (all require the
   external `.tex` sources; the repo ships PDFs only).
 
@@ -44,30 +48,24 @@ and merged it.
   unless confident; effort is the finer lever here.
 - **Weekly cadence, Mondays 9:00 AM Pacific** chosen for the routine — author
   commits are authored at UTC-07:00.
-- **Scheduling was not armed from the remote session** — the trigger call
-  requires an approval the author declined; the author will create the
-  routine themselves (desktop or claude.ai/code/routines).
+- **Scheduling is repo-native (GitHub Actions), not a claude.ai Routine** —
+  the remote-session trigger API was declined twice at the approval prompt,
+  so the routine lives as `.github/workflows/pm-status.yml`: durable,
+  reviewable in git, and account-independent. A desktop or
+  claude.ai/code/routines routine remains a valid alternative the author can
+  add from their own UI; do not create one via the trigger API unprompted.
 - **`PM-STATUS.md` keeps a stable filename** (latest report in place, history
   in git), matching the `VERIFICATION.md` convention.
 
 ## Open loops / unresolved
-- **The weekly routine is not yet created.** Paste-ready instruction block:
-
-  ```
-  Run the weekly project-status pulse for EXSTO ERGO SUM. Invoke the /pm
-  command (the pm-status workflow graph in .claude/workflows/). If /pm is
-  unavailable, fetch branch claude/graph-engineering-pm-ptnlmy and launch the
-  Workflow tool with scriptPath .claude/workflows/pm-status.js — this is my
-  explicit request to run that workflow. Present the returned report in full,
-  dated, leading with confirmed high-severity findings; note in one line if
-  nothing changed since last week. Report-only: change, commit, and push
-  nothing. Preserve Sanskrit diacritics exactly (Ahiṃsā, Saṃskāra-Vyākaraṇa,
-  Sat-Cit-Ānanda, Pañca-Stambha).
-  ```
-
-  Desktop: Routines → New routine → Local, weekly Mon 9:00 AM, folder = the
-  local clone. Cloud: https://claude.ai/code/routines, repo
-  SanjaySrivatsa5172/EXSTO-ERGO-SUM, cron `0 16 * * 1` (UTC).
+- **The routine's first run is unverified.** `.github/workflows/pm-status.yml`
+  fires Mondays 16:00 UTC and needs the `ANTHROPIC_API_KEY` repository secret
+  (Settings → Secrets and variables → Actions). Validate with a manual run
+  from the Actions tab; the report should arrive as a GitHub issue titled
+  "PM status — <date>". If the author prefers a UI routine instead (desktop:
+  Routines → New routine → Local, weekly Mon 9:00 AM; cloud:
+  https://claude.ai/code/routines, cron `0 16 * * 1` UTC), the prompt to
+  paste is step 1–5 of the workflow file's `prompt:` block.
 - **All eight confirmed high findings in `PM-STATUS.md` are unfixed** — the
   two desk-reject-class ones first: cover letter targets *Minds and Machines*
   while README/CLAUDE.md say *AI and Ethics*; the "anonymized" title page
@@ -91,6 +89,7 @@ and merged it.
   `1fb7702` (graph + command), `699c628` (attribution fix).
 
 ## Next action
-- Author: create the weekly routine (block above). First working session
-  after that: PM-STATUS Next action 1 — pick the target journal and align
-  cover letter, README citation, and CLAUDE.md.
+- Author: confirm the `ANTHROPIC_API_KEY` secret exists, then trigger one
+  manual run of "Weekly PM status" from the Actions tab to validate the
+  routine. First working session after that: PM-STATUS Next action 1 — pick
+  the target journal and align cover letter, README citation, and CLAUDE.md.
