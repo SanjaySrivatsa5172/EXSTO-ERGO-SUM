@@ -1,0 +1,65 @@
+# Weekly PM status — runs the pm-status workflow graph (.claude/workflows/)
+# every Monday and files the report as a GitHub issue, which notifies the
+# author by email. Report-only: this job never commits, pushes, or merges.
+#
+# Requires one repository secret: ANTHROPIC_API_KEY
+#   (Settings → Secrets and variables → Actions → New repository secret.
+#    If the Claude GitHub App was installed via /install-github-app, the
+#    secret is typically configured already.)
+#
+# Schedule is UTC: 16:00 Monday = 9:00 AM Pacific during daylight time
+# (8:00 AM in winter). Manual runs: Actions tab → this workflow → Run workflow.
+
+name: Weekly PM status
+
+on:
+  schedule:
+    - cron: "0 16 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  pm-status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run the pm-status graph
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            You are running the weekly project-status pulse for the EXSTO ERGO
+            SUM academic-submission repository. This prompt is the author's
+            explicit request to run the pm-status workflow graph.
+
+            1. Invoke the /pm command (.claude/commands/pm.md), which launches
+               the pm-status workflow (.claude/workflows/pm-status.js). If the
+               Workflow tool is unavailable in this environment, perform the
+               five scout sweeps inline instead (repository state;
+               version/count drift across README.md and derived/*.txt;
+               verification debt in VERIFICATION.md; submission readiness
+               across the cover letter and both title pages; .claude tooling
+               health) and label the report "inline run".
+            2. Compare the outcome with the previous report in PM-STATUS.md at
+               the repository root: open with one line stating what changed —
+               new findings, resolved findings, or "unchanged".
+            3. File the full dated report as a new GitHub issue in this
+               repository using: gh issue create --title "PM status — <today's
+               date>" --body-file <the report>. The issue body is the
+               deliverable; keep the report complete, confirmed high-severity
+               findings first.
+            4. Report-only, like the graph itself: change no repository files,
+               commit nothing, push nothing, merge nothing, open no pull
+               requests.
+
+            Preserve Sanskrit diacritics exactly in everything you write:
+            Ahiṃsā, Saṃskāra-Vyākaraṇa, Sat-Cit-Ānanda, Pañca-Stambha.
+          claude_args: "--max-turns 150"
