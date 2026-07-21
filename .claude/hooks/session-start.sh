@@ -26,6 +26,23 @@ echo "── EXSTO-ERGO-SUM session readiness ───────────�
 command -v node    >/dev/null 2>&1 && echo "  ✓ node    $(node --version)"   || echo "  • node    not present"
 command -v python3 >/dev/null 2>&1 && echo "  ✓ python3 $(python3 --version 2>&1)" || echo "  • python3 not present"
 
+# Pandoc — universal document converter. Used for format conversions between the
+# repo's prose artifacts: Markdown ⇄ LaTeX ⇄ HTML/DOCX/PDF, and cleaner text
+# extraction than pdftotext for any future .tex/.md sources. It is a small
+# package (unlike TeX Live), so install it unconditionally when missing.
+# Idempotent and non-interactive; an install hiccup must not abort session start.
+if command -v pandoc >/dev/null 2>&1; then
+  echo "  ✓ pandoc  $(pandoc --version 2>/dev/null | head -1 | awk '{print $2}')"
+else
+  echo "  … pandoc  not present — installing…"
+  export DEBIAN_FRONTEND=noninteractive
+  if apt-get update -qq && apt-get install -y -qq --no-install-recommends pandoc >/dev/null 2>&1; then
+    echo "  ✓ pandoc  installed ($(pandoc --version 2>/dev/null | head -1 | awk '{print $2}'))"
+  else
+    echo "  ‼ pandoc  install failed — install by hand with: apt-get install -y pandoc"
+  fi
+fi
+
 # Are there LaTeX sources to build?
 TEX_COUNT=$(git ls-files '*.tex' 2>/dev/null | wc -l | tr -d ' ')
 
