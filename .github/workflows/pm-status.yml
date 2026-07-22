@@ -76,7 +76,15 @@ jobs:
                first. A follow-up workflow step files that file as the GitHub
                issue — do NOT run gh yourself. Also include the full report
                in your final message.
-            4. Report-only, like the graph itself: change no repository files,
+            4. End the report with a "Pipeline retrospective" section: one
+               short paragraph on what this run's own process missed, wasted,
+               or got wrong (a scout that added no signal, a check that
+               should exist, a false positive pattern), and AT MOST ONE
+               concrete proposed change to this routine's prompt or workflow
+               file — phrased as a suggestion for the author to approve.
+               Never apply such a change yourself; reflection here, decision
+               with the author.
+            5. Report-only, like the graph itself: change no repository files,
                commit nothing, push nothing, merge nothing, open no pull
                requests.
 
