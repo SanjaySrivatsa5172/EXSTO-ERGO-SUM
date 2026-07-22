@@ -1,7 +1,7 @@
 ---
 name: reviewer
 description: Reviews a manuscript draft or revision against its claims and sources. Finds unsupported claims, fabricated or mismatched citations, and cross-document inconsistencies. Never edits — reports gaps only.
-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch
+tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, mcp__Scite_mcp, mcp__PubMed, mcp__bioRxiv
 model: opus
 ---
 

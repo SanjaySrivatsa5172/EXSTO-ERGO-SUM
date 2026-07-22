@@ -5,8 +5,9 @@ It records the graph-engineering session that built the PM tooling, ran it,
 and merged it.
 
 ## Where we are
-- Working branch: `claude/graph-engineering-pm-ptnlmy` (restarted from `main`
-  after PR #10 merged as `3ef3d5f`).
+- Working branch: `claude/graph-engineering-pm-ptnlmy`, restarted from `main`
+  before each follow-up per the merged-PR rule; tooling history runs through
+  PR #18 (`main` at `f8d6fb5`), first automated report filed as Issue #19.
 - Current goal (one sentence): the project-manager graph is built, verified,
   and merged; the manuscript itself now needs the submission-coherence fixes
   the graph confirmed.
@@ -38,8 +39,10 @@ and merged it.
   third: the Workflow tool backgrounds its fleet and the one-shot job
   exits before it finishes, so the CI prompt now mandates the inline
   five-scout sweep; the fleet graph stays interactive-only via /pm.
-- [ ] Author works through `PM-STATUS.md` Next actions 1–9 (all require the
-  external `.tex` sources; the repo ships PDFs only).
+- [ ] Author works through the next actions in `PM-STATUS.md` and the latest
+  weekly issue (currently #19, ten items). Most require the external `.tex`
+  sources (the repo ships PDFs only); the exceptions — SOURCES.md creation
+  and tooling-doc reconciliation — can be done in-repo.
 
 ## Decisions made (and why)
 - **Only the PM graph shipped.** Companion graphs (claims-verification fleet,
@@ -92,8 +95,11 @@ and merged it.
 - Course provenance: X post by @0xCodez (2026-07-20), "Graph Engineering with
   Claude: 14-Step roadmap"; the 14 principles are annotated inline as
   comments in `.claude/workflows/pm-status.js`.
-- Merged history: PR #10 → squash `3ef3d5f` (tooling), prior commits
-  `1fb7702` (graph + command), `699c628` (attribution fix).
+- Merged history: PR #10 `3ef3d5f` (graph + /pm) · #11 `581e851` (artifacts)
+  · #12 `909c1e8` (Actions routine) · #13 `105c1ce` (CI auth) · #14 `d0c2f9c`
+  (model pin + output) · #15 `696d00f` (subscription-token auth) · #16
+  `6d6a85c` (session PM pulse) · #17 `e1940d7` (deterministic issue filing)
+  · #18 `f8d6fb5` (inline sweep mandate). First automated report: Issue #19.
 
 ## Next action
 - Confirm one post-fix run files its issue (see Open loops). Then the real
