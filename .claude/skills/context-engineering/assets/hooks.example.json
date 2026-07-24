@@ -1,0 +1,26 @@
+{
+  "_comment": "Merge into .claude/settings.json after swapping in this project's real formatter and test commands. Command hooks receive a JSON payload on stdin.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | xargs -r ruff format"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "agent",
+            "prompt": "Run pytest -q. Fix and re-run until green, then allow the stop."
+          }
+        ]
+      }
+    ]
+  }
+}
