@@ -1,6 +1,7 @@
 # CLAUDE.md
 
-Guidance for AI assistants working in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with
+code in this repository.
 
 ## What this repository is
 
@@ -18,13 +19,14 @@ merely prohibited. The framework is grounded in cross-traditional wisdom
 convergence (seven traditions) and the Five Pillars (Karma, Dharma, Ahiṃsā,
 Viveka, Ānanda).
 
-There is **no application code, package manager, test suite, or CI pipeline**.
-"Development" means editing prose/PDF documents and keeping the README and
-metadata accurate. Treat tasks accordingly: do not look for or invent npm/make/
-pytest workflows. The repo *does* carry Claude Code tooling under `.claude/`
-(slash commands, a session-start hook, a `reviewer` subagent, scoped rules) and
-plain-text mirrors of each PDF under `derived/` for reading/grepping — see the
-**Manuscript tooling** section below.
+There is **no application code, package manager, or test suite**; the only CI
+is a scheduled report job (`.github/workflows/pm-status.yml`), not a build/test
+pipeline. "Development" means editing prose/PDF documents and keeping the README
+and metadata accurate. Treat tasks accordingly: do not look for or invent
+npm/make/pytest workflows. The repo *does* carry Claude Code tooling under
+`.claude/` (slash commands, a session-start hook, a `reviewer` subagent, scoped
+rules, the `pm-status` workflow graph) and plain-text mirrors of each PDF under
+`derived/` for reading/grepping — see the **Manuscript tooling** section below.
 
 **Current Charter version: v3.67** (43 articles across 17 Parts, contiguous
 numbering Zero–XXXVII; five pillars; unamendable Ahiṃsā core).
@@ -47,8 +49,12 @@ derived/*.txt              # Plain-text extraction of each PDF (read/grep-able)
 derived/README.md          # How the derived text is produced/used
 README.md                  # Public-facing overview, keywords, citation
 VERIFICATION.md            # Claim/consistency verification report
+PM-STATUS.md               # Latest pm-status graph report (history in git)
+HANDOFF.md                 # Latest session handoff — read first in fresh work
 CLAUDE.md                  # This file
-.claude/                   # Claude Code tooling: commands, hooks, rules, agent
+.claude/                   # Claude Code tooling: commands, hook, rules, agent,
+                           #   workflows/pm-status.js, HANDOFF.template.md
+.github/workflows/         # pm-status.yml — weekly automated PM report
 .DS_Store                  # macOS artifact (tracked; harmless — do not rely on)
 ```
 
@@ -83,8 +89,8 @@ Online Resources are organized in bands inside `onlineresources.pdf`:
 
 ## Git workflow
 
-- Default branch is `main`. Feature work for the current task happens on
-  `claude/claude-md-docs-l1ht5d` (or the branch named in the task).
+- Default branch is `main`. Feature work happens on the `claude/…` branch named
+  in the current task; never commit directly to `main`.
 - Commit with clear, descriptive messages; push with
   `git push -u origin <branch>`; open a **draft** PR after pushing if none
   exists.
@@ -155,7 +161,7 @@ Operate as a durable project loop, not a one-shot coding chat.
 - Keep a durable sources file (URLs, retrieval dates, key quotes, why each mattered) so a later session can retrace the reasoning, not just the conclusion.
 
 ## Manuscript tooling
-- This repo is a LaTeX academic submission (*AI and Ethics*). The `.tex` files are source; the `.pdf` files are build artifacts — edit and review the source.
+- This repo is a LaTeX academic submission (*AI and Ethics*). The `.tex` files are the source of truth but are **not committed** — in-repo you have the compiled PDFs plus `derived/*.txt` mirrors. If sources are ever added, edit and review the source, never the PDFs (see `.claude/rules/latex.md`).
 - Reusable workflows live as commands and a subagent, not in this file:
   - `/verify-claims <section>` — extract every factual claim and verify each against a retrieved primary source. Run before any submission.
   - `/consistency` — cross-document sweep (version, counts, Sanskrit transliteration, cross-references).
@@ -167,3 +173,4 @@ Operate as a durable project loop, not a one-shot coding chat.
 
 ## Context handoff
 - Before context gets heavy (~60%), don't rely on `/compact`. Copy `.claude/HANDOFF.template.md` → `HANDOFF.md`, fill in plan/decisions/open loops, `/clear`, then resume by reading `HANDOFF.md`. You control what survives.
+- A filled `HANDOFF.md` lives at the repo root — read it at the start of fresh work. It records the current goal, open loops (unfixed PM findings, blocked external verification), and standing decisions — including tooling the author explicitly declined (companion fleet graphs, a workflows README): offer before re-adding any of it.
