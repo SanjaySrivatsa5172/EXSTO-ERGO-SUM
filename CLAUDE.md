@@ -47,13 +47,15 @@ titlepage.pdf              # Title page (anonymized)
 titlepage_with_author.pdf  # Title page with author identity
 derived/*.txt              # Plain-text extraction of each PDF (read/grep-able)
 derived/README.md          # How the derived text is produced/used
+drafts/                    # Website drafts from /seo-draft — never auto-published
 README.md                  # Public-facing overview, keywords, citation
 VERIFICATION.md            # Claim/consistency verification report
 PM-STATUS.md               # Latest pm-status graph report (history in git)
 HANDOFF.md                 # Latest session handoff — read first in fresh work
 CLAUDE.md                  # This file
 .claude/                   # Claude Code tooling: commands, hook, rules, agent,
-                           #   workflows/pm-status.js, HANDOFF.template.md
+                           #   workflows/ (pm-status, seo-content-machine),
+                           #   HANDOFF.template.md
 .github/workflows/         # pm-status.yml — weekly automated PM report
 .DS_Store                  # macOS artifact (tracked; harmless — do not rely on)
 ```
@@ -168,6 +170,7 @@ Operate as a durable project loop, not a one-shot coding chat.
   - `/submission-check` — pre-submission gate: builds LaTeX, checks bib/figures/front matter, reports blockers.
   - `reviewer` subagent — fresh-context review of a draft for unsupported claims and citation mismatches; reports gaps, never edits.
   - `/pm` — launches the `pm-status` workflow graph (`.claude/workflows/pm-status.js`): five parallel scouts → skeptic panel on high-severity findings → status report with ranked next actions. Report-only; latest report lives in `PM-STATUS.md`.
+  - `/seo-draft <topic>` — launches the `seo-content-machine` workflow graph (`.claude/workflows/seo-content-machine.js`): three parallel research scouts (top-page coverage, real questions, content gaps) → one merge node writes the outline and full draft → a fact-checker flags every claim without a source → saved to `drafts/<date>-<slug>.md` with the flags on top. Website content, not manuscript. Draft-only: the graph never commits, posts, or publishes — the webmaster reviews `drafts/` and publishes by hand.
   - Weekly automation: `.github/workflows/pm-status.yml` runs the inline five-scout sweep every Monday 16:00 UTC (auth: `CLAUDE_CODE_OAUTH_TOKEN` secret) and files the report as a GitHub issue; manual runs via the Actions tab. The fleet graph itself is interactive-only — a one-shot CI job cannot outlive its backgrounded fleet.
 - Scoped rules belong in `.claude/rules/`; keep this file lean.
 

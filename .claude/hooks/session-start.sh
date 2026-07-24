@@ -74,5 +74,5 @@ else
   echo "  • PM      no PM-STATUS.md yet — run /pm for the first project pulse"
 fi
 
-echo "  Commands: /pm  /verify-claims  /consistency  /submission-check   ·   subagent: reviewer"
+echo "  Commands: /pm  /seo-draft  /verify-claims  /consistency  /submission-check   ·   subagent: reviewer"
 echo "─────────────────────────────────────────────────────────────"
