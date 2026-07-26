@@ -51,11 +51,25 @@ savefig(filepath) -> None    # alias: save(filepath)
   submission**. `.png` → raster preview. Font type is set to keep text editable.
 - Optional: install MuPDF's `mutool` for enhanced SVG; without it a standard
   matplotlib SVG is written (a harmless RuntimeWarning notes this).
+- `savefig` takes **only** a filepath — there is no `dpi=` argument (calling
+  `savefig(path, dpi=300)` raises `TypeError`). Control raster DPI, transparency,
+  and bounding box through settings (`cns.settings.savefig_dpi`,
+  `savefig_transparent`, `savefig_bbox`) before saving.
 
 `cns.settings` holds global defaults (fonts, spine visibility, p-value format,
-tick styling, `figure_width`/`figure_height`, `palette_qual`, `palette_seq`).
-Set attributes on it before plotting to change house style, e.g.
-`cns.settings.palette_qual = "Nature"`.
+tick styling, `savefig_dpi`, `figure_width`/`figure_height`, `palette_qual`,
+`palette_seq`). Set attributes on it before plotting to change house style, e.g.
+`cns.settings.palette_qual = "Nature"`. Call `cns.setup_matplotlib()` once to
+apply cnsplots' publication defaults to plain matplotlib (companions:
+`setup_ggplot()`, `setup_scanpy()`). For a temporary override scoped to a block,
+use the settings context manager:
+
+```python
+cns.settings.title_fontsize = 9                    # persistent change
+with cns.settings.context(palette_qual="Dark2"):   # temporary, auto-reverts
+    cns.figure(120, 90)
+    cns.barplot(data=df, x="grp", y="val")
+```
 
 Named single colors are exposed as constants: `cns.BLUE, RED, GREEN, ORANGE,
 PURPLE, PINK, BROWN, GRAY, YELLOW, VIOLET, CHOCOLATE`.
@@ -72,7 +86,9 @@ test it used, and draws the bracket with a significance marker (`ns`, `*`,
 cns.boxplot(data=tips, x="day", y="total_bill",
             pairs=[("Thur", "Fri"), ("Sat", "Sun")])
 ```
-Only list the comparisons you want annotated — brackets stack automatically.
+Only list the comparisons you want annotated — brackets stack automatically. Pass
+`pairs="all"` to test and annotate every category pair (use sparingly; it gets
+busy fast, and only annotate comparisons you actually intend to report).
 
 ## Basic plots
 

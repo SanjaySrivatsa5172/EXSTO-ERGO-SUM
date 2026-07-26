@@ -58,7 +58,9 @@ Most `gg*` functions share these, which is what makes ggpubr terse:
 - `add` — overlay(s): `"mean"`, `"mean_sd"`, `"mean_se"`, `"median_iqr"`,
   `"jitter"`, `"boxplot"`, `"dotplot"`, `"violin"`. Combine as a vector.
 - `add.params` — list controlling the overlay, e.g. `list(fill = "white")`.
-- `order` — explicit category order (character vector).
+- `order` — explicit category order (character vector). For ranked charts,
+  `ggbarplot` takes `sort.val = "asc"/"desc"` (+ `sort.by.groups`) and
+  `ggdotchart` takes `sorting = "ascending"/"descending"`.
 - `facet.by`, `ncol`, `nrow` — small multiples.
 - `label`, `label.select` — point/bar labels.
 - `ggtheme` — base theme (default `theme_pubr()`).
@@ -97,6 +99,10 @@ figure <- ggarrange(p1, p2, p3, p4,
                     common.legend = TRUE, legend = "bottom")
 annotate_figure(figure, top = text_grob("Figure 1", face = "bold"))
 ```
+`ggarrange` is ggpubr's built-in layout; for complex composites `patchwork`
+(`p1 + p2 / p3`) or `cowplot::plot_grid()` are drop-in alternatives. Themes
+besides `theme_pubr()`: `theme_classic2()`, `theme_transparent()`; tune any plot
+globally with `ggpar(p, ...)`.
 
 ## Export
 ```r
