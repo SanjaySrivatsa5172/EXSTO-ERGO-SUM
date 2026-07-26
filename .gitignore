@@ -1,0 +1,15 @@
+# Python environments created by the scientific-diagram skill (scripts/setup_env.sh)
+.venv-cnsplots/
+.venv/
+venv/
+env/
+
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+
+# Rendered figure outputs from skill demos (keep sources, not generated images)
+gallery_out/
+
+# OS / editor cruft
+.DS_Store
