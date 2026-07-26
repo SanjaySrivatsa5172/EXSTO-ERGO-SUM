@@ -168,6 +168,7 @@ Operate as a durable project loop, not a one-shot coding chat.
   - `/submission-check` — pre-submission gate: builds LaTeX, checks bib/figures/front matter, reports blockers.
   - `reviewer` subagent — fresh-context review of a draft for unsupported claims and citation mismatches; reports gaps, never edits.
   - `/pm` — launches the `pm-status` workflow graph (`.claude/workflows/pm-status.js`): five parallel scouts → skeptic panel on high-severity findings → status report with ranked next actions. Report-only; latest report lives in `PM-STATUS.md`.
+  - `/grok-build:*` — second-model bridge to xAI's Grok Build CLI (official `xai-org/grok-build-plugin-cc` plugin v0.2.0, declared in `.claude/settings.json`): `:review` / `:critique` for an outside-model pass on a draft or diff, `:delegate` for hand-offs, `:check` for readiness. Requires the local `grok` CLI installed and logged in (see https://docs.x.ai/build/overview); bridge defaults are read-only, matching this repo's report-only discipline. Headless CI (`pm-status.yml`) does not load marketplace plugins, so the weekly report job is unaffected.
   - Weekly automation: `.github/workflows/pm-status.yml` runs the inline five-scout sweep every Monday 16:00 UTC (auth: `CLAUDE_CODE_OAUTH_TOKEN` secret) and files the report as a GitHub issue; manual runs via the Actions tab. The fleet graph itself is interactive-only — a one-shot CI job cannot outlive its backgrounded fleet.
 - Scoped rules belong in `.claude/rules/`; keep this file lean.
 
