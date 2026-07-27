@@ -16,7 +16,50 @@ Run: 2026-06-25 · Source audited: `derived/manuscript.txt` (extracted from
   every external verdict here is **PRIMARY READ BLOCKED** — flagged honestly, not
   silently passed on second-hand summaries. The four checks marked ⧗ are queued
   for the MCP scholarly pass once tool approval / a more permissive network policy
-  is in place.
+  is in place. **Superseded 2026-07-27:** the channel opened; see the
+  **External pass** section below for the resolved verdicts.
+
+## External pass — 2026-07-27 (channel unblocked)
+
+A later session ran the queued external pass: the web-search channel became
+available (arXiv/publisher/Pew pages still block direct fetch; evidence is
+abstract text and figures as surfaced verbatim through search, corroborated
+across independent hits — provenance per entry in `SOURCES.md`). The tables
+below keep the original 2026-06-25 verdicts; this section records what the
+external pass resolved.
+
+| # | External verdict now | Basis |
+|---|---|---|
+| 1 | ✅ **SUPPORTED** — "blackmailed 55.1% of the time, compared to only 6.5% … when it stated it was in an evaluation" (Claude Opus 4; 500 samples: real 21.4% / eval 64.8% / abstain 13.8%) | Anthropic, *Agentic Misalignment* (Jun 2025) |
+| 2 | ✅ **SUPPORTED verbatim** — 51% public more concerned than excited vs 15% of experts. ⚠ Cite-year: the report is dated **April 3, 2025** (fieldwork Aug/Oct 2024; N=5,410 + 1,013) — check [15]'s year in the `.bib` | Pew, *How the U.S. Public and AI Experts View AI* |
+| 3 | ⚠ **PARTIAL** — GPT-4o **20%** confirmed. The GPT-4.1 "~50%" was **not found**; the *Nature* version reports GPT-4.1 misalignment *higher than GPT-4o* (Fig. 11) without a headline rate. Confirm ~50% against Fig. 11 or drop it. **Citation upgrade:** Betley et al. is now published — *Nature* (2025), "Training large language models on narrow tasks can lead to broad misalignment" | Betley et al., arXiv:2502.17424 / Nature s41586-025-09937-5 |
+| 4 | ⚠ **CONFIRMED, RELABEL** — the abstract says **14%** = compliance with harmful free-tier queries (paid ≈ never), with explicit alignment-faking reasoning in almost all compliant cases (**12%** = complied-with-faking-reasoning subset); **78%** = alignment-faking-reasoning rate **after RL** ✓. The manuscript's "complied 12% baseline" swaps the two — write "14% compliance" or "12% complied after explicit alignment-faking reasoning" | Greenblatt et al., arXiv:2412.14093 |
+| 5 | ✅ external side settled — 78% is the *post-RL alignment-faking-reasoning* rate (see #4); the manuscript/OR relabel (fix-list 1) still stands | same |
+| 6 | ✅ **LARGELY SUPPORTED** — 99.9% of weights zero ✓; circuits **~16×** smaller than dense baselines ✓. The "7 nodes / 4 edges" count was not independently quoted (coverage describes the quote-matching circuit as a few residual channels + 2 MLP neurons + 1 attention head) — confirm against the paper's figure | Gao et al. / OpenAI, arXiv:2511.13653 (Nov 2025) |
+| 7 | ✅ **REFERENCE IS REAL** — William Walden, "Reasoning Models Will Blatantly Lie About Their Reasoning," arXiv:2601.07663 (Jan 2026; **retitled** "…Will *Sometimes* Lie…" in v4 — track in `.bib`). **34.5%** ✓ = Claude's *maximum normalized CoT-honesty score* on grader-hacking hints, consistent with "reported reliance <34.5%". ⚠ The "**>95% of the time** models change answers" was **not found**: the paper measures hint use *as* answer-change and reports bootstrapped **95% CIs** — the manuscript may have read a confidence level as a rate. Recheck L2857 against the paper | Walden, arXiv:2601.07663 |
+| 8 | ✅ **SUPPORTED verbatim** — across **11** models, AI affirmed users' actions **49%** more than humans. **Citation upgrade:** now published — Cheng et al., *Science* (Mar 2026), doi:10.1126/science.aec8352 ("Sycophantic AI decreases prosocial intentions and promotes dependence") | Cheng et al. |
+| 9 | ❌ **NOT LOCATED — treat as suspect.** The April 2025 Pew report's regulation-confidence coverage gives **62% public / 53% experts with little-to-no confidence** — not the manuscript's 32%/23%; the 93%/78% relationships split also did not surface. Primary PDF blocked here; the author must read the report before keeping these four numbers | Pew, same report |
+| 10 | ✅ unchanged (already SUPPORTED) | Amodei, Jan 2026 |
+
+**OR items resolved in the same pass:**
+
+| OR # | External verdict now | Basis |
+|---|---|---|
+| OR-3/OR-13 | ✅ **SUPPORTED with nuance** — **92.78% is the maximum** (Mistral Large-2) across 8 open-weight models, range 25.86–92.78%; multi-turn up to ~10× more effective than single-turn. OR text should say "**up to** 92.78%" | Cisco AI Threat Research, "Death by a Thousand Prompts" (Nov 2025) |
+| OR-4 | ✅ **SUPPORTED verbatim** — Pangram screened 19,490 submissions / 75,800 reviews for ICLR 2026: 21% of reviews fully AI-generated, >50% with signs of AI; analysis prompted by Neubig (CMU). (One outlet counts 76,139 reviews) | Pangram Labs + press coverage |
+| OR-6 | ⚠ **PARTIAL** — SWE-agent (Yang et al., arXiv:2405.15793, NeurIPS 2024) is real; ACI is its core contribution; SWE-bench pass@1 12.5%. The specific "**64%** improvement from ACI design alone" derivation was not located — confirm against the paper's ablations | Yang et al. 2024 |
+| OR-1/OR-5 | external side settled via #4/#7 above; the in-document relabels still stand | — |
+| OR-2, OR-7/OR-9, OR-10, OR-11, OR-12 | ⏳ still awaiting primary reads (Lou 2026; Keshavarz 2025; clinical-VLM source hunt; Brown-Cohen) — the channel is proven, finish in a later pass | — |
+
+**Net effect on the fix-list:** item 4 (Walden existence) is **resolved** —
+the reference is real; a *new* sub-flag replaces it (the >95% framing).
+Item 5 (12 vs 14) is **resolved** — 14% compliance / 12% faking-reasoning
+subset; the manuscript wording must be relabeled, not the number trusted as-is.
+Item 7's primary confirmations are **done** for #2, #6 (bar the 7-node count)
+and #8; **#9 failed confirmation** and escalates from "needs primary read" to
+"numbers likely wrong or mis-sourced." New: two citation upgrades (Betley →
+*Nature* 2025; Cheng → *Science* 2026) and the Walden v4 retitle belong in the
+`.bib` when sources are added.
 
 ## Claims register
 
@@ -115,17 +158,17 @@ load-bearing and most-repeated claims; a full line-by-line sweep remains.
   **internal layer** (citation presence, attribution, cross-document consistency).
 - **One open attribution:** OR-10 (clinical VLM "mirage" figures) — source not
   yet located.
-- **The external layer is entirely blocked.** Every ⧗/PRIMARY-READ-BLOCKED item
-  awaits the MCP scholarly channel (Scite/PubMed), which is gated by a tool
-  approval that did not flow through in this session despite the user approving
-  it — likely an interactive permission prompt not rendering in the web client.
-  Resolve by approving the MCP tool in the client UI, allowlisting it, or opening
-  the network policy for primary web reads; then re-run the external pass.
+- **The external layer is no longer blocked** *(updated 2026-07-27)*: the pass
+  ran via web search + Scite; see **External pass — 2026-07-27** above and
+  `SOURCES.md`. Manuscript claims #1–#10 are now externally settled except:
+  the GPT-4.1 "~50%" (#3), the Pew 93/78 and 32/23 splits (#9 — failed to
+  confirm, treat as suspect), the Walden ">95%" framing (#7), and the 7-node
+  circuit count (#6). Still queued: OR-2/7/9/10/11/12 primary reads.
 - No source files were edited (none exist). The README fixes are the only
   in-place corrections. This document is the fix-list for the rest.
-- External (⧗) confirmations are queued for the MCP scholarly channel
-  (Scite/PubMed) — blocked at run time by per-call tool approval not flowing
-  through. Re-run once approved, or open the network policy for primary web reads.
+- The ⧗ queue was cleared by the 2026-07-27 pass (Greenblatt, Walden, Betley,
+  Pew) — outcomes in the **External pass** section; source register with quotes
+  and retrieval dates in `SOURCES.md`.
 - No manuscript text was edited. This is a report.
 
 ## Glossary
