@@ -1,16 +1,19 @@
-# Session handoff — 2026-07-21
+# Session handoff — 2026-07-27
 
 Read this before doing anything else in a fresh session on this repository.
-It records the graph-engineering session that built the PM tooling, ran it,
-and merged it.
+It records the graph-engineering session that built the PM tooling
+(2026-07-21) and the follow-up session that synced CLAUDE.md (PR #21) and ran
+the external citation-verification pass (2026-07-27, see `SOURCES.md`).
 
 ## Where we are
-- Working branch: `claude/graph-engineering-pm-ptnlmy`, restarted from `main`
-  before each follow-up per the merged-PR rule; tooling history runs through
-  PR #18 (`main` at `f8d6fb5`), first automated report filed as Issue #19.
-- Current goal (one sentence): the project-manager graph is built, verified,
-  and merged; the manuscript itself now needs the submission-coherence fixes
-  the graph confirmed.
+- Working branch: `claude/claude-md-docs-dpe1hn`, restarted from `main`
+  before each follow-up per the merged-PR rule; history runs through the
+  CLAUDE.md sync (PR #21, `main` at `00a2e6f`); first automated PM report
+  filed as Issue #19.
+- Current goal (one sentence): tooling is merged and the external citation
+  layer is now largely verified (`SOURCES.md`); what remains are the
+  author-side submission-coherence and relabeling fixes in the external
+  `.tex` sources.
 - Version / state of the manuscript: Charter v3.67 (43 articles, Zero–XXXVII,
   17 Parts, five pillars / Pañca-Stambha); manuscript untouched this session —
   all edits were `.claude/` tooling and project docs.
@@ -80,8 +83,17 @@ and merged it.
   two desk-reject-class ones first: cover letter targets *Minds and Machines*
   while README/CLAUDE.md say *AI and Ethics*; the "anonymized" title page
   names the author.
-- **External citation verification is still ~0%** (VERIFICATION.md: PRIMARY
-  READ BLOCKED items; Walden 2026 existence unconfirmed).
+- **External citation verification: core register done 2026-07-27** (see
+  VERIFICATION.md "External pass" + `SOURCES.md`). Walden 2026 **exists**
+  (arXiv:2601.07663); Greenblatt 14%/12%/78% pinned; Agentic-Misalignment
+  55.1/6.5, Pew 51/15, Cheng 49%/11-models, Gao 99.9%/16×, Cisco "up to
+  92.78%", ICLR 21% all confirmed. Remaining flags for the author: Betley
+  GPT-4.1 "~50%" unconfirmed; Pew 93/78 and 32/23 **failed to confirm**
+  (suspect); Walden ">95%" framing likely a misread of a 95% CI; Gao
+  7-node/4-edge count and Yang 64% unpinned. Still queued: Lou 2026,
+  Keshavarz 2025, Brown-Cohen, OR-10 VLM source. `.bib` upgrades when
+  sources arrive: Betley → *Nature* 2025; Cheng → *Science* 2026
+  (10.1126/science.aec8352); Walden v4 retitle; Pew year (April 2025).
 - Fixes require the `.tex` sources, which are **not in the repo** — confirm
   with the author how changes should be delivered before editing anything.
 
@@ -102,7 +114,9 @@ and merged it.
   · #18 `f8d6fb5` (inline sweep mandate). First automated report: Issue #19.
 
 ## Next action
-- Confirm one post-fix run files its issue (see Open loops). Then the real
-  work: PM-STATUS Next action 1 — pick the target journal and align cover
-  letter, README citation, and CLAUDE.md; the un-anonymized title page is
-  the other desk-reject-class fix.
+- Author decisions now dominate: (1) pick the target journal and align the
+  cover letter, README citation, and CLAUDE.md; (2) fix the un-anonymized
+  title page; (3) work the relabel/recheck flags from the 2026-07-27
+  external pass — `SOURCES.md` links each primary directly. In-repo work
+  remaining: the queued OR primary reads (Lou, Keshavarz, Brown-Cohen,
+  OR-10 source hunt).
