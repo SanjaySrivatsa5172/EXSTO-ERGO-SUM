@@ -1,0 +1,4 @@
+# OptMem takes this lock while writing; it is per-machine runtime state.
+.optmem/memory/.lock
+# Machine-specific Obsidian vault path — never committed (see obsidian.conf.example).
+.claude/optmem/obsidian.conf

@@ -1,0 +1,25 @@
+# Where `.claude/optmem/to-obsidian` writes the memory note.
+#
+# Copy this file to `obsidian.conf` (same directory) and set VAULT for THIS
+# machine. That file is gitignored: the vault lives at a different path on
+# the Windows desktop than on the Mac, so the path must never be committed.
+# $OBSIDIAN_VAULT / $OBSIDIAN_NOTE in the environment override this file.
+#
+# VAULT is the vault root — the folder Obsidian opens, the one containing
+# `.obsidian/`. NOTE is relative to it.
+
+# --- macOS ---------------------------------------------------------------
+# VAULT=/Users/you/Documents/MyVault
+# An iCloud-synced vault lives under:
+# VAULT=/Users/you/Library/Mobile Documents/iCloud~md~obsidian/Documents/MyVault
+
+# --- Windows -------------------------------------------------------------
+# Forward slashes work fine in Python on Windows, and avoid escaping pain:
+# VAULT=C:/Users/you/Documents/MyVault
+# Under Git Bash or WSL a POSIX path works too:
+# VAULT=/c/Users/you/Documents/MyVault
+
+# --- The note ------------------------------------------------------------
+# Defaults to "permanent claude memories/EXSTO-ERGO-SUM.md". The folder is
+# created if missing. The script will not overwrite a note it did not write.
+# NOTE=permanent claude memories/EXSTO-ERGO-SUM.md

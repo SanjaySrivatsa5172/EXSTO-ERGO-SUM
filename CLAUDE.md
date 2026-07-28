@@ -3,6 +3,87 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with
 code in this repository.
 
+## Memory
+
+Your memory is OptMem:
+- The tool is `.claude/optmem/memo`
+- Your memories are in `.optmem/memory`
+
+OptMem outlives every session, compaction, model and vendor change.
+Without it you do not know who you are, or what was decided and tried.
+
+Use the wrapper path above, never `~/.optmem/memo`: this project keeps its
+memories in the repo so they survive the ephemeral remote container, and the
+bare tool would read an empty store in `$HOME`. The wrapper rewrites what
+OptMem prints, so any command it hands you is already correct — run it as
+given.
+
+### At startup: activating OptMem (mandatory)
+
+Run `.claude/optmem/memo wake` before any other tool call, in every session,
+and then do exactly what it prints, to the end of its output.
+
+### While working: register memories (mandatory)
+
+Call `.claude/optmem/memo note "<1 line, max 280 chars>"` whenever you learn
+something new, or something worth keeping happens. That covers a task worth
+real effort, a fact or insight the user teaches you, anything you learn about
+their life (even indirectly), any event of lasting effect. For this project
+that includes editorial decisions, reviewer feedback, submission-status
+changes, and anything the author rules in or out.
+
+Do not register redundant memories.
+
+If `.claude/optmem/memo note` asks a compression: do it before your next action.
+
+Never edit or delete anything under `.optmem/memory`: the tool manages it. It
+is committed to git — that is what makes it durable — and a Stop hook commits
+new memories for you. Push the branch and they persist; leave the branch
+unpushed and they die with the container.
+
+### When you need an old memory: search, or navigate
+
+`.claude/optmem/memo recall <regex>` searches every memory, word for word.
+
+Your memories also form a binary tree: #0-1, #2-3 ... exist as one-line
+summaries, pairs of those as #0-3, and so on -- every `#a-b` line wake
+prints is one node of it. `.claude/optmem/memo zoom <a-b>` opens a node into
+its two halves, down to the raw memories.
+
+### Exporting to the Obsidian vault: ask every single time
+
+The author keeps a "permanent claude memories" folder in an Obsidian vault
+that exists on both their Windows desktop and their Mac.
+`.claude/optmem/to-obsidian` renders the store as one markdown note there.
+
+**Never export without asking first, every time — no standing permission.**
+The vault is outside this repository and on its own sync path, so writing
+there is the author's call on each occasion, not a habit you acquire. Ask,
+then pass `--confirmed`; the script refuses without it. Never run it from a
+hook, and never in a loop.
+
+    .claude/optmem/to-obsidian --dry-run     # safe: prints, writes nothing
+    .claude/optmem/to-obsidian --confirmed   # only after the author agrees
+
+The vault path is machine-specific and therefore **not committed**: set
+`OBSIDIAN_VAULT`, or copy `obsidian.conf.example` to `.claude/optmem/
+obsidian.conf` (gitignored) and fill in the path for that machine. In a
+remote container there is no vault — the script says so and exits.
+
+The export is one-way and rebuilds the note in full; the repo store stays
+the source of truth. Output is deterministic, so re-exporting an unchanged
+store rewrites identical bytes and causes no sync churn.
+
+### If you're a subagent: skip everything above
+
+Parallel sessions on this machine are all you, and may all write memories.
+A subagent is not: it must never run `memo`, because it cannot judge what
+is already known, and its notes would arrive duplicated and incorrectly.
+When you spawn one, write: `You are a subagent. Don't run memo.`
+
+This applies to the `reviewer` subagent and to every scout, skeptic and merge
+node of the `pm-status` graph — none of them may run `memo`.
+
 ## What this repository is
 
 **EXSTO ERGO SUM** ("I Stand Forth, Therefore I Am") is an academic
@@ -52,7 +133,10 @@ VERIFICATION.md            # Claim/consistency verification report
 PM-STATUS.md               # Latest pm-status graph report (history in git)
 HANDOFF.md                 # Latest session handoff — read first in fresh work
 CLAUDE.md                  # This file
-.claude/                   # Claude Code tooling: commands, hook, rules, agent,
+.optmem/memory/            # OptMem store — LOG.txt (append-only) + TREE/ summaries
+.claude/optmem/memo        # Repo-scoped OptMem wrapper — the only way to call it
+.claude/optmem/to-obsidian # One-way export of the store to the author's vault
+.claude/                   # Claude Code tooling: commands, hooks, rules, agent,
                            #   workflows/pm-status.js, HANDOFF.template.md
 .github/workflows/         # pm-status.yml — weekly automated PM report
 .DS_Store                  # macOS artifact (tracked; harmless — do not rely on)

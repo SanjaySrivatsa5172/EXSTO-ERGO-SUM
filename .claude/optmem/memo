@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# OptMem (github.com/VictorTaelin/OptMem), scoped to this repository.
+#
+# Why a wrapper instead of the plain `~/.optmem/memo` install:
+#
+#   1. This project is worked on from ephemeral remote containers. $HOME is
+#      wiped between sessions, so OptMem's default store (~/.optmem/memory)
+#      would forget everything — the exact failure it exists to prevent.
+#      Pointing MEMORY_DIR at <repo>/.optmem/memory puts the memories in git,
+#      where they outlive the container and sync to every other machine.
+#   2. The tool itself stays disposable: it is fetched into $HOME on demand
+#      and never committed here, so this repo vendors no third-party code.
+#   3. The tool names itself in the commands it prints ("~/.optmem/memo nap
+#      0-1 ..."), and those would run against the wrong (empty) store. Its
+#      output is rewritten below so every command it prints is runnable
+#      as-is. The rewrite is on the way out only — a memory whose text
+#      happens to contain that path is stored verbatim and merely displays
+#      expanded.
+#
+# Usage: exactly OptMem's, with this path in place of `~/.optmem/memo`:
+#
+#   .claude/optmem/memo wake
+#   .claude/optmem/memo note "..."
+#
+# It resolves the repo from its own location, so it works from any cwd.
+#
+# Overrides, for the unusual case: OPTMEM_MEMORY_DIR (a different store),
+# OPTMEM_TOOL (an existing install), OPTMEM_REF (pin the upstream version).
+set -euo pipefail
+
+HERE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(cd -- "$HERE/../.." && pwd)"
+SELF="$HERE/memo"
+
+export MEMORY_DIR="${OPTMEM_MEMORY_DIR:-$ROOT/.optmem/memory}"
+
+TOOL="${OPTMEM_TOOL:-$HOME/.optmem/memo}"
+REF="${OPTMEM_REF:-main}"
+SRC="https://raw.githubusercontent.com/VictorTaelin/OptMem/$REF/memo"
+
+command -v python3 >/dev/null 2>&1 || {
+  echo "optmem: OptMem is one Python file, and this machine has no python3." >&2
+  exit 1
+}
+
+# Fetch the tool if this machine does not have it yet. Idempotent: delete
+# "$TOOL" and run any memo command to pull the current upstream version.
+if [ ! -s "$TOOL" ]; then
+  mkdir -p -- "$(dirname -- "$TOOL")"
+  if ! curl -fsSL "$SRC" -o "$TOOL.new"; then
+    rm -f -- "$TOOL.new"
+    echo "optmem: could not fetch the tool from $SRC" >&2
+    echo "optmem: no network? memories are intact in $MEMORY_DIR — retry later." >&2
+    exit 1
+  fi
+  mv -- "$TOOL.new" "$TOOL"
+  chmod +x -- "$TOOL"
+fi
+
+# A fresh clone restores LOG.txt and config but not TREE/ — git stores no
+# empty directories, and the tree starts empty. `init` creates whatever is
+# missing and never touches memories that already exist.
+if [ ! -d "$MEMORY_DIR/TREE" ]; then
+  python3 "$TOOL" init >/dev/null
+fi
+
+# Rewrite the tool's self-reference so the commands it prints can be run
+# verbatim. pipefail keeps the tool's exit status, not sed's.
+set -o pipefail
+python3 "$TOOL" "$@" | sed -e "s|~/\.optmem/memo|$SELF|g"

@@ -1,0 +1,4 @@
+# OptMem records are fixed width — position is identity, so a single byte of
+# EOL normalization would corrupt every lookup. Keep them exactly as written.
+.optmem/memory/LOG.txt   -text
+.optmem/memory/TREE/**   -text
