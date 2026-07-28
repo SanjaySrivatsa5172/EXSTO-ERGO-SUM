@@ -41,13 +41,15 @@ if git diff --cached --quiet -- .optmem/memory 2>/dev/null; then
   exit 0
 fi
 
+# New memories are lines appended to LOG.txt; a compression writes only to
+# TREE/. Both are worth committing, but only the first is "a new memory".
 COUNT="$(git diff --cached --numstat -- .optmem/memory/LOG.txt 2>/dev/null | awk '{print $1}')"
 COUNT="${COUNT:-0}"
-if [ "$COUNT" = "1" ]; then
-  SUBJECT="memory: record 1 new memory"
-else
-  SUBJECT="memory: record $COUNT new memories"
-fi
+case "$COUNT" in
+  0) SUBJECT="memory: compress summaries" ;;
+  1) SUBJECT="memory: record 1 new memory" ;;
+  *) SUBJECT="memory: record $COUNT new memories" ;;
+esac
 
 # `commit -- <path>` commits those paths only, leaving anything else the
 # session has staged untouched and uncommitted.
