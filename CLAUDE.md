@@ -50,6 +50,30 @@ summaries, pairs of those as #0-3, and so on -- every `#a-b` line wake
 prints is one node of it. `.claude/optmem/memo zoom <a-b>` opens a node into
 its two halves, down to the raw memories.
 
+### Exporting to the Obsidian vault: ask every single time
+
+The author keeps a "permanent claude memories" folder in an Obsidian vault
+that exists on both their Windows desktop and their Mac.
+`.claude/optmem/to-obsidian` renders the store as one markdown note there.
+
+**Never export without asking first, every time — no standing permission.**
+The vault is outside this repository and on its own sync path, so writing
+there is the author's call on each occasion, not a habit you acquire. Ask,
+then pass `--confirmed`; the script refuses without it. Never run it from a
+hook, and never in a loop.
+
+    .claude/optmem/to-obsidian --dry-run     # safe: prints, writes nothing
+    .claude/optmem/to-obsidian --confirmed   # only after the author agrees
+
+The vault path is machine-specific and therefore **not committed**: set
+`OBSIDIAN_VAULT`, or copy `obsidian.conf.example` to `.claude/optmem/
+obsidian.conf` (gitignored) and fill in the path for that machine. In a
+remote container there is no vault — the script says so and exits.
+
+The export is one-way and rebuilds the note in full; the repo store stays
+the source of truth. Output is deterministic, so re-exporting an unchanged
+store rewrites identical bytes and causes no sync churn.
+
 ### If you're a subagent: skip everything above
 
 Parallel sessions on this machine are all you, and may all write memories.
@@ -111,6 +135,7 @@ HANDOFF.md                 # Latest session handoff — read first in fresh work
 CLAUDE.md                  # This file
 .optmem/memory/            # OptMem store — LOG.txt (append-only) + TREE/ summaries
 .claude/optmem/memo        # Repo-scoped OptMem wrapper — the only way to call it
+.claude/optmem/to-obsidian # One-way export of the store to the author's vault
 .claude/                   # Claude Code tooling: commands, hooks, rules, agent,
                            #   workflows/pm-status.js, HANDOFF.template.md
 .github/workflows/         # pm-status.yml — weekly automated PM report

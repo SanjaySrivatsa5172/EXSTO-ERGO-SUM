@@ -1,0 +1,218 @@
+#!/usr/bin/env python3
+"""Render the OptMem store as one Obsidian note.
+
+    .claude/optmem/to-obsidian --dry-run     # show what would be written
+    .claude/optmem/to-obsidian --confirmed   # actually write it
+
+The store is fixed-width padded records — correct for O(1) seeks, unreadable
+in a notes app. This renders it as ordinary markdown: the tree summaries, then
+every memory in order, with a frontmatter block Obsidian can index.
+
+WHY --confirmed IS MANDATORY
+The vault is outside this repository. Writing there copies memories onto a
+different sync path (iCloud, Obsidian Sync, whatever the vault uses), so it is
+never automatic and never a hook: the author is asked every single time, and
+this flag is what carries that answer. Without it the script refuses.
+
+CONFIGURING THE VAULT
+The path is machine-specific, so it is not committed. Either:
+
+    export OBSIDIAN_VAULT="$HOME/path/to/vault"
+
+or write .claude/optmem/obsidian.conf (gitignored):
+
+    VAULT=/Users/you/path/to/vault
+    NOTE=EXSTO-ERGO-SUM Memory.md      # optional, relative to the vault
+
+This script only ever writes that one note, and refuses to overwrite a file
+it did not generate.
+"""
+
+import os
+import sys
+
+LOG_REC = 320  # bytes per memory in LOG.txt  — must match OptMem
+TREE_REC = 288  # bytes per summary in TREE/<size>
+MARKER = "optmem_generated"  # our fingerprint in the note's frontmatter
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(HERE))
+STORE = os.environ.get("OPTMEM_MEMORY_DIR") or os.path.join(ROOT, ".optmem", "memory")
+CONF = os.path.join(HERE, "obsidian.conf")
+# The author's vault has a "permanent claude memories" folder; the note lands
+# there. Override with NOTE= in the conf, or $OBSIDIAN_NOTE.
+DEFAULT_NOTE = "permanent claude memories/EXSTO-ERGO-SUM.md"
+
+
+def die(msg):
+    print("to-obsidian: " + msg, file=sys.stderr)
+    sys.exit(1)
+
+
+def read_conf():
+    """VAULT/NOTE from the gitignored conf file. Env wins over the file."""
+    conf = {}
+    if os.path.exists(CONF):
+        with open(CONF, encoding="utf-8") as fh:
+            for line in fh:
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                k, v = line.split("=", 1)
+                conf[k.strip().upper()] = v.strip().strip('"').strip("'")
+    return conf
+
+
+def memories():
+    """Every memory, in order: (index, date, text)."""
+    path = os.path.join(STORE, "LOG.txt")
+    if not os.path.exists(path):
+        die("no memory store at %s" % STORE)
+    out = []
+    # Records are fixed width in BYTES, not characters — one multi-byte
+    # character (an em dash, a Sanskrit diacritic) would desynchronise
+    # character-based slicing for every record after it.
+    with open(path, "rb") as fh:
+        raw = fh.read()
+    for i in range(len(raw) // LOG_REC):
+        rec = raw[i * LOG_REC:(i + 1) * LOG_REC].decode("utf-8").strip()
+        if not rec:
+            continue
+        # "#12 2026-07-28 the text of the memory"
+        parts = rec.split(" ", 2)
+        if len(parts) < 3:
+            continue
+        out.append((parts[0], parts[1], parts[2].strip()))
+    return out
+
+
+def summaries():
+    """Tree nodes as (span_size, lo, hi, text), most compressed first."""
+    tree = os.path.join(STORE, "TREE")
+    if not os.path.isdir(tree):
+        return []
+    nodes = []
+    for name in os.listdir(tree):
+        try:
+            size = int(name)
+        except ValueError:
+            continue  # not a block file
+        with open(os.path.join(tree, name), "rb") as fh:
+            raw = fh.read()  # byte-width records, as above
+        for k in range(len(raw) // TREE_REC):
+            text = raw[k * TREE_REC:(k + 1) * TREE_REC].decode("utf-8").strip()
+            if text:
+                nodes.append((size, k * size, (k + 1) * size - 1, text))
+    # Widest spans first: the most compressed view of the whole history.
+    nodes.sort(key=lambda n: (-n[0], n[1]))
+    return nodes
+
+
+def render(mems, nodes, today):
+    L = []
+    L.append("---")
+    L.append("tags:")
+    L.append("  - optmem")
+    L.append("  - exsto-ergo-sum")
+    L.append("%s: %s" % (MARKER, today))
+    L.append("optmem_memories: %d" % len(mems))
+    L.append("optmem_source: EXSTO-ERGO-SUM/.optmem/memory")
+    L.append("---")
+    L.append("")
+    L.append("# EXSTO ERGO SUM — agent memory")
+    L.append("")
+    L.append("> [!info] Generated file")
+    L.append("> Rendered from the OptMem store in the EXSTO-ERGO-SUM repo and")
+    L.append("> **rewritten in full on every export** — edits made here are lost.")
+    L.append("> The source of truth is `.optmem/memory/LOG.txt` in the repo.")
+    L.append("")
+
+    if nodes:
+        L.append("## Summaries")
+        L.append("")
+        L.append("Compressed views of the history. Each covers the memory range in")
+        L.append("its heading; the widest spans come first.")
+        L.append("")
+        for size, lo, hi, text in nodes:
+            L.append("### #%d–%d" % (lo, hi))
+            L.append("")
+            L.append(text)
+            L.append("")
+
+    L.append("## Memories")
+    L.append("")
+    if not mems:
+        L.append("*No memories recorded yet.*")
+        L.append("")
+    else:
+        date = None
+        for idx, when, text in mems:
+            if when != date:
+                date = when
+                L.append("### %s" % when)
+                L.append("")
+            L.append("- **%s** — %s" % (idx, text))
+        L.append("")
+    return "\n".join(L)
+
+
+def main():
+    args = sys.argv[1:]
+    dry = "--dry-run" in args
+    confirmed = "--confirmed" in args
+    for a in args:
+        if a not in ("--dry-run", "--confirmed"):
+            die("unknown argument %r (use --dry-run or --confirmed)" % a)
+
+    conf = read_conf()
+    vault = os.environ.get("OBSIDIAN_VAULT") or conf.get("VAULT")
+    note = os.environ.get("OBSIDIAN_NOTE") or conf.get("NOTE") or DEFAULT_NOTE
+
+    mems = memories()
+    nodes = summaries()
+
+    # A stable date, taken from the memories themselves, so re-exporting an
+    # unchanged store produces an identical file (no sync churn).
+    today = mems[-1][1] if mems else "unknown"
+    body = render(mems, nodes, today)
+
+    if not vault:
+        die("no vault configured — set OBSIDIAN_VAULT, or write VAULT=... to\n"
+            "               %s" % CONF)
+    vault = os.path.expanduser(vault)
+    target = os.path.join(vault, note)
+
+    if dry:
+        print("would write %d memories + %d summaries to:\n  %s\n" %
+              (len(mems), len(nodes), target))
+        print(body)
+        return
+
+    if not confirmed:
+        die("refusing to write without --confirmed.\n"
+            "               The vault is outside this repo, so every export is\n"
+            "               the author's call. Ask first, then pass --confirmed.")
+
+    if not os.path.isdir(vault):
+        die("vault not found: %s\n"
+            "               (this is expected in a remote container — the vault\n"
+            "               lives on the author's machine; run this locally)" % vault)
+
+    # Never clobber a note we did not generate.
+    if os.path.exists(target):
+        with open(target, encoding="utf-8") as fh:
+            head = fh.read(600)
+        if MARKER not in head:
+            die("%s exists and was not generated by this script — refusing to\n"
+                "               overwrite it. Move it, or set NOTE to another name." % target)
+
+    parent = os.path.dirname(target)
+    if parent and not os.path.isdir(parent):
+        os.makedirs(parent, exist_ok=True)
+    with open(target, "w", encoding="utf-8") as fh:
+        fh.write(body + "\n")
+    print("wrote %d memories + %d summaries to %s" % (len(mems), len(nodes), target))
+
+
+if __name__ == "__main__":
+    main()
