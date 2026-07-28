@@ -47,6 +47,24 @@ else
   echo "             Add .tex sources and the next session will install the toolchain automatically."
 fi
 
+# OptMem — the agent's memory across sessions. The store is in the repo
+# (.optmem/memory), so it survives this container; the tool is not, so fetch it
+# now rather than paying the latency on the session's first memo call.
+if [ -d .optmem/memory ]; then
+  if .claude/optmem/memo config >/dev/null 2>&1; then
+    MEM_N=$(( $(wc -c < .optmem/memory/LOG.txt 2>/dev/null || echo 0) / 320 ))
+    if [ "$MEM_N" -eq 0 ]; then
+      echo "  ✓ OptMem  ready, no memories yet — run .claude/optmem/memo wake, then note what matters"
+    else
+      echo "  ✓ OptMem  $MEM_N memories — run .claude/optmem/memo wake FIRST, before any other tool call"
+    fi
+  else
+    echo "  ‼ OptMem  store present but the tool would not start (no python3, or no network to fetch it)"
+  fi
+else
+  echo "  • OptMem  no store — reinstall with: MEMORY_DIR=\$PWD/.optmem/memory sh -c 'curl -fsSL https://raw.githubusercontent.com/VictorTaelin/OptMem/main/install.sh | sh'"
+fi
+
 # PM pulse — surface the latest pm-status graph report (PM-STATUS.md) so every
 # session opens knowing the project state, without spawning the fleet.
 if [ -f PM-STATUS.md ]; then

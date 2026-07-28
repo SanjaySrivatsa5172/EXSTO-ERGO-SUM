@@ -1,0 +1,2 @@
+# OptMem takes this lock while writing; it is per-machine runtime state.
+.optmem/memory/.lock
