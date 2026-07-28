@@ -1,108 +1,126 @@
-# Session handoff — 2026-07-21
+# Session handoff — 2026-07-28
 
 Read this before doing anything else in a fresh session on this repository.
-It records the graph-engineering session that built the PM tooling, ran it,
-and merged it.
+It records the session that gave the project a persistent memory (OptMem).
+
+**Read this *and* run `.claude/optmem/memo wake`.** They are not redundant:
+OptMem holds one-line memories that accrete across every future session; this
+file is the structured state of *one* session — plan, decisions, open loops —
+that you choose to carry across a reset. Memory tells you who you are; the
+handoff tells you where you stopped.
 
 ## Where we are
-- Working branch: `claude/graph-engineering-pm-ptnlmy`, restarted from `main`
-  before each follow-up per the merged-PR rule; tooling history runs through
-  PR #18 (`main` at `f8d6fb5`), first automated report filed as Issue #19.
-- Current goal (one sentence): the project-manager graph is built, verified,
-  and merged; the manuscript itself now needs the submission-coherence fixes
-  the graph confirmed.
+- Working branch: `claude/optmem-routine-setup-gzv38y`, branched from `main`
+  at `00a2e6f` (PR #21). Open as **draft PR #28**, `mergeable_state: clean`.
+- Current goal (one sentence): OptMem is installed, verified, and pushed —
+  the manuscript's submission-coherence fixes remain the real outstanding
+  work, unchanged from the previous session.
 - Version / state of the manuscript: Charter v3.67 (43 articles, Zero–XXXVII,
-  17 Parts, five pillars / Pañca-Stambha); manuscript untouched this session —
-  all edits were `.claude/` tooling and project docs.
+  17 Parts, five pillars / Pañca-Stambha); **manuscript untouched this
+  session** — all edits were `.claude/` tooling, `CLAUDE.md`, and the new
+  `.optmem/` store.
 
 ## The plan
-- [x] Read the "Graph Engineering with Claude" 14-step course (scan + clean
-  X-post text by @0xCodez) and construct it for this repo.
-- [x] Build `.claude/workflows/pm-status.js` (scope → fan out → reduce →
-  verify → synthesize) and the `/pm` command.
-- [x] Fix the scout-attribution defect (names attached before null-filter).
-- [x] Validate with a live fleet run: `wf_918f593f-42c`, 30 agents, 0 errors.
-- [x] Merge to `main` (PR #10, squash `3ef3d5f`); PR watch closed.
-- [x] Save the run's report to `PM-STATUS.md`; document `/pm` in CLAUDE.md.
-- [x] Weekly routine live as a repo-native GitHub Actions schedule:
-  `.github/workflows/pm-status.yml` (Mondays 16:00 UTC). Auth is the
-  `CLAUDE_CODE_OAUTH_TOKEN` secret (author's Claude subscription, via
-  `claude setup-token`); the stored `ANTHROPIC_API_KEY` has no API credits
-  and its input is disabled in the workflow — do not re-enable without
-  adding credits first.
-- [x] First authenticated run validated (run #7, 2026-07-21: ~5½ min,
-  $2.17 on claude-sonnet-5, full report produced). It exposed two headless
-  gaps — the Workflow tool and gh needed interactive approval — fixed by
-  `--dangerously-skip-permissions` in claude_args and by moving issue
-  filing into a deterministic workflow step (Claude writes
-  /tmp/pm-report.md; plain `gh issue create` files it). Run #8 exposed a
-  third: the Workflow tool backgrounds its fleet and the one-shot job
-  exits before it finishes, so the CI prompt now mandates the inline
-  five-scout sweep; the fleet graph stays interactive-only via /pm.
+- [x] Install OptMem (github.com/VictorTaelin/OptMem) with the store pointed
+  at `.optmem/memory` in-repo, not the default `~/.optmem/memory`.
+- [x] Wrapper `.claude/optmem/memo`: sets `MEMORY_DIR`, bootstraps tool and
+  store on a fresh clone or container, rewrites the tool's self-reference so
+  the commands it prints run as given.
+- [x] `Stop` hook `.claude/hooks/optmem-commit.sh`: commits `.optmem/memory`
+  and nothing else; never pushes; refuses on `main`.
+- [x] Session-start banner reports the memory count; `CLAUDE.md` carries
+  OptMem's prompt block with repo-scoped paths.
+- [x] Verified by behaviour (see **Don't lose**), not by diff.
+- [x] Pushed; draft PR #28 opened and subscribed.
+- [ ] Author reviews and merges PR #28.
 - [ ] Author works through the next actions in `PM-STATUS.md` and the latest
-  weekly issue (currently #19, ten items). Most require the external `.tex`
-  sources (the repo ships PDFs only); the exceptions — SOURCES.md creation
-  and tooling-doc reconciliation — can be done in-repo.
+  weekly issue. Most require the external `.tex` sources (the repo ships PDFs
+  only); the exceptions — SOURCES.md creation and tooling-doc reconciliation
+  — can be done in-repo. **Carried forward, still untouched.**
 
 ## Decisions made (and why)
-- **Only the PM graph shipped.** Companion graphs (claims-verification fleet,
-  consistency fleet, error sweep, research scan) and a workflows README were
-  drafted but **declined by the author at write time** — do not re-add them
-  unprompted; offer first.
-- **Workflow names must not collide with command names** — a workflow's
-  `meta.name` registers alongside slash commands, so `verify-claims` is
-  unavailable as a workflow name (taken by the command). Use e.g.
-  `verify-claims-fleet` if that graph is ever wanted.
-- **Report-only discipline for all graph agents** (no repo writes), matching
-  `/verify-claims`, `/consistency`, and the `reviewer` subagent — the author
-  is the only writer in this repo.
-- **Effort tiering instead of model tiering** in `pm-status.js` (scouts low,
-  synthesis high): the Workflow API advises inheriting the session model
-  unless confident; effort is the finer lever here.
-- **Weekly cadence, Mondays 9:00 AM Pacific** chosen for the routine — author
-  commits are authored at UTC-07:00.
-- **Scheduling is repo-native (GitHub Actions), not a claude.ai Routine** —
-  the remote-session trigger API was declined twice at the approval prompt,
-  so the routine lives as `.github/workflows/pm-status.yml`: durable,
-  reviewable in git, and account-independent. A desktop or
-  claude.ai/code/routines routine remains a valid alternative the author can
-  add from their own UI; do not create one via the trigger API unprompted.
-- **`PM-STATUS.md` keeps a stable filename** (latest report in place, history
-  in git), matching the `VERIFICATION.md` convention.
+- **Memory lives in the repo, not `$HOME`.** Sessions run in ephemeral remote
+  containers where `$HOME` is wiped, so OptMem's default store would forget
+  everything between sessions — the exact failure it exists to prevent. Git is
+  what makes the memories durable and what syncs them across machines. The
+  repo is private, so committed memories stay private.
+- **The tool is not vendored.** `memo` is fetched into `$HOME` on demand, so
+  no third-party code is committed into an academic submission repo. Pin the
+  upstream version with `OPTMEM_REF` if it ever drifts.
+- **Always `.claude/optmem/memo`, never `~/.optmem/memo`** — the bare tool
+  reads an empty store in `$HOME`. The wrapper rewrites OptMem's output so
+  printed commands are correct; the rewrite is display-only, and a memory
+  whose text contains that path is stored verbatim.
+- **The Stop hook commits but never pushes.** Nothing leaves the machine
+  unasked; memories ride along with the next branch push. The cost is real:
+  an unpushed branch loses its memories with the container.
+- **"Routine" meant a standing setup, not a scheduled job** — confirmed by the
+  author. Consistent with OptMem's design: nothing ever runs in the background.
+  No cron, Routine, or Action was created for it.
+- **Subagent exclusion extended** to the `reviewer` subagent and every scout,
+  skeptic, and merge node of `pm-status` — per upstream, a subagent must never
+  run `memo`: it cannot judge what is already known and its notes arrive
+  duplicated.
+- Carried forward, still binding: **companion fleet graphs and a workflows
+  README were declined by the author** — offer before re-adding. Workflow
+  `meta.name` must not collide with a command name. Report-only discipline for
+  all graph agents. Effort tiering, not model tiering, in `pm-status.js`.
+  `PM-STATUS.md` keeps a stable filename.
 
 ## Open loops / unresolved
-- **End-to-end issue delivery pending one green run.** After the delivery
-  fix, one manual dispatch (Actions tab → "Weekly PM status" → Run
-  workflow) should end with an issue titled "PM status — <date>"; confirm
-  it appears, then the loop is fully closed. On-demand alternatives: `/pm`
-  in any session on this repo, or the same Actions button anytime.
+All carried forward from 2026-07-21 — **this session resolved none of them.**
 - **All eight confirmed high findings in `PM-STATUS.md` are unfixed** — the
-  two desk-reject-class ones first: cover letter targets *Minds and Machines*
-  while README/CLAUDE.md say *AI and Ethics*; the "anonymized" title page
-  names the author.
+  two desk-reject-class ones first: the cover letter targets *Minds and
+  Machines* while README/CLAUDE.md say *AI and Ethics*; the "anonymized"
+  title page names the author.
 - **External citation verification is still ~0%** (VERIFICATION.md: PRIMARY
   READ BLOCKED items; Walden 2026 existence unconfirmed).
 - Fixes require the `.tex` sources, which are **not in the repo** — confirm
   with the author how changes should be delivered before editing anything.
+- **PM report is stale** (banner: "needs attention", 7 days old at session
+  start). `/pm` refreshes it.
+- **New:** the hourly PR check-in for #28 could not be armed — `send_later`
+  needs an approval a non-interactive session cannot give. Low risk: this repo
+  has **no PR-triggered CI** (`pm-status.yml` is schedule/dispatch only), so
+  nothing can go red unattended.
 
 ## Don't lose
-- Live-run provenance: run `wf_918f593f-42c`, 2026-07-21, 30 agents
-  (5 scouts + 24 skeptics + 1 synthesis), 0 errors, ~23 min, 8/8 highs
-  survived the panel, 23 watchlist items.
+- **OptMem verification evidence** (behaviour, not diff): wake/note/nap/recall
+  through the wrapper; fresh clone (`TREE/` absent, `LOG.txt` present) → `init`
+  rebuilds the cache with memories preserved byte-for-byte; missing tool
+  re-fetched automatically; works from any cwd; non-zero exit survives the
+  rewrite pipe; Stop hook commits, no-ops, and refuses on `main` (scratch-repo
+  test). The store was accidentally deleted from disk mid-session and
+  **restored intact from git** — an unplanned test of the whole premise.
+- **Two defects found and fixed in this session's own work**, not shipped: the
+  runtime `.lock` was committed on the first pass (now in `.gitignore`), and
+  compression commits read "record 0 new memories" because a compression writes
+  to `TREE/` and not `LOG.txt` (now "memory: compress summaries").
+- Record geometry: OptMem records are **fixed width — 320 bytes per LOG entry**,
+  so position is identity. `.gitattributes` marks the store `-text`; a single
+  byte of EOL normalization would corrupt every lookup. Memory count =
+  `LOG.txt` size ÷ 320.
 - Canonical facts: Charter **v3.67**, **43** articles (**Zero–XXXVII**),
   **17** Parts, **5** pillars; exact spellings Ahiṃsā, Saṃskāra-Vyākaraṇa,
   Sat-Cit-Ānanda, Pañca-Stambha, Viveka, Ānanda, Devanāgarī.
-- Course provenance: X post by @0xCodez (2026-07-20), "Graph Engineering with
-  Claude: 14-Step roadmap"; the 14 principles are annotated inline as
-  comments in `.claude/workflows/pm-status.js`.
+- Weekly routine auth: `CLAUDE_CODE_OAUTH_TOKEN` secret (author's subscription,
+  via `claude setup-token`). The stored `ANTHROPIC_API_KEY` has **no credits**
+  and is disabled in the workflow — do not re-enable without adding credits.
 - Merged history: PR #10 `3ef3d5f` (graph + /pm) · #11 `581e851` (artifacts)
   · #12 `909c1e8` (Actions routine) · #13 `105c1ce` (CI auth) · #14 `d0c2f9c`
   (model pin + output) · #15 `696d00f` (subscription-token auth) · #16
   `6d6a85c` (session PM pulse) · #17 `e1940d7` (deterministic issue filing)
-  · #18 `f8d6fb5` (inline sweep mandate). First automated report: Issue #19.
+  · #18 `f8d6fb5` (inline sweep mandate) · #20 `1992b84` (retrospective +
+  reviewer tools) · #21 `00a2e6f` (CLAUDE.md sync). First automated report:
+  Issue #19. **Open:** #28 (OptMem).
+- Live-run provenance (prior session): run `wf_918f593f-42c`, 2026-07-21, 30
+  agents, 0 errors, ~23 min, 8/8 highs survived the panel, 23 watchlist items.
+- Course provenance: X post by @0xCodez (2026-07-20), "Graph Engineering with
+  Claude: 14-Step roadmap"; the 14 principles are annotated inline in
+  `.claude/workflows/pm-status.js`.
 
 ## Next action
-- Confirm one post-fix run files its issue (see Open loops). Then the real
-  work: PM-STATUS Next action 1 — pick the target journal and align cover
-  letter, README citation, and CLAUDE.md; the un-anonymized title page is
-  the other desk-reject-class fix.
+- Merge PR #28 (or say what to change). Then the real work, unchanged for a
+  week: PM-STATUS Next action 1 — pick the target journal and align the cover
+  letter, README citation, and CLAUDE.md; the un-anonymized title page is the
+  other desk-reject-class fix. Both need the `.tex` sources — ask first.
