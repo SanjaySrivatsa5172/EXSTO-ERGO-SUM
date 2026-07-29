@@ -65,6 +65,23 @@ if [ ! -d "$MEMORY_DIR/TREE" ]; then
 fi
 
 # Rewrite the tool's self-reference so the commands it prints can be run
-# verbatim. pipefail keeps the tool's exit status, not sed's.
-set -o pipefail
-python3 "$TOOL" "$@" | sed -e "s|~/\.optmem/memo|$SELF|g"
+# verbatim. This has to cover stderr too: OptMem's *errors* are the ones that
+# hand you a corrective command ("Wrong block: 4-7 ... Run: ~/.optmem/memo
+# nap"), and an unrewritten one there would send you at the empty $HOME store.
+# stderr is buffered to a file rather than filtered through a process
+# substitution, which can lose its tail when the shell exits first.
+REWRITE="s|~/\.optmem/memo|$SELF|g"
+ERR="$(mktemp "${TMPDIR:-/tmp}/optmem-err.XXXXXX")"
+trap 'rm -f "$ERR"' EXIT
+
+# `set -e` would abort the script the moment the tool exits non-zero — before
+# the buffered stderr below ever reached the terminal, silently eating the very
+# message that tells you what went wrong. So failure is handled explicitly here.
+set +e
+set -o pipefail  # keep the tool's exit status, not sed's
+python3 "$TOOL" "$@" 2>"$ERR" | sed -e "$REWRITE"
+STATUS=$?
+set -e
+
+[ -s "$ERR" ] && sed -e "$REWRITE" "$ERR" >&2
+exit "$STATUS"
