@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 # Stop hook (global): commit and push the shared memory store.
 #
-# The repo-scoped version of this hook commits but never pushes, because the
-# memories ride along with the next push of the branch you are already on.
-# Here there is no such branch: the memory store is its own repository that
-# nobody else pushes. If this hook does not push, a memory written in a
-# container dies with it. So this one pushes.
+# Differs deliberately from this project's own .claude/hooks/optmem-commit.sh,
+# which commits but never pushes — there, the memory commit rides along with
+# the next push of the branch you are already working on. The shared store has
+# no such branch and nobody else pushes it, so a memory that is only committed
+# is a memory that dies with the machine. This one pushes.
 #
-# Runs in EVERY Claude Code session. Fast, quiet, always exits 0.
+# Runs in EVERY Claude Code session, so every path exits 0 and stays quiet
+# when there is nothing to do.
 #
 # Installed by .claude/optmem/global/install.sh, which substitutes the store
 # path below. Edit the template, re-run the installer — not this copy.
@@ -18,7 +19,7 @@ MEM="@@MEMREPO@@"
 [ -d "$MEM/.git" ] || exit 0
 command -v git >/dev/null 2>&1 || exit 0
 
-# A merge/rebase in progress owns the index; don't add commits under it.
+# A merge or rebase in progress owns the index; don't add commits under it.
 GIT_DIR="$(git -C "$MEM" rev-parse --git-dir 2>/dev/null)" || exit 0
 case "$GIT_DIR" in /*) ;; *) GIT_DIR="$MEM/$GIT_DIR" ;; esac
 for state in MERGE_HEAD REBASE_HEAD CHERRY_PICK_HEAD; do
@@ -45,9 +46,10 @@ git -C "$MEM" remote get-url origin >/dev/null 2>&1 || exit 0
 # Nothing to push is the common case — say nothing.
 [ -z "$(git -C "$MEM" log --oneline @{u}..HEAD 2>/dev/null)" ] && exit 0
 
-if ! git -C "$MEM" push --quiet origin HEAD >/dev/null 2>&1; then
-  echo "optmem: memories are committed locally but the push failed — they are" >&2
-  echo "optmem: safe on this machine only. Retry: git -C $MEM push origin HEAD" >&2
+BRANCH="$(git -C "$MEM" rev-parse --abbrev-ref HEAD 2>/dev/null || echo HEAD)"
+if ! git -C "$MEM" push --quiet origin "$BRANCH" >/dev/null 2>&1; then
+  echo "optmem: new memories are committed locally but could NOT be pushed." >&2
+  echo "optmem: they are safe on this machine only. Retry: git -C $MEM push" >&2
 fi
 
 exit 0
