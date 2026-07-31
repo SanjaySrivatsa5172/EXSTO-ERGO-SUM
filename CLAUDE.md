@@ -39,7 +39,10 @@ If `.claude/optmem/memo note` asks a compression: do it before your next action.
 Never edit or delete anything under `.optmem/memory`: the tool manages it. It
 is committed to git — that is what makes it durable — and a Stop hook commits
 new memories for you. Push the branch and they persist; leave the branch
-unpushed and they die with the container.
+unpushed and they die with the container. Records are fixed-width (320 bytes
+per `LOG.txt` entry — position is identity), so `.gitattributes` marks the
+store `-text`: keep those lines, and never let an EOL or formatting tool touch
+`.optmem/`.
 
 ### When you need an old memory: search, or navigate
 
@@ -139,6 +142,8 @@ CLAUDE.md                  # This file
 .claude/                   # Claude Code tooling: commands, hooks, rules, agent,
                            #   workflows/pm-status.js, HANDOFF.template.md
 .github/workflows/         # pm-status.yml — weekly automated PM report
+.gitattributes             # Marks the OptMem store -text; EOL normalization would corrupt it
+.gitignore                 # OptMem runtime .lock + machine-local obsidian.conf
 .DS_Store                  # macOS artifact (tracked; harmless — do not rely on)
 ```
 
@@ -180,6 +185,10 @@ Online Resources are organized in bands inside `onlineresources.pdf`:
   exists.
 - Commit only when the user asks. Never push to a different branch without
   explicit permission.
+- Parallel Claude sessions each work on their own `claude/…` branch, so several
+  draft PRs are typically open at once. `main` alone is the project's current
+  state — check the open PRs before building tooling that may already exist
+  unmerged, and don't document unmerged work as present.
 - History shows the project is versioned by edition/date (e.g. "April edition")
   and Charter version, not semantic software versioning.
 
@@ -248,13 +257,13 @@ Operate as a durable project loop, not a one-shot coding chat.
 - This repo is a LaTeX academic submission (*AI and Ethics*). The `.tex` files are the source of truth but are **not committed** — in-repo you have the compiled PDFs plus `derived/*.txt` mirrors. If sources are ever added, edit and review the source, never the PDFs (see `.claude/rules/latex.md`).
 - Reusable workflows live as commands and a subagent, not in this file:
   - `/verify-claims <section>` — extract every factual claim and verify each against a retrieved primary source. Run before any submission.
-  - `/consistency` — cross-document sweep (version, counts, Sanskrit transliteration, cross-references).
-  - `/submission-check` — pre-submission gate: builds LaTeX, checks bib/figures/front matter, reports blockers.
+  - `/consistency` — cross-document sweep (version, counts, Sanskrit transliteration, cross-references). Written against the `.tex` set; with no sources committed it sweeps `derived/*.txt` + README.
+  - `/submission-check` — pre-submission gate: builds LaTeX, checks bib/figures/front matter, reports blockers. With no `.tex` in-repo the build gate cannot pass — it reports that as a blocker by design.
   - `reviewer` subagent — fresh-context review of a draft for unsupported claims and citation mismatches; reports gaps, never edits.
   - `/pm` — launches the `pm-status` workflow graph (`.claude/workflows/pm-status.js`): five parallel scouts → skeptic panel on high-severity findings → status report with ranked next actions. Report-only; latest report lives in `PM-STATUS.md`.
-  - Weekly automation: `.github/workflows/pm-status.yml` runs the inline five-scout sweep every Monday 16:00 UTC (auth: `CLAUDE_CODE_OAUTH_TOKEN` secret) and files the report as a GitHub issue; manual runs via the Actions tab. The fleet graph itself is interactive-only — a one-shot CI job cannot outlive its backgrounded fleet.
+  - Weekly automation: `.github/workflows/pm-status.yml` runs the inline five-scout sweep every Monday 16:00 UTC (auth: `CLAUDE_CODE_OAUTH_TOKEN` secret) and files the report as a GitHub issue; manual runs via the Actions tab. The fleet graph itself is interactive-only — a one-shot CI job cannot outlive its backgrounded fleet. `PM-STATUS.md` is rewritten only by interactive `/pm` runs, so the freshest pulse is often a weekly "PM status" issue newer than the file — check the repo's issues when the session banner calls the report stale.
 - Scoped rules belong in `.claude/rules/`; keep this file lean.
 
 ## Context handoff
 - Before context gets heavy (~60%), don't rely on `/compact`. Copy `.claude/HANDOFF.template.md` → `HANDOFF.md`, fill in plan/decisions/open loops, `/clear`, then resume by reading `HANDOFF.md`. You control what survives.
-- A filled `HANDOFF.md` lives at the repo root — read it at the start of fresh work. It records the current goal, open loops (unfixed PM findings, blocked external verification), and standing decisions — including tooling the author explicitly declined (companion fleet graphs, a workflows README): offer before re-adding any of it.
+- A filled `HANDOFF.md` lives at the repo root — read it at the start of fresh work. It records the current goal, open loops (unfixed PM findings, blocked external verification), and standing decisions — including tooling the author explicitly declined (companion fleet graphs, a workflows README): offer before re-adding any of it. It is a dated snapshot of one session, not live state — verify its PR/issue claims against GitHub before acting on them (e.g. a PR it calls open may since have merged).
