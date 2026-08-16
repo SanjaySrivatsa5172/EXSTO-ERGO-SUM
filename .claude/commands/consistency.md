@@ -11,7 +11,28 @@ A multi-file submission drifts: the version bumps in one file but not another,
 an article count changes, a Sanskrit term is spelled two ways. Reviewers notice.
 Find the drift before they do.
 
-## Check, with the file:line evidence for each mismatch
+## Step 0 — run the mechanical checker first
+
+Before reasoning by hand, run the deterministic signal generator:
+
+```bash
+python3 .claude/consistency/check.py
+```
+
+It scans `derived/*.txt` + `README.md` and reports, with verified `file:line`
+evidence, the *distribution* of version strings, counts, Sanskrit
+transliterations, and Online-Resource cross-references — flagging the minority,
+out-of-band, and ASCII-folded cases. It is a **signal, not a verdict**: it never
+demands uniformity (a changelog legitimately names old versions; a proposal
+names a future one), so every flag is a candidate you must judge in context.
+Use its output as the spine of the checks below — it will not miss a version
+token or a folded diacritic the way a hand-sweep can, and it frees you to spend
+judgement on whether each flagged item is real drift or intentional. When the
+script and your own reading disagree, reconcile the difference explicitly rather
+than trusting either blindly. (The script reads only the plain-text mirrors; if
+`.tex` sources are ever added, confirm the same values there too.)
+
+## Then check, with the file:line evidence for each mismatch
 
 1. **Version string** — every stated version agrees (currently v3.67). Flag any
    stale number.
