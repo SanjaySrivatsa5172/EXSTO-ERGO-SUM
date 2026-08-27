@@ -1,1 +1,2 @@
 EXSTO ERGO SUM (Srivatsa, Charter v3.67, submitted to AI and Ethics) is a PDF-only manuscript repo with .tex uncommitted and derived/*.txt mirrors; its agent memory is OptMem at .claude/optmem/memo, store .optmem/memory, persisted by committing and pushing.                              
+OptMem shipped in draft PR #28 (wrapper, Stop hook, CLAUDE.md block, .optmem/memory) as a standing always-on setup, not a cron job; repo is private and has no PR CI. Stop hook auto-commits memories but never pushes. HANDOFF.md 2026-07-28 carries the open loops.                          
