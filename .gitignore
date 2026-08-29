@@ -2,3 +2,6 @@
 .optmem/memory/.lock
 # Machine-specific Obsidian vault path — never committed (see obsidian.conf.example).
 .claude/optmem/obsidian.conf
+# Python bytecode from running tools/ — build artifact, never source.
+__pycache__/
+*.py[cod]

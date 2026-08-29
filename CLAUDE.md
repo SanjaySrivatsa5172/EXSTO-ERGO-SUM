@@ -128,8 +128,11 @@ titlepage.pdf              # Title page (anonymized)
 titlepage_with_author.pdf  # Title page with author identity
 derived/*.txt              # Plain-text extraction of each PDF (read/grep-able)
 derived/README.md          # How the derived text is produced/used
+derived/sources/           # Captured text of web sources cited in verification
 README.md                  # Public-facing overview, keywords, citation
+SOURCES.md                 # Index of captured sources (generated — never hand-edit)
 VERIFICATION.md            # Claim/consistency verification report
+tools/source_capture.py    # Fetch a cited URL → derived/sources/ + SOURCES.md
 PM-STATUS.md               # Latest pm-status graph report (history in git)
 HANDOFF.md                 # Latest session handoff — read first in fresh work
 CLAUDE.md                  # This file
@@ -247,7 +250,7 @@ Operate as a durable project loop, not a one-shot coding chat.
 ## Manuscript tooling
 - This repo is a LaTeX academic submission (*AI and Ethics*). The `.tex` files are the source of truth but are **not committed** — in-repo you have the compiled PDFs plus `derived/*.txt` mirrors. If sources are ever added, edit and review the source, never the PDFs (see `.claude/rules/latex.md`).
 - Reusable workflows live as commands and a subagent, not in this file:
-  - `/verify-claims <section>` — extract every factual claim and verify each against a retrieved primary source. Run before any submission.
+  - `/verify-claims <section>` — extract every factual claim and verify each against a retrieved primary source. Run before any submission. Capture each reachable source with `python3 tools/source_capture.py <url>`; it writes the extracted text to `derived/sources/` and indexes it in `SOURCES.md`, so a later session with no web access can still retrace the reasoning. Both files are generated — never hand-edit them. See `tools/README.md`.
   - `/consistency` — cross-document sweep (version, counts, Sanskrit transliteration, cross-references).
   - `/submission-check` — pre-submission gate: builds LaTeX, checks bib/figures/front matter, reports blockers.
   - `reviewer` subagent — fresh-context review of a draft for unsupported claims and citation mismatches; reports gaps, never edits.
