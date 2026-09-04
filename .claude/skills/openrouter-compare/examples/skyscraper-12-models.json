@@ -1,0 +1,75 @@
+{
+  "models": [
+    "openai/gpt-5.6-sol-pro",
+    "anthropic/claude-opus-5",
+    "nvidia/nemotron-3-ultra-550b-a55b",
+    "meta/muse-spark-1.3",
+    "google/gemini-3.8-flash",
+    "anthropic/claude-fable-5.1",
+    "z-ai/glm-5.3-flash",
+    "~z-ai/glm-flash-latest",
+    "qwen/qwen3.8-27b",
+    "bytedance/seedance-2.0-mini",
+    "deepseek/deepseek-v4-pro",
+    "moonshotai/kimi-k3"
+  ],
+  "messages": [
+    {
+      "role": "system",
+      "content": "Answer the user directly and concisely."
+    },
+    {
+      "role": "user",
+      "content": "If you built the world's tallest skyscraper, what would you name it?"
+    }
+  ],
+  "temperature": 0.6,
+  "stream": true,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "description": "Get the current weather for a location",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "City name"
+            }
+          },
+          "required": ["location"]
+        }
+      }
+    }
+  ],
+  "response_format": {
+    "type": "json_schema",
+    "json_schema": {
+      "name": "calendar_event",
+      "strict": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "date": { "type": "string" },
+          "participants": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["name", "date", "participants"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "provider": {
+    "allow_fallbacks": true,
+    "sort": {
+      "by": "exacto",
+      "partition": null
+    },
+    "data_collection": "deny"
+  }
+}

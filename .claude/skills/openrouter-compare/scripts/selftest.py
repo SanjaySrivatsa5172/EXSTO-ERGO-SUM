@@ -32,6 +32,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import compare_models  # noqa: E402
 
+SEEN_BODIES: list = []
+
 PROSE = {
     "alpha": "I would name it Aetherion Spire, a tower reaching toward the aether above the clouds.",
     "beta": "The tower would be called Aetherion Spire because it reaches toward the clouds and the sky.",
@@ -63,6 +65,7 @@ class Handler(BaseHTTPRequestHandler):
         model = body["model"]
         assert "models" not in body, "fan-out must not forward the models array"
         assert body.get("usage", {}).get("include") is True
+        SEEN_BODIES.append(body)
         if "missing" in model:
             self._json(404, {"error": {"code": 404, "message": f"No endpoints found for {model}."}})
             return
@@ -141,6 +144,8 @@ def main() -> int:
                 "messages": [{"role": "system", "content": "Answer briefly."},
                              {"role": "user", "content": "If you built the world's tallest skyscraper, what would you name it?"}],
                 "stream": True,
+                "temperature": 0.6,
+                "provider": {"allow_fallbacks": True, "sort": {"by": "exacto", "partition": None}, "data_collection": "deny"},
                 "tools": [{"type": "function", "function": {"name": "get_weather", "parameters": {"type": "object", "properties": {"location": {"type": "string"}}, "required": ["location"]}}}],
                 "response_format": {"type": "json_schema", "json_schema": {"name": "calendar_event", "strict": True, "schema": {
                     "type": "object", "properties": {"name": {"type": "string"}, "date": {"type": "string"}, "participants": {"type": "array", "items": {"type": "string"}}},
@@ -151,8 +156,13 @@ def main() -> int:
         out = os.path.join(tmp, "run1")
         rc = compare_models.main(["--config", cfg_path, "--out", out, "--base-url", base, "--api-key", "test-key", "--timeout", "1", "--quiet"])
         check(rc == 0, "exit code 0 when at least one model succeeds")
+        fwd = SEEN_BODIES[0]
+        check(fwd["provider"] == {"allow_fallbacks": True, "sort": {"by": "exacto", "partition": None}, "data_collection": "deny"}
+              and fwd["temperature"] == 0.6 and "tools" in fwd and "response_format" in fwd, "provider/temperature/tools/response_format forwarded verbatim")
+        check(len({json.dumps({k: v for k, v in b.items() if k != "model"}, sort_keys=True) for b in SEEN_BODIES}) == 1, "every model receives an identical body apart from `model`")
         with open(os.path.join(out, "results.json")) as fh:
             res = json.load(fh)
+        check(res["run"]["request_options"]["provider"]["sort"]["by"] == "exacto", "provider routing recorded in run metadata")
         by = {r["model_requested"]: r for r in res["results"]}
         check(len(by) == 10, "one record per requested model")
         check(by["mock/alpha"]["ok"] and by["mock/alpha"]["content"] == PROSE["alpha"], "streamed content reassembled verbatim")
@@ -198,6 +208,15 @@ def main() -> int:
         out3 = os.path.join(tmp, "run3")
         rc = compare_models.main(["--model", "mock/missing-2", "--prompt", "x", "--out", out3, "--base-url", base, "--api-key", "test-key", "--quiet"])
         check(rc == 1, "exit code 1 when every model fails")
+
+        print("dry run")
+        import contextlib
+        import io
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            rc = compare_models.main(["--config", cfg_path, "--dry-run"])
+        dry = json.loads(buf.getvalue())
+        check(rc == 0 and len(dry["requests"]) == 10 and all("models" not in r and r["model"] for r in dry["requests"]), "--dry-run prints one body per model without calling the API or needing a key")
 
         print("unit: --no-response-format / --no-tools strip keys")
         ns = compare_models.parse_args(["--no-tools", "--no-response-format"])

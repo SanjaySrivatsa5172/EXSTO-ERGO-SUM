@@ -894,6 +894,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--no-tools", action="store_true", help="Drop `tools`/`tool_choice` from the request")
     p.add_argument("--no-response-format", action="store_true", help="Drop `response_format` from the request")
     p.add_argument("--quiet", action="store_true", help="Suppress per-model progress on stderr")
+    p.add_argument("--dry-run", action="store_true", help="Print the per-model request bodies as JSON and exit without calling the API")
     return p.parse_args(argv)
 
 
@@ -902,6 +903,10 @@ def main(argv: list[str] | None = None) -> int:
     cfg = load_config(args.config)
     models = resolve_models(cfg, args.model)
     messages = resolve_messages(cfg, args.prompt, args.system)
+    bodies = {m: build_body(cfg, m, messages, args) for m in models}
+    if args.dry_run:
+        print(json.dumps({"endpoint": args.base_url.rstrip("/") + CHAT_PATH, "requests": [bodies[m] for m in models]}, indent=2, ensure_ascii=False))
+        return 0
     api_key = args.api_key or os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
         eprint("error: set OPENROUTER_API_KEY (or pass --api-key)")
@@ -912,7 +917,6 @@ def main(argv: list[str] | None = None) -> int:
     raw_dir = os.path.join(out_dir, "raw")
     os.makedirs(raw_dir, exist_ok=True)
 
-    bodies = {m: build_body(cfg, m, messages, args) for m in models}
     template = dict(next(iter(bodies.values())))
     template.pop("model", None)
     template.pop("messages", None)

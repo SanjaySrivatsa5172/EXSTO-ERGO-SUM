@@ -34,6 +34,9 @@ python3 scripts/compare_models.py \
 
 # Reuse a config but drop the parts that make the comparison unfair
 python3 scripts/compare_models.py --config request.json --no-response-format --no-tools
+
+# Inspect exactly what each model will receive, without a key or a network call
+python3 scripts/compare_models.py --config examples/skyscraper-12-models.json --dry-run
 ```
 
 Paths are relative to this skill's directory.
@@ -52,6 +55,15 @@ Paths are relative to this skill's directory.
 | `--no-tools` | off | Drop `tools` and `tool_choice`. |
 | `--no-response-format` | off | Drop `response_format`. |
 | `--base-url URL` | `https://openrouter.ai/api/v1` | Any OpenAI-compatible endpoint (also `OPENROUTER_BASE_URL`). |
+| `--dry-run` | off | Print the per-model request bodies as JSON and exit. No key needed. |
+
+Everything else in the body is forwarded to every model unchanged: `temperature`,
+`max_tokens`, `reasoning`, `tools`, `response_format`, and OpenRouter's `provider`
+routing block (`allow_fallbacks`, `sort`, `data_collection`, `order`, ...). The
+forwarded options are recorded under `run.request_options` in `results.json` and
+listed at the top of `summary.md`, so a run's routing constraints stay attached to
+its results. Note that `provider.allow_fallbacks` governs fallback across
+*providers serving the same model*; the per-model fan-out is unaffected by it.
 
 Exit codes: `0` at least one model succeeded, `1` every model failed, `2` bad
 arguments or missing key.
@@ -105,7 +117,7 @@ recorded in the model's record and listed under **Failures**. Failed models
 appear in every table with `n/a` and are excluded from the similarity matrix,
 rankings, and charts.
 
-## Interpreting the example
+## Interpreting the examples
 
 `examples/skyscraper.json` reproduces a request pasted from the OpenRouter
 playground: nine models, a `get_weather` tool the prompt never needs, and a strict
@@ -115,6 +127,21 @@ question (most will force the answer into `name` and invent `date` and
 `participants`). Run with `--no-response-format --no-tools` for a plain answer
 comparison. Model IDs in that file are passed through verbatim; an ID OpenRouter
 does not recognise fails with HTTP 400 or 404 for that model only.
+
+`examples/skyscraper-12-models.json` is the second playground paste: twelve
+models, `temperature: 0.6`, and a `provider` block (`allow_fallbacks: true`,
+`sort.by: "exacto"`, `data_collection: "deny"`). Two entries are expected to fail
+on their own: `bytedance/seedance-2.0-mini` is a video model and does not serve
+`chat/completions`, and the `~`-prefixed alias may not resolve. Both playground
+pastes carried a system prompt that was an instruction to the operator (the first
+was "compare outputs and export"; the second was the previous curl command
+embedded as a string). Neither belongs in front of the models, so both examples use
+a neutral system prompt.
+
+`examples/fanout.mjs` is the same fan-out in Node for anyone starting from the
+`fetch` snippet: it strips `models`, sends one non-streaming request per model with
+`Promise.all`, and prints a per-model JSON array. It does not produce the Markdown
+or chart exports; use the Python tool for those.
 
 ## Self-test
 
