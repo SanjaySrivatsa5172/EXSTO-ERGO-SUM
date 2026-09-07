@@ -255,6 +255,16 @@ Operate as a durable project loop, not a one-shot coding chat.
   - Weekly automation: `.github/workflows/pm-status.yml` runs the inline five-scout sweep every Monday 16:00 UTC (auth: `CLAUDE_CODE_OAUTH_TOKEN` secret) and files the report as a GitHub issue; manual runs via the Actions tab. The fleet graph itself is interactive-only — a one-shot CI job cannot outlive its backgrounded fleet.
 - Scoped rules belong in `.claude/rules/`; keep this file lean.
 
+## Other CLIs in the environment
+- xAI's `grok` CLI is installed by the SessionStart hook, so it is present in
+  every session without being asked for. Upstream's one-liner
+  (`curl -fsSL https://x.ai/cli/install.sh | bash`) is tried first; in the
+  remote container the egress proxy denies `x.ai`, so the hook falls back to
+  `npm install -g @xai-official/grok` — the same binary, same publisher
+  (`xai-security <security@x.ai>`), landing in `~/.grok/bin`. It needs
+  `XAI_API_KEY` (or one interactive `grok` sign-in) before it can do anything;
+  the banner says so when unauthenticated.
+
 ## Context handoff
 - Before context gets heavy (~60%), don't rely on `/compact`. Copy `.claude/HANDOFF.template.md` → `HANDOFF.md`, fill in plan/decisions/open loops, `/clear`, then resume by reading `HANDOFF.md`. You control what survives.
 - A filled `HANDOFF.md` lives at the repo root — read it at the start of fresh work. It records the current goal, open loops (unfixed PM findings, blocked external verification), and standing decisions — including tooling the author explicitly declined (companion fleet graphs, a workflows README): offer before re-adding any of it.
