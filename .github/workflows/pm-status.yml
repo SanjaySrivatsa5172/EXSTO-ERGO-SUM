@@ -8,6 +8,9 @@
 # Auth: the CLAUDE_CODE_OAUTH_TOKEN repository secret — a Claude subscription
 # token from `claude setup-token`. (To use API billing instead: add credits at
 # console.anthropic.com and re-enable the anthropic_api_key input below.)
+# If Claude returns 401 (revoked/expired token), run `claude setup-token`
+# locally and replace CLAUDE_CODE_OAUTH_TOKEN under Settings > Secrets and
+# variables > Actions. Signing in locally does not update the stored secret.
 #
 # Delivery: Claude writes the report to /tmp/pm-report.md; a plain follow-up
 # step files it as an issue with the runner's own token — the delivery edge is
@@ -34,9 +37,10 @@ jobs:
     timeout-minutes: 90
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Run the pm-status graph
+        id: claude
         uses: anthropics/claude-code-action@v1
         env:
           GH_TOKEN: ${{ github.token }}
@@ -105,6 +109,49 @@ jobs:
           # (credits, model access) are visible instead of hidden.
           show_full_output: "true"
 
+      - name: Explain Claude failure
+        if: ${{ failure() && steps.claude.outcome == 'failure' }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          # The action may fail before publishing its output path.
+          output = Path(os.environ.get("CLAUDE_EXECUTION_FILE") or
+                        str(Path(os.environ["RUNNER_TEMP"]) / "claude-execution-output.json"))
+          try:
+              records = json.loads(output.read_text())
+          except (OSError, ValueError):
+              records = []
+          if isinstance(records, dict):
+              records = [records]
+          if not isinstance(records, list):
+              records = []
+          results = [item for item in records
+                     if isinstance(item, dict) and item.get("type") == "result"]
+          result = results[-1] if results else {}
+          detail = str(result.get("result", "")).lower()
+          if (result.get("api_error_status") == 401 or
+                  "oauth access token has been revoked" in detail or
+                  "oauth access token has expired" in detail or
+                  "oauth token has expired" in detail):
+              message = (
+                  "Claude authentication failed. Run `claude setup-token` locally, "
+                  "replace the repository Actions secret `CLAUDE_CODE_OAUTH_TOKEN`, "
+                  "then re-run this workflow. A local sign-in alone does not update "
+                  "GitHub's secret. Do not paste the token into issues or logs."
+              )
+          else:
+              message = "Claude failed; inspect the 'Run the pm-status graph' log for the cause."
+          # Emit fixed messages only, never raw execution output or credentials.
+          print(f"::error::{message}")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
+              summary.write(f"## PM status failed\n\n{message}\n")
+          PY
+
       - name: File the report as a GitHub issue
         if: success()
         env:
@@ -115,5 +162,6 @@ jobs:
               --title "PM status — $(date -u +%Y-%m-%d)" \
               --body-file /tmp/pm-report.md
           else
-            echo "::warning::No /tmp/pm-report.md produced — the report exists only in this run's log"
+            echo "::error::No /tmp/pm-report.md produced — no PM status issue was filed"
+            exit 1
           fi
