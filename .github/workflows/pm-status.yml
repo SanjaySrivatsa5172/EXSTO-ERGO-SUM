@@ -11,6 +11,8 @@
 # If Claude returns 401 (revoked/expired token), run `claude setup-token`
 # locally and replace CLAUDE_CODE_OAUTH_TOKEN under Settings > Secrets and
 # variables > Actions. Signing in locally does not update the stored secret.
+# Paste only the token itself, on one line; terminal wrapping can introduce
+# line breaks that make the Authorization header invalid.
 #
 # Delivery: Claude writes the report to /tmp/pm-report.md; a plain follow-up
 # step files it as an issue with the runner's own token — the delivery edge is
@@ -134,7 +136,14 @@ jobs:
                      if isinstance(item, dict) and item.get("type") == "result"]
           result = results[-1] if results else {}
           detail = str(result.get("result", "")).lower()
-          if (result.get("api_error_status") == 401 or
+          if "invalid authorization header value from claude_code_oauth_token" in detail:
+              message = (
+                  "Claude authentication failed: the stored token is malformed. "
+                  "Replace `CLAUDE_CODE_OAUTH_TOKEN` with only the token itself, "
+                  "on one continuous line, without copied terminal text or line breaks. "
+                  "Then re-run this workflow. Do not paste the token into issues or logs."
+              )
+          elif (result.get("api_error_status") == 401 or
                   "oauth access token has been revoked" in detail or
                   "oauth access token has expired" in detail or
                   "oauth token has expired" in detail):
