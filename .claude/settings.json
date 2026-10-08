@@ -27,5 +27,16 @@
         ]
       }
     ]
+  },
+  "extraKnownMarketplaces": {
+    "xai-grok-build": {
+      "source": {
+        "source": "github",
+        "repo": "xai-org/grok-build-plugin-cc"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "grok-build@xai-grok-build": true
   }
 }
