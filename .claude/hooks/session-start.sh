@@ -47,6 +47,45 @@ else
   echo "             Add .tex sources and the next session will install the toolchain automatically."
 fi
 
+# Grok CLI — xAI's terminal agent (`grok`), requested as a standing part of the
+# environment. Upstream ships it as `curl -fsSL https://x.ai/cli/install.sh | bash`,
+# which is what we try first. In this remote container the egress proxy denies
+# x.ai at CONNECT (organization network policy), so we fall back to the same
+# binary on npm — @xai-official/grok, published by xai-security <security@x.ai>,
+# whose postinstall drops it in ~/.grok/bin exactly as the installer does.
+# Both paths are idempotent; the container is ephemeral, so this reruns each session.
+GROK_BIN_DIR="${GROK_HOME:-$HOME/.grok}/bin"
+case ":$PATH:" in *":$GROK_BIN_DIR:"*) ;; *) PATH="$PATH:$GROK_BIN_DIR" ;; esac
+export PATH
+
+if command -v grok >/dev/null 2>&1; then
+  echo "  ✓ Grok    $(grok --version 2>/dev/null | head -1)"
+elif [ "$REMOTE" != "true" ]; then
+  echo "  • Grok    not installed — local session, skipping auto-install"
+  echo "             Install with: curl -fsSL https://x.ai/cli/install.sh | bash"
+else
+  echo "  … Grok    not present — installing the xAI CLI…"
+  GROK_VIA=""
+  if curl -fsSL --max-time 60 https://x.ai/cli/install.sh 2>/dev/null | bash >/dev/null 2>&1; then
+    hash -r 2>/dev/null || true
+    command -v grok >/dev/null 2>&1 && GROK_VIA="x.ai installer" || true
+  fi
+  if [ -z "$GROK_VIA" ] && command -v npm >/dev/null 2>&1; then
+    if npm install -g @xai-official/grok >/dev/null 2>&1; then
+      hash -r 2>/dev/null || true
+      command -v grok >/dev/null 2>&1 && GROK_VIA="npm @xai-official/grok" || true
+    fi
+  fi
+  if [ -n "$GROK_VIA" ]; then
+    echo "  ✓ Grok    $(grok --version 2>/dev/null | head -1) (via $GROK_VIA)"
+  else
+    echo "  ‼ Grok    install failed — x.ai unreachable and the npm fallback did not land"
+  fi
+fi
+if command -v grok >/dev/null 2>&1 && [ -z "${XAI_API_KEY:-}" ] && [ ! -f "${GROK_HOME:-$HOME/.grok}/auth.json" ]; then
+  echo "             (unauthenticated — set XAI_API_KEY, or run \`grok\` once to sign in)"
+fi
+
 # OptMem — the agent's memory across sessions. The store is in the repo
 # (.optmem/memory), so it survives this container; the tool is not, so fetch it
 # now rather than paying the latency on the session's first memo call.
