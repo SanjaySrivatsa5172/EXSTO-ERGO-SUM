@@ -1,1 +1,2 @@
 EXSTO ERGO SUM: Srivatsa's Human-AGI Covenant charter paper for AI and Ethics; v3.67, 43 articles/17 Parts, 5 pillars. Repo ships PDFs only, no .tex; derived/*.txt mirrors; README main editable. OptMem lives in-repo (PR #28); author declined fleet graphs + workflows README.             
+Standing rule: always suggest/apply academic-humanizer for academic writing (merged #34). Obsidian export is per-machine, ask each time; memo is bash-only. PR #40 adds stdlib-only source_capture. Containers lack pip packages and local DNS; the proxy resolves and 403s egress.            

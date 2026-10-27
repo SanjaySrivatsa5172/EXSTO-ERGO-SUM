@@ -128,8 +128,11 @@ titlepage.pdf              # Title page (anonymized)
 titlepage_with_author.pdf  # Title page with author identity
 derived/*.txt              # Plain-text extraction of each PDF (read/grep-able)
 derived/README.md          # How the derived text is produced/used
+derived/sources/           # Captured text of web sources cited in verification
 README.md                  # Public-facing overview, keywords, citation
+SOURCES.md                 # Index of captured sources (generated — never hand-edit)
 VERIFICATION.md            # Claim/consistency verification report
+tools/source_capture.py    # Fetch a cited URL → derived/sources/ + SOURCES.md
 PM-STATUS.md               # Latest pm-status graph report (history in git)
 HANDOFF.md                 # Latest session handoff — read first in fresh work
 CLAUDE.md                  # This file
@@ -247,7 +250,7 @@ Operate as a durable project loop, not a one-shot coding chat.
 ## Manuscript tooling
 - This repo is a LaTeX academic submission (*AI and Ethics*). The `.tex` files are the source of truth but are **not committed** — in-repo you have the compiled PDFs plus `derived/*.txt` mirrors. If sources are ever added, edit and review the source, never the PDFs (see `.claude/rules/latex.md`).
 - Reusable workflows live as commands, a skill, and a subagent, not in this file:
-  - `/verify-claims <section>` — extract every factual claim and verify each against a retrieved primary source. Run before any submission.
+  - `/verify-claims <section>` — extract every factual claim and verify each against a retrieved primary source. Run before any submission. Capture each reachable source with `python3 tools/source_capture.py <url>`; it writes the extracted text to `derived/sources/` and indexes it in `SOURCES.md`, so a later session with no web access can still retrace the reasoning. Both files are generated — never hand-edit them. See `tools/README.md`.
   - `/consistency` — cross-document sweep (version, counts, Sanskrit transliteration, cross-references).
   - `/submission-check` — pre-submission gate: builds LaTeX, checks bib/figures/front matter, reports blockers.
   - `academic-humanizer` skill (`.claude/skills/academic-humanizer/`) — editorial pass for AI-assisted academic prose: strips AI tells, matches every claim to its evidence, preserves scholarly hedging and voice; never alters a number, result, or citation. **Standing rule (author, 2026-08-15): always suggest — or, when editing, apply — this skill whenever drafting or reviewing any scientific/academic writing for the author**: manuscript sections, abstracts, the cover letter, rebuttals, reviewer responses. Vendored from github.com/AIScientists-Dev/academic-humanizer (MIT, v0.3.3; license alongside the skill).
