@@ -1,1 +1,1 @@
-EXSTO ERGO SUM: Srivatsa's Human-AGI Charter paper (v3.67, 43 articles) at AI and Ethics. Private repo ships PDFs + derived/*.txt; no .tex, README is the editable artifact. OptMem via .claude/optmem/memo, store committed by a Stop hook but durable only once pushed (PR #28).             
+EXSTO ERGO SUM: Srivatsa's Human-AGI Covenant charter paper for AI and Ethics; v3.67, 43 articles/17 Parts, 5 pillars. Repo ships PDFs only, no .tex; derived/*.txt mirrors; README main editable. OptMem lives in-repo (PR #28); author declined fleet graphs + workflows README.             
