@@ -38,8 +38,8 @@ Usage
     python3 tools/source_capture.py <url> --json          # machine-readable
     python3 tools/source_capture.py --self-test           # offline checks
 
-No third-party dependencies beyond ``requests``, which is already present; HTML
-is parsed with the standard library. Nothing here imports the manuscript or
+No third-party dependencies at all — the standard library only. HTML is parsed
+with ``html.parser`` and fetched with ``urllib.request``. Nothing here imports the manuscript or
 touches the PDFs.
 """
 
@@ -49,19 +49,20 @@ import argparse
 import datetime as _dt
 import hashlib
 import html.parser
+import http.client
 import ipaddress
 import json
 import os
 import re
 import socket
+import ssl
 import sys
+import urllib.error
+import urllib.request
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable, Optional
 from urllib.parse import urljoin, urlparse, urlunparse
-
-import requests
-from requests.adapters import HTTPAdapter
 
 MAX_BYTES = 1_000_000  # ~1 MB cap on what we will download
 REQUEST_TIMEOUT = 20.0
@@ -76,6 +77,10 @@ DEFAULT_CAPTURE_DIR = REPO_ROOT / "derived" / "sources"
 DEFAULT_INDEX = REPO_ROOT / "SOURCES.md"
 
 EXCERPT_CHARS = 600
+
+# Marker distinguishing "this machine could not resolve the name" from "the
+# address resolved and the policy rejected it" — see _check_host.
+_UNRESOLVED = "no local DNS resolution"
 
 # Elements whose text is chrome, not content.
 _DROP_TAGS = frozenset(
@@ -152,15 +157,19 @@ def _public_ips_for_host(host: str) -> tuple[list[str], str]:
     """Resolve ``host`` (A and AAAA) and return its addresses, or ``([], reason)``
     if any one of them is blocked. Fails closed: a hostname that resolves to one
     public and one private address is refused outright, since we cannot control
-    which the connection would pick."""
+    which the connection would pick.
+
+    A literal IP needs no DNS, so it is judged directly — which matters, because
+    the cloud metadata endpoint is always reached by literal address.
+    """
     if not host:
         return [], "missing host"
     try:
         infos = socket.getaddrinfo(host, None, proto=socket.IPPROTO_TCP)
     except (socket.gaierror, UnicodeError) as exc:
-        return [], f"DNS resolution failed: {exc}"
+        return [], f"{_UNRESOLVED}: {exc}"
     if not infos:
-        return [], "host did not resolve"
+        return [], _UNRESOLVED
     ips: list[str] = []
     for info in infos:
         ip_text = info[4][0]
@@ -169,6 +178,50 @@ def _public_ips_for_host(host: str) -> tuple[list[str], str]:
         if ip_text not in ips:
             ips.append(ip_text)
     return ips, ""
+
+
+def _is_literal_ip(host: str) -> bool:
+    try:
+        ipaddress.ip_address(host.strip("[]"))
+        return True
+    except ValueError:
+        return False
+
+
+def _check_host(host: str, scheme: str) -> tuple[Optional[str], Optional[str], Optional[str]]:
+    """Apply the address policy to one hop.
+
+    Returns ``(pinned_ip, refusal, warning)``. Exactly one of ``pinned_ip`` and
+    ``refusal`` is meaningful; ``warning`` is recorded either way.
+
+    The subtle case is a hostname this machine cannot resolve. Local DNS failure
+    is not evidence that an address is unsafe — behind a forward proxy there may
+    be no local resolver at all, and the proxy resolves the name itself. Treating
+    that as a policy refusal would wrongly reject every host the proxy *can*
+    reach, and would dress an environment limitation up as a security verdict.
+    So when a proxy is configured we proceed and say plainly that the policy
+    could not be applied locally; egress control then rests with the proxy, as
+    it already does for pinning. A literal IP is still judged directly, so the
+    metadata-endpoint vector stays closed either way.
+    """
+    if _allow_private_targets():
+        return None, None, None
+
+    ips, why = _public_ips_for_host(host)
+    if ips:
+        # Pinning closes the gap between this check and the connection's own
+        # lookup, but is impossible through a proxy, which resolves the name.
+        return (None if _proxy_for(scheme) else ips[0]), None, None
+
+    unresolved = _UNRESOLVED in why
+    if unresolved and not _is_literal_ip(host) and _proxy_for(scheme):
+        detail = why.split(":", 1)[1].strip() if ":" in why else why
+        return None, None, (
+            f"address policy not applied locally to {host!r}: no local DNS resolution "
+            f"({detail}). The proxy resolves this name and performs egress control; "
+            f"this is not a statement that the host is safe."
+        )
+    return None, why, None
 
 
 def _proxy_for(scheme: str) -> str:
@@ -200,44 +253,111 @@ def _explain_request_error(exc: Exception, hostname: Optional[str]) -> str:
             f"evidence about the source — do not retry or route around it. Capture this "
             f"URL from an unrestricted network, or verify via the MCP scholarly tools."
         )
-    if isinstance(exc, requests.exceptions.SSLError):
-        return f"TLS verification failed for {hostname or 'host'}: {exc}"
-    if isinstance(exc, requests.exceptions.ConnectTimeout):
-        return f"connection to {hostname or 'host'} timed out after {REQUEST_TIMEOUT:g}s"
-    if isinstance(exc, requests.exceptions.ReadTimeout):
-        return f"{hostname or 'host'} accepted the connection but stopped responding"
+    if isinstance(exc, ssl.SSLError) or isinstance(getattr(exc, "reason", None), ssl.SSLError):
+        return f"TLS verification failed for {hostname or 'host'}: {getattr(exc, 'reason', exc)}"
+    if isinstance(exc, (socket.timeout, TimeoutError)) or isinstance(
+        getattr(exc, "reason", None), (socket.timeout, TimeoutError)
+    ):
+        return f"{hostname or 'host'} did not respond within {REQUEST_TIMEOUT:g}s"
+    if isinstance(exc, urllib.error.URLError):
+        return f"could not reach {hostname or 'host'}: {exc.reason}"
     return f"http error: {exc}"
 
 
-class _PinnedHostAdapter(HTTPAdapter):
-    """Verify the certificate against the real hostname while the URL carries a
-    literal IP, so the connection lands on the address we already validated."""
+class _PinnedHTTPSConnection(http.client.HTTPSConnection):
+    """Dial a pre-validated IP while keeping the real hostname for SNI and
+    certificate verification.
 
-    def __init__(self, hostname: str, **kwargs) -> None:
-        self._hostname = hostname
-        super().__init__(**kwargs)
+    ``http.client`` derives both the connect address and the SNI name from
+    ``self.host``, so pinning means overriding ``connect`` rather than passing
+    an option. Everything else — the TLS handshake, hostname checking — is left
+    to the default context, so a pinned connection is no less verified than an
+    ordinary one.
+    """
 
-    def init_poolmanager(self, *args, **kwargs):  # type: ignore[override]
-        kwargs["server_hostname"] = self._hostname
-        kwargs["assert_hostname"] = self._hostname
-        return super().init_poolmanager(*args, **kwargs)
+    pinned_ip: str = ""
+
+    def connect(self) -> None:
+        self.sock = socket.create_connection(
+            (self.pinned_ip or self.host, self.port), self.timeout, self.source_address
+        )
+        if self._tunnel_host:
+            self._tunnel()
+        self.sock = self._context.wrap_socket(self.sock, server_hostname=self.host)
 
 
-def _url_on_ip(url: str, ip: str) -> str:
-    """Rewrite ``url`` so the connect target is ``ip``; caller sets Host/SNI."""
-    parsed = urlparse(url)
+class _PinnedHTTPSHandler(urllib.request.HTTPSHandler):
+    """Route https:// requests through :class:`_PinnedHTTPSConnection`."""
+
+    def __init__(self, pinned_ip: str, context: ssl.SSLContext) -> None:
+        super().__init__(context=context)
+        self._pinned_ip = pinned_ip
+
+    def https_open(self, req):  # type: ignore[override]
+        def build(host, **kwargs):
+            kwargs.pop("context", None)
+            conn = _PinnedHTTPSConnection(host, context=self._context, **kwargs)
+            conn.pinned_ip = self._pinned_ip
+            return conn
+
+        return self.do_open(build, req)
+
+
+class _NoRedirects(urllib.request.HTTPRedirectHandler):
+    """Hand 3xx responses back to the caller instead of following them, so the
+    address policy can be re-applied to each hop by hand."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # type: ignore[override]
+        return None
+
+
+class _Response:
+    """The handful of response fields this module uses, normalised across the
+    success path and :class:`urllib.error.HTTPError` (which is itself a readable
+    response — a 403 page still carries usable metadata)."""
+
+    def __init__(self, raw, url: str) -> None:
+        self.status: int = getattr(raw, "status", None) or raw.getcode() or 0
+        self.reason: str = getattr(raw, "reason", "") or ""
+        self.headers = raw.headers
+        self.url = url
+        self._raw = raw
+
+    def header(self, name: str, default: str = "") -> str:
+        return self.headers.get(name, default) or default
+
+    def read_capped(self, limit: int) -> tuple[bytes, bool]:
+        """Read at most ``limit`` bytes; also report whether more remained."""
+        chunks, total = [], 0
+        while total < limit:
+            chunk = self._raw.read(min(65_536, limit - total))
+            if not chunk:
+                break
+            chunks.append(chunk)
+            total += len(chunk)
+        truncated = bool(self._raw.read(1))
+        return b"".join(chunks), truncated
+
+    def close(self) -> None:
+        try:
+            self._raw.close()
+        except Exception:  # noqa: BLE001 - closing must never mask a real error
+            pass
+
+
+def _open(url: str, headers: dict, pinned_ip: Optional[str], timeout: float) -> _Response:
+    """Issue one request, following no redirects. Raises on transport failure."""
+    handlers: list = [_NoRedirects, urllib.request.ProxyHandler()]  # ProxyHandler reads the env
+    if pinned_ip and urlparse(url).scheme == "https":
+        handlers.append(_PinnedHTTPSHandler(pinned_ip, ssl.create_default_context()))
+    opener = urllib.request.build_opener(*handlers)
+    request = urllib.request.Request(url, headers=headers, method="GET")
     try:
-        version = ipaddress.ip_address(ip).version
-    except ValueError:
-        version = 4
-    host = f"[{ip}]" if version == 6 else ip
-    netloc = f"{host}:{parsed.port}" if parsed.port is not None else host
-    return urlunparse(parsed._replace(netloc=netloc))
-
-
-def _host_header(parsed) -> str:
-    hostname = parsed.hostname or ""
-    return f"{hostname}:{parsed.port}" if parsed.port is not None else hostname
+        return _Response(opener.open(request, timeout=timeout), url)
+    except urllib.error.HTTPError as exc:
+        # 3xx (redirects we refused to follow) and 4xx/5xx both land here, and
+        # both are responses worth reading rather than failures.
+        return _Response(exc, url)
 
 
 # --------------------------------------------------------------------------- #
@@ -357,10 +477,11 @@ class _Extractor(html.parser.HTMLParser):
 
 
 def _decode(raw: bytes, header_encoding: Optional[str]) -> str:
-    """Decode page bytes. ``requests`` falls back to ISO-8859-1 for any
-    ``text/*`` response without an explicit charset, which mangles the accented
-    characters and diacritics this project cares about — so sniff the document's
-    own declaration first and prefer UTF-8 over that guess."""
+    """Decode page bytes. HTTP's own default for a ``text/*`` response with no
+    explicit charset is ISO-8859-1, which mangles the accented characters and
+    diacritics this project cares about — and in practice such pages are almost
+    always UTF-8. So sniff the document's own declaration first and prefer UTF-8
+    over that default."""
     sniffed = None
     head = raw[:4096]
     match = re.search(rb"""<meta[^>]+charset=["']?\s*([\w.:-]+)""", head, re.I)
@@ -517,15 +638,12 @@ def scrape(url: str, *, timeout: float = REQUEST_TIMEOUT) -> ScrapedPage:
     # Redirects are followed by hand so the address policy is re-applied on every
     # hop; a 302 into 169.254.169.254 must be refused as firmly as a direct
     # request for it.
-    response: Optional[requests.Response] = None
-    session = requests.Session()
-    session.headers.update(
-        {
-            "User-Agent": USER_AGENT,
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Accept-Language": "en-US,en;q=0.5",
-        }
-    )
+    base_headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+    }
+    response: Optional[_Response] = None
     try:
         current = url
         for _ in range(MAX_REDIRECTS + 1):
@@ -534,41 +652,21 @@ def scrape(url: str, *, timeout: float = REQUEST_TIMEOUT) -> ScrapedPage:
                 page.errors.append(f"unsupported redirect target {current!r}")
                 return page
 
-            request_url, headers = current, {}
-            if _allow_private_targets():
-                pass  # operator has explicitly opted out of the policy
-            else:
-                ips, why = _public_ips_for_host(hop.hostname)
-                if not ips:
-                    label = "refusing to fetch" if current == url else "refusing redirect to"
-                    page.errors.append(f"{label} {hop.hostname!r}: {why}")
-                    return page
-                # Pinning the validated IP is what closes the window between the
-                # DNS check and the connection's own lookup. Through a forward
-                # proxy it is not available at all — the proxy resolves the name
-                # itself — so we fall back to pre-flight validation and say so
-                # rather than implying a guarantee we cannot make.
-                if _proxy_for(hop.scheme):
-                    pass
-                else:
-                    request_url = _url_on_ip(current, ips[0])
-                    headers["Host"] = _host_header(hop)
-                    if hop.scheme == "https":
-                        session.mount(f"https://{ips[0]}", _PinnedHostAdapter(hop.hostname))
+            pinned_ip, refusal, warning = _check_host(hop.hostname, hop.scheme)
+            if refusal:
+                label = "refusing to fetch" if current == url else "refusing redirect to"
+                page.errors.append(f"{label} {hop.hostname!r}: {refusal}")
+                return page
+            if warning and warning not in page.errors:
+                page.errors.append(warning)
 
-            response = session.get(
-                request_url,
-                headers=headers,
-                timeout=timeout,
-                allow_redirects=False,
-                stream=True,
-            )
-            if response.status_code not in (301, 302, 303, 307, 308):
+            response = _open(current, base_headers, pinned_ip, timeout)
+            if response.status not in (301, 302, 303, 307, 308):
                 break
-            location = response.headers.get("location")
+            location = response.header("location")
             response.close()
             if not location:
-                page.errors.append(f"http {response.status_code} with no Location header")
+                page.errors.append(f"http {response.status} with no Location header")
                 break
             current = urljoin(current, location)
         else:
@@ -580,28 +678,21 @@ def scrape(url: str, *, timeout: float = REQUEST_TIMEOUT) -> ScrapedPage:
             return page
 
         page.final_url = current
-        page.status_code = response.status_code
-        if response.status_code != 200:
+        page.status_code = response.status
+        if response.status != 200:
             # Don't bail: many publishers 403 a bot but still serve usable
             # <head> metadata, which is enough to confirm a citation exists.
-            page.errors.append(f"http {response.status_code} {response.reason}".rstrip())
+            page.errors.append(f"http {response.status} {response.reason}".rstrip())
 
-        content_type = response.headers.get("content-type", "")
-
-        chunks, total = [], 0
-        for chunk in response.iter_content(65_536):
-            chunks.append(chunk)
-            total += len(chunk)
-            if total >= MAX_BYTES:
-                page.errors.append(f"response exceeded {MAX_BYTES:,} bytes; truncated")
-                break
+        content_type = response.header("content-type")
+        raw, truncated = response.read_capped(MAX_BYTES)
+        if truncated:
+            page.errors.append(f"response exceeded {MAX_BYTES:,} bytes; truncated")
         response.close()
-        body = _decode(b"".join(chunks)[:MAX_BYTES], response.encoding)
-    except requests.RequestException as exc:
+        body = _decode(raw, response.headers.get_content_charset())
+    except (urllib.error.URLError, OSError, http.client.HTTPException) as exc:
         page.errors.append(_explain_request_error(exc, parsed.hostname))
         return page
-    finally:
-        session.close()
 
     _parse_body(page, body, content_type)
     return page
@@ -846,6 +937,25 @@ def _self_test() -> int:
     _parse_body(binary, "%PDF-1.7 ...", "application/pdf")
     check("binary refused", any("unsupported content-type" in e for e in binary.errors), True)
     check("binary has no bogus JS warning", any("JavaScript-rendered" in e for e in binary.errors), False)
+
+    # A literal private IP is refused whether or not a proxy is configured and
+    # whether or not DNS works: the metadata-endpoint vector needs no resolver.
+    for proxy in ("", "http://proxy.invalid:8080"):
+        prior = os.environ.get("HTTPS_PROXY"), os.environ.get("https_proxy")
+        os.environ["HTTPS_PROXY"] = proxy
+        os.environ.pop("https_proxy", None)
+        try:
+            _, refusal, warning = _check_host("169.254.169.254", "https")
+            check(f"literal metadata IP refused (proxy={bool(proxy)})", bool(refusal), True)
+            check(f"no bypass warning for literal IP (proxy={bool(proxy)})", warning, None)
+        finally:
+            for key, value in zip(("HTTPS_PROXY", "https_proxy"), prior):
+                if value is None:
+                    os.environ.pop(key, None)
+                else:
+                    os.environ[key] = value
+    check("literal IP detected", _is_literal_ip("169.254.169.254"), True)
+    check("hostname not a literal IP", _is_literal_ip("arxiv.org"), False)
 
     # Encoding: a UTF-8 page with no charset header must not be mangled. The
     # manuscript's Sanskrit diacritics are the reason this matters.

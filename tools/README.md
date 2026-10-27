@@ -47,11 +47,17 @@ the open web.
 
 ### Requirements
 
-`requests` (already present) and the Python standard library. Deliberately no
-`httpx`, no `beautifulsoup4`, no `lxml`: this repository has no package manager
-and no dependency file, and a verification tool that must be `pip install`-ed
-before it runs is a tool that will not be run. HTML is parsed with
-`html.parser`.
+**The Python standard library, and nothing else.** No `requests`, no `httpx`,
+no `beautifulsoup4`, no `lxml`: this repository has no package manager and no
+dependency file, and a verification tool that must be `pip install`-ed before it
+runs is a tool that will not be run. Fetching uses `urllib.request`; HTML is
+parsed with `html.parser`.
+
+That constraint earned its keep. An earlier revision of this tool used
+`requests` on the grounds that it was "already present" — and the next session
+came up in a rebuilt container where it was not, so the tool would not start at
+all. Anything beyond the standard library is a dependency this repository has no
+way to guarantee.
 
 ### Network policy in this environment
 
@@ -68,6 +74,10 @@ source — do not retry or route around it.
 
 Record that verbatim rather than logging a failed verification, and do not try
 to route around it. Capture the URL from an unrestricted network instead.
+
+There is also **no local DNS resolver** for most external names here; the proxy
+resolves them. The tool keeps those two things apart, because conflating them
+would be a lie in both directions — see the next section.
 
 ### Safety: what the tool refuses to fetch
 
@@ -102,6 +112,27 @@ directly and falls back to pre-flight validation when a proxy is configured,
 rather than implying a guarantee it cannot make. Egress control in that case
 rests with the proxy.
 
+Pinning is not a verification bypass: a pinned connection still sends the real
+hostname for SNI and still verifies the certificate against it. A test proves
+this by pointing a pinned connection at a server whose certificate does not
+cover the requested hostname and asserting the fetch is rejected.
+
+**A hostname this machine cannot resolve** is treated as neither safe nor
+unsafe. Local DNS failure is not evidence about an address — behind a proxy
+there may be no local resolver at all — so refusing on that basis would reject
+every host the proxy *can* reach while dressing an environment limitation up as
+a security verdict. When a proxy is configured the tool proceeds and records:
+
+```
+address policy not applied locally to 'arxiv.org': no local DNS resolution
+(...). The proxy resolves this name and performs egress control; this is not
+a statement that the host is safe.
+```
+
+A **literal IP address needs no resolver**, so it is always judged directly and
+the cloud-metadata vector stays closed either way. With no proxy configured, an
+unresolvable host is refused as before.
+
 ### Provenance and licence
 
 The fetching core is adapted from
@@ -115,13 +146,14 @@ What changed, and why:
 
 | Change | Reason |
 |---|---|
-| `httpx` + `BeautifulSoup` → `requests` + `html.parser` | Neither dependency is installed here and there is no package manager to add them |
+| `httpx` + `BeautifulSoup` → `urllib.request` + `html.parser` | Neither dependency is installed here and there is no package manager to add them; the standard library is the only thing this repo can rely on |
 | `async` → synchronous CLI | Nothing in this repository runs an event loop |
 | Output: wiki onboarding markdown → capture file + `SOURCES.md` index | The purpose is citation provenance, not profile import |
 | Added: plain-text handling | RFCs and arXiv text mirrors are `text/plain`; the original reduced every one of them to zero words |
-| Added: charset sniffing, UTF-8 preferred over the ISO-8859-1 fallback | `requests` mangles unlabelled UTF-8, which would corrupt Sanskrit diacritics |
+| Added: charset sniffing, UTF-8 preferred over the ISO-8859-1 default | HTTP's default for unlabelled `text/*` would corrupt Sanskrit diacritics |
 | Added: IPv4-mapped / 6to4 / Teredo unwrapping, `is_global` catch-all | Closes bypasses the original's flag checks left open |
 | Added: proxy detection with documented pinning fallback | Pinning is structurally impossible through this environment's proxy |
+| Added: unresolvable-host handling distinct from policy refusal | Local DNS failure is an environment limit, not a security verdict |
 | Added: egress-403 translated into an actionable finding | `/verify-claims` must distinguish policy denial from a bad citation |
 | Added: `--self-test` | The repository has no test suite; the address policy and extractor need a gate |
 
@@ -170,12 +202,16 @@ the address policy and the extractor:
 - UTF-8 decoded without a header charset, with **Ahiṃsā** surviving extraction;
 - index round-trip: a re-capture updates in place and never duplicates.
 
-Beyond the self-test, the live paths were exercised against a local server:
+Beyond the self-test, the live paths were exercised against local servers:
 HTML extraction over real HTTP (diacritics intact with no charset header),
-redirect following, the redirect cap, the 1 MB cap, a permitted host redirecting
-to `169.254.169.254` being refused mid-chain, and the default policy refusing
-`localhost` until `SOURCE_CAPTURE_ALLOW_PRIVATE=1` is set.
+redirect following, the redirect cap, the 1 MB cap, a non-200 response still
+yielding usable metadata, a permitted host redirecting to `169.254.169.254`
+being refused mid-chain, and the default policy refusing `localhost` until
+`SOURCE_CAPTURE_ALLOW_PRIVATE=1` is set. Against a local TLS server with a
+self-signed certificate: a pinned connection succeeds and verifies the
+certificate against the requested hostname, and a pinned connection to a
+hostname the certificate does not cover is rejected.
 
 Not verified: capture of a real publisher or arXiv page, which this
-environment's egress policy blocks. That path is exercised only against the
-local server and the few hosts the proxy permits.
+environment's egress policy blocks. That path is exercised only against local
+servers and the few hosts the proxy permits.
