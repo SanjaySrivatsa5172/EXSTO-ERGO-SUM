@@ -246,10 +246,11 @@ Operate as a durable project loop, not a one-shot coding chat.
 
 ## Manuscript tooling
 - This repo is a LaTeX academic submission (*AI and Ethics*). The `.tex` files are the source of truth but are **not committed** — in-repo you have the compiled PDFs plus `derived/*.txt` mirrors. If sources are ever added, edit and review the source, never the PDFs (see `.claude/rules/latex.md`).
-- Reusable workflows live as commands and a subagent, not in this file:
+- Reusable workflows live as commands, a skill, and a subagent, not in this file:
   - `/verify-claims <section>` — extract every factual claim and verify each against a retrieved primary source. Run before any submission.
   - `/consistency` — cross-document sweep (version, counts, Sanskrit transliteration, cross-references).
   - `/submission-check` — pre-submission gate: builds LaTeX, checks bib/figures/front matter, reports blockers.
+  - `academic-humanizer` skill (`.claude/skills/academic-humanizer/`) — editorial pass for AI-assisted academic prose: strips AI tells, matches every claim to its evidence, preserves scholarly hedging and voice; never alters a number, result, or citation. **Standing rule (author, 2026-08-15): always suggest — or, when editing, apply — this skill whenever drafting or reviewing any scientific/academic writing for the author**: manuscript sections, abstracts, the cover letter, rebuttals, reviewer responses. Vendored from github.com/AIScientists-Dev/academic-humanizer (MIT, v0.3.3; license alongside the skill).
   - `reviewer` subagent — fresh-context review of a draft for unsupported claims and citation mismatches; reports gaps, never edits.
   - `/pm` — launches the `pm-status` workflow graph (`.claude/workflows/pm-status.js`): five parallel scouts → skeptic panel on high-severity findings → status report with ranked next actions. Report-only; latest report lives in `PM-STATUS.md`.
   - Weekly automation: `.github/workflows/pm-status.yml` runs the inline five-scout sweep every Monday 16:00 UTC (auth: `CLAUDE_CODE_OAUTH_TOKEN` secret) and files the report as a GitHub issue; manual runs via the Actions tab. The fleet graph itself is interactive-only — a one-shot CI job cannot outlive its backgrounded fleet.
